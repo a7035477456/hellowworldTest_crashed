@@ -1,0 +1,53 @@
+import useSWR from 'swr';
+import { useMemo } from 'react';
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3005';
+
+const fetcher = async (url) => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('Failed to fetch singles');
+  }
+  return response.json();
+};
+
+const endpoints = {
+  key: 'api/singles',
+  list: '/api/singles'
+};
+
+export function useGetSingles() {
+  const url = `${API_BASE_URL}${endpoints.list}`;
+  const { data, error, isLoading, mutate } = useSWR(url, fetcher, {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: true
+  });
+
+  // Transform database fields to match component expectations
+  const transformedData = useMemo(() => {
+    if (!data) return [];
+    return data.map((single) => ({
+      id: single.id,
+      name: single.name,
+      title: single.job_title, // Map job_title to title
+      description: single.description,
+      email: single.email,
+      phone: single.phone,
+      location: single.location,
+      avatar: single.profile_image_url || 'user-round.svg' // Map profile_image_url to avatar, with fallback
+    }));
+  }, [data]);
+
+  const memoizedValue = useMemo(
+    () => ({
+      singles: transformedData,
+      singlesLoading: isLoading,
+      singlesError: error,
+      refetch: mutate
+    }),
+    [transformedData, isLoading, error, mutate]
+  );
+
+  return memoizedValue;
+}
+
