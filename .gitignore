@@ -3,10 +3,14 @@
 be/logs/*.log
 
 # dependencies
-*/node_modules
-*/package-lock.json
-*/dist
-*/logs
+node_modules/
+**/node_modules/
+package-lock.json
+**/package-lock.json
+dist/
+**/dist/
+logs/
+**/logs/
 /.pnp
 .pnp.js
 
