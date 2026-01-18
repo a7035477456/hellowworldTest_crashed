@@ -1,5 +1,3 @@
-import { Link as RouterLink } from 'react-router-dom';
-
 // material-ui
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -14,28 +12,9 @@ export default function Footer() {
           CodedThemes
         </Typography>
       </Typography>
-      <Stack direction="row" sx={{ gap: 1.5, alignItems: 'center', justifyContent: 'space-between' }}>
-        <Link
-          component={RouterLink}
-          to="https://github.com/codedthemes/berry-free-react-admin-template"
-          underline="hover"
-          target="_blank"
-          variant="caption"
-          color="text.primary"
-        >
-          GitHub
-        </Link>
-        <Link
-          component={RouterLink}
-          to="https://www.figma.com/community/file/1468460364009262125/berry-free-dashboard-ui-kit"
-          underline="hover"
-          target="_blank"
-          variant="caption"
-          color="text.primary"
-        >
-          Figma UI Kit
-        </Link>
-      </Stack>
+      <Typography variant="caption" color="text.secondary">
+        GitHub Figma UI Kit
+      </Typography>
     </Stack>
   );
 }

@@ -23,9 +23,9 @@ import { useGetSingles } from 'api/singles';
 import { IconSearch } from '@tabler/icons-react';
 import UserRound from 'assets/images/users/user-round.svg';
 
-// ==============================|| VETTED SINGLES ||============================== //
+// ==============================|| REQUEST ABOUT ME ||============================== //
 
-export default function VettedSingles() {
+export default function RequestAboutMe() {
   const [searchQuery, setSearchQuery] = useState('');
   const { singles, singlesLoading, singlesError } = useGetSingles();
 
@@ -47,7 +47,7 @@ export default function VettedSingles() {
 
   return (
     <MainCard
-      title="Vetted Singles Index Cards"
+      title="Request About Me"
       secondary={
         <OutlinedInput
           id="input-search-cards"
@@ -140,4 +140,3 @@ export default function VettedSingles() {
     </MainCard>
   );
 }
-

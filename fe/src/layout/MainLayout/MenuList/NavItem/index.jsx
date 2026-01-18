@@ -130,7 +130,8 @@ export default function NavItem({ item, level, isParents = false, setSelectedID 
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     width: 102,
-                    color: 'inherit'
+                    color: 'inherit',
+                    ...(item.customStyle && item.customStyle)
                   }}
                 >
                   {item.title}

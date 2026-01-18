@@ -7,14 +7,16 @@ import Loadable from 'ui-component/Loadable';
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
 const VettedSingles = Loadable(lazy(() => import('views/dashboard/VettedSingles')));
+const AllSingles = Loadable(lazy(() => import('views/dashboard/AllSingles')));
+const NewSingles = Loadable(lazy(() => import('views/dashboard/NewSingles')));
+const Friends = Loadable(lazy(() => import('views/dashboard/Friends')));
+const RequestAboutMe = Loadable(lazy(() => import('views/dashboard/RequestAboutMe')));
+const RequestIveSent = Loadable(lazy(() => import('views/dashboard/RequestIveSent')));
 
 // utilities routing
-const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
-const UtilsColor = Loadable(lazy(() => import('views/utilities/Color')));
-const UtilsShadow = Loadable(lazy(() => import('views/utilities/Shadow')));
-
-// sample page routing
-const SamplePage = Loadable(lazy(() => import('views/sample-page')));
+const VerifySelf = Loadable(lazy(() => import('views/utilities/VerifySelf')));
+const RequestsAboutMe = Loadable(lazy(() => import('views/utilities/RequestsAboutMe')));
+const RequestsSent = Loadable(lazy(() => import('views/utilities/RequestsSent')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -36,24 +38,40 @@ const MainRoutes = {
         {
           path: 'vetted-singles',
           element: <VettedSingles />
+        },
+        {
+          path: 'all-singles',
+          element: <AllSingles />
+        },
+        {
+          path: 'new-singles',
+          element: <NewSingles />
+        },
+        {
+          path: 'friends',
+          element: <Friends />
+        },
+        {
+          path: 'request-about-me',
+          element: <RequestAboutMe />
+        },
+        {
+          path: 'request-ive-sent',
+          element: <RequestIveSent />
         }
       ]
     },
     {
-      path: 'typography',
-      element: <UtilsTypography />
+      path: 'verifyself',
+      element: <VerifySelf />
     },
     {
-      path: 'color',
-      element: <UtilsColor />
+      path: 'requests-about-me',
+      element: <RequestsAboutMe />
     },
     {
-      path: 'shadow',
-      element: <UtilsShadow />
-    },
-    {
-      path: '/sample-page',
-      element: <SamplePage />
+      path: 'requests-sent',
+      element: <RequestsSent />
     }
   ]
 };

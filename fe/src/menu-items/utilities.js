@@ -1,44 +1,56 @@
 // assets
-import { IconTypography, IconPalette, IconShadow, IconWindmill } from '@tabler/icons-react';
+import { IconTypography } from '@tabler/icons-react';
 
 // constant
 const icons = {
-  IconTypography,
-  IconPalette,
-  IconShadow,
-  IconWindmill
+  IconTypography
 };
 
 // ==============================|| UTILITIES MENU ITEMS ||============================== //
 
 const utilities = {
   id: 'utilities',
-  title: 'Utilities',
+  title: 'Vetting',
   type: 'group',
   children: [
     {
-      id: 'util-typography',
-      title: 'Typography',
+      id: 'util-vetself',
+      title: 'My Vetting Info',
       type: 'item',
-      url: '/typography',
+      url: '/verifyself',
       icon: icons.IconTypography,
-      breadcrumbs: false
+      breadcrumbs: false,
+      customStyle: {
+        fontFamily: 'Comic Sans MS',
+        color: '#744DBC',
+        fontWeight: 600
+      }
     },
     {
-      id: 'util-color',
-      title: 'Color',
+      id: 'util-requests-about-me',
+      title: 'Requests About Me',
       type: 'item',
-      url: '/color',
-      icon: icons.IconPalette,
-      breadcrumbs: false
+      url: '/dashboard/request-about-me',
+      icon: icons.IconTypography,
+      breadcrumbs: false,
+      customStyle: {
+        fontFamily: 'Comic Sans MS',
+        color: '#744DBC',
+        fontWeight: 600
+      }
     },
     {
-      id: 'util-shadow',
-      title: 'Shadow',
+      id: 'util-requests-sent',
+      title: "Request I've Sent",
       type: 'item',
-      url: '/shadow',
-      icon: icons.IconShadow,
-      breadcrumbs: false
+      url: '/dashboard/request-ive-sent',
+      icon: icons.IconTypography,
+      breadcrumbs: false,
+      customStyle: {
+        fontFamily: 'Comic Sans MS',
+        color: '#744DBC',
+        fontWeight: 600
+      }
     }
   ]
 };
