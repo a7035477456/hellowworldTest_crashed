@@ -19,7 +19,7 @@ import Slider from '@mui/material/Slider';
 import MainCard from 'ui-component/cards/MainCard';
 import SubCard from 'ui-component/cards/SubCard';
 import { gridSpacing } from 'store/constant';
-import { useGetSingles } from 'api/singles';
+import { useGetSingles } from 'api/all-singles';
 
 // assets
 import { IconSearch, IconChevronRight } from '@tabler/icons-react';
@@ -33,9 +33,9 @@ export default function VettedSingles() {
   const [maxDistance, setMaxDistance] = useState(19);
   const [gender, setGender] = useState('Men');
   const [ageRange, setAgeRange] = useState([21, 35]);
-  const { singles, singlesLoading, singlesError } = useGetSingles();
+  const { allSingles, allSinglesLoading, allSinglesError } = useGetAllSingles();
 
-  const filteredSingles = (singles || []).filter((person) => {
+  const filteredSingles = (allSingles || []).filter((person) => {
     const query = searchQuery.toLowerCase();
     const memberId = `member ${String(person.id).padStart(5, '0')}`;
     return memberId.includes(query);

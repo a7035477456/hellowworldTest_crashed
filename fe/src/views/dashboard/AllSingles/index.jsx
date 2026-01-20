@@ -33,26 +33,22 @@ export default function AllSingles() {
   const [maxDistance, setMaxDistance] = useState(19);
   const [gender, setGender] = useState('Men');
   const [ageRange, setAgeRange] = useState([21, 35]);
-  const { singles, singlesLoading, singlesError } = useGetSingles();
+  const { singles: singles_AAAAAAAAA, singlesLoading, singlesError } = useGetSingles();
 
-  const filteredSingles = (singles || []).filter((person) => {
+  const filteredSingles = (singles_AAAAAAAAA || []).filter((person_CCCCCCCC) => {
     const query = searchQuery.toLowerCase();
-    const memberId = `member ${String(person.id).padStart(5, '0')}`;
+    const memberId = `member ${String(person_CCCCCCCC.singles_id).padStart(5, '0')}`;
     return memberId.includes(query);
   });
 
-  const handleMessage = (id) => {
-    console.log('Message clicked for:', id);
+  const handleMessage = (singles_id) => {
+    console.log('Message clicked for:', singles_id);
     // Add message functionality here
   };
 
-  const handleMarkInterested = (id) => {
-    console.log('Mark Interested clicked for:', id);
+  const handleMarkInterested = (singles_id) => {
+    console.log('Mark Interested clicked for:', singles_CCCCCCCC.singles_id);
     // Add mark interested functionality here
-  };
-
-  const handleAgeRangeChange = (event, newValue) => {
-    setAgeRange(newValue);
   };
 
   return (
@@ -239,8 +235,8 @@ export default function AllSingles() {
       
       {!singlesLoading && !singlesError && (
         <Grid container spacing={gridSpacing}>
-          {filteredSingles.map((person) => (
-          <Grid key={person.id} size={{ xs: 12, sm: 6, md: 4 }}>
+          {filteredSingles.map((person_DDDDDDD) => (
+          <Grid key={person_DDDDDDD.singles_id} size={{ xs: 12, sm: 6, md: 4 }}>
             <Card
               sx={{
                 height: '100%',
@@ -254,8 +250,8 @@ export default function AllSingles() {
               <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
                   <Avatar
-                    src={person.avatar && person.avatar !== 'user-round.svg' ? person.avatar : UserRound}
-                    alt={`Member ${String(person.id).padStart(5, '0')}`}
+                    src={person_DDDDDDD.profile_image_url && person_DDDDDDD.profile_image_url !== 'user-round.svg' ? person_DDDDDDD.profile_image_url : UserRound}
+                    alt={`Member ${String(person_DDDDDDD.singles_id).padStart(5, '0')}`}
                     sx={{
                       width: 80,
                       height: 80
@@ -271,7 +267,7 @@ export default function AllSingles() {
                     fontWeight: 500
                   }}
                 >
-                  Member {String(person.id).padStart(5, '0')}
+                  Member {String(person_DDDDDDD.singles_id).padStart(5, '0')}
                 </Typography>
               </CardContent>
 
@@ -280,7 +276,7 @@ export default function AllSingles() {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  onClick={() => handleMessage(person.id)}
+                  onClick={() => handleMessage(person_DDDDDDD.singles_id)}
                   sx={{ mr: 1 }}
                 >
                   Message
@@ -289,7 +285,7 @@ export default function AllSingles() {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  onClick={() => handleMarkInterested(person.id)}
+                  onClick={() => handleMarkInterested(person_DDDDDDD.singles_id)}
                 >
                   Mark Interested
                 </Button>

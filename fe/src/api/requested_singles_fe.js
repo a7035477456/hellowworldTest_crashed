@@ -12,11 +12,11 @@ const fetcher = async (url) => {
 };
 
 const endpoints = {
-  key: 'api/singles',
-  list: '/api/singles'
+  key: 'api/requested-singles',
+  list: '/api/requested-singles'
 };
 
-export function useGetSingles() {
+export function useGetRequestedSingles() {
   const url = `${API_BASE_URL}${endpoints.list}`;
   const { data, error, isLoading, mutate } = useSWR(url, fetcher, {
     revalidateOnFocus: false,
@@ -26,15 +26,10 @@ export function useGetSingles() {
   // Transform database fields to match component expectations
   const transformedData = useMemo(() => {
     if (!data) return [];
-    return data.map((single) => ({
-      id: single.id,
-      name: single.name,
-      title: single.job_title, // Map job_title to title
-      description: single.description,
-      email: single.email,
-      phone: single.phone,
-      location: single.location,
-      avatar: single.profile_image_url || 'user-round.svg' // Map profile_image_url to avatar, with fallback
+    return data.map((single_EEEEEEEE) => ({
+      //id: single.id,
+      singles_id: single_EEEEEEEE.singles_id,
+      profile_image_url: single_EEEEEEEE.profile_image_url || 'user-round.svg' // Map profile_image_url to avatar, with fallback
     }));
   }, [data]);
 
@@ -51,3 +46,4 @@ export function useGetSingles() {
   return memoizedValue;
 }
 
+ 

@@ -1,20 +1,3 @@
--- -- Create singles table
--- CREATE TABLE IF NOT EXISTS singles (
---     id SERIAL PRIMARY KEY,
---     firstname VARCHAR(255) NOT NULL,
---     job_title VARCHAR(255),
---     description TEXT,
---     email VARCHAR(255),
---     phone VARCHAR(50),
---     location VARCHAR(255),
---     profile_image_url VARCHAR(500),
---     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
--- );
-
--- -- Create index on email for faster lookups
--- CREATE INDEX IF NOT EXISTS idx_singles_email ON singles(email);
-
 --
 -- PostgreSQL database dump
 --
@@ -35,25 +18,15 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- Name: public; Type: SCHEMA; Schema: -; Owner: pg_database_owner
---
-
 CREATE SCHEMA public;
 
-
 ALTER SCHEMA public OWNER TO pg_database_owner;
-
---
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: pg_database_owner
---
 
 COMMENT ON SCHEMA public IS 'standard public schema';
 
 
---
--- Name: requests_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
+
+
 
 CREATE SEQUENCE public.requests_id_seq
     START WITH 1
@@ -89,11 +62,37 @@ CREATE TABLE public.requests (
     countryofbirth_requestapproval boolean DEFAULT false,
     created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    interested date NULL,
     CONSTRAINT chk_not_self_request CHECK ((singles_id_from <> singles_id_to))
 );
 
 
 ALTER TABLE public.requests OWNER TO postgres;
+SELECT pg_catalog.setval('public.requests_id_seq', 2, true);
+
+
+
+ALTER TABLE ONLY public.requests
+    ADD CONSTRAINT uq_requests_from_to UNIQUE (singles_id_from, singles_id_to);
+
+CREATE INDEX idx_requests_from ON public.requests USING btree (singles_id_from);
+
+CREATE INDEX idx_requests_to ON public.requests USING btree (singles_id_to);
+
+ALTER TABLE ONLY public.requests
+    ADD CONSTRAINT requests_pkey PRIMARY KEY (requests_id);
+
+
+
+ALTER TABLE ONLY public.requests
+    ADD CONSTRAINT fk_requests_from FOREIGN KEY (singles_id_from) REFERENCES public.singles(singles_id) ON DELETE CASCADE;
+
+
+ALTER TABLE ONLY public.requests
+    ADD CONSTRAINT fk_requests_to FOREIGN KEY (singles_id_to) REFERENCES public.singles(singles_id) ON DELETE CASCADE;
+
+
+
 
 --
 -- Name: singles_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -106,12 +105,7 @@ CREATE SEQUENCE public.singles_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
 ALTER SEQUENCE public.singles_id_seq OWNER TO postgres;
-
---
--- Name: singles; Type: TABLE; Schema: public; Owner: postgres
---
 
 CREATE TABLE public.singles (
     singles_id bigint DEFAULT nextval('public.singles_id_seq'::regclass) NOT NULL,
@@ -158,35 +152,10 @@ CREATE TABLE public.singles (
 
 ALTER TABLE public.singles OWNER TO postgres;
 
---
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
+SELECT pg_catalog.setval('public.singles_id_seq', 11, true);
 
-CREATE SEQUENCE public.users_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.users_id_seq OWNER TO postgres;
-
---
--- Name: users; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.users (
-    id integer DEFAULT nextval('public.users_id_seq'::regclass) NOT NULL,
-    first_name character varying(100) NOT NULL,
-    last_name character varying(100) NOT NULL,
-    email character varying(255) NOT NULL,
-    password character varying(255) NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL
-);
-
-
-ALTER TABLE public.users OWNER TO postgres;
+ALTER TABLE ONLY public.singles
+    ADD CONSTRAINT singles_pkey PRIMARY KEY (singles_id);
 
 --
 -- Data for Name: requests; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -215,75 +184,7 @@ COPY public.singles (singles_id, password_hash, firstname, lastname, middlename,
 \.
 
 
---
--- Name: requests_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
 
-SELECT pg_catalog.setval('public.requests_id_seq', 2, true);
-
-
---
--- Name: singles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.singles_id_seq', 11, true);
-
-
---
--- Name: requests requests_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.requests
-    ADD CONSTRAINT requests_pkey PRIMARY KEY (requests_id);
-
---
--- Name: singles singles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.singles
-    ADD CONSTRAINT singles_pkey PRIMARY KEY (singles_id);
-
-
---
--- Name: requests uq_requests_from_to; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.requests
-    ADD CONSTRAINT uq_requests_from_to UNIQUE (singles_id_from, singles_id_to);
-
-
---
--- Name: idx_requests_from; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_requests_from ON public.requests USING btree (singles_id_from);
-
-
---
--- Name: idx_requests_to; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX idx_requests_to ON public.requests USING btree (singles_id_to);
-
---
--- Name: requests fk_requests_from; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.requests
-    ADD CONSTRAINT fk_requests_from FOREIGN KEY (singles_id_from) REFERENCES public.singles(singles_id) ON DELETE CASCADE;
-
-
---
--- Name: requests fk_requests_to; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.requests
-    ADD CONSTRAINT fk_requests_to FOREIGN KEY (singles_id_to) REFERENCES public.singles(singles_id) ON DELETE CASCADE;
-
-
---
--- PostgreSQL database dump complete
---
 
 \unrestrict dNLfe5vpfjPJJPicbhna61ffVhvT0d5ciOqg03ETGYxduFc7Z44QgRenGw6Dwta
 

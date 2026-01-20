@@ -47,7 +47,7 @@ npm run dev
 
 ## API Endpoints
 
-- `GET /api/singles` - Get all singles from the database
+- `GET /api/all-singles` - Get all singles from the database
 - `GET /health` - Health check endpoint
 
 ## Database Schema

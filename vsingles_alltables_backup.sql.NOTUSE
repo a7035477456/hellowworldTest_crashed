@@ -1,25 +1,8 @@
--- -- Create singles table
--- CREATE TABLE IF NOT EXISTS singles (
---     id SERIAL PRIMARY KEY,
---     firstname VARCHAR(255) NOT NULL,
---     job_title VARCHAR(255),
---     description TEXT,
---     email VARCHAR(255),
---     phone VARCHAR(50),
---     location VARCHAR(255),
---     profile_image_url VARCHAR(500),
---     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
---     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
--- );
-
--- -- Create index on email for faster lookups
--- CREATE INDEX IF NOT EXISTS idx_singles_email ON singles(email);
-
 --
 -- PostgreSQL database dump
 --
 
-\restrict dNLfe5vpfjPJJPicbhna61ffVhvT0d5ciOqg03ETGYxduFc7Z44QgRenGw6Dwta
+\restrict PLuKRdrde2VmINrxpMMA7b28GmEFq1gw3XXGfsJmoMdvKunwnbQORb1mzo3iNhF
 
 -- Dumped from database version 16.11 (Homebrew)
 -- Dumped by pg_dump version 16.11 (Homebrew)
@@ -159,6 +142,34 @@ CREATE TABLE public.singles (
 ALTER TABLE public.singles OWNER TO postgres;
 
 --
+-- Name: singles_orig; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.singles_orig (
+    email_verified character(10) DEFAULT 'n/a'::bpchar,
+    vetted_status boolean DEFAULT false,
+    optoutadvertise boolean DEFAULT false,
+    firstname character varying(255),
+    lastname character varying(255),
+    middlename character varying(255),
+    user_status character(10) DEFAULT 'active'::bpchar,
+    id bigint NOT NULL,
+    name character varying(255) NOT NULL,
+    job_title character varying(255),
+    description text,
+    email character varying(255) NOT NULL,
+    phone character varying(50),
+    location character varying(255),
+    profile_image_url character varying(500),
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    password_hash character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.singles_orig OWNER TO postgres;
+
+--
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -193,8 +204,6 @@ ALTER TABLE public.users OWNER TO postgres;
 --
 
 COPY public.requests (requests_id, singles_id_from, singles_id_to, profilephoto_request, profilephoto_requestapproval, age_request, age_requestapproval, job_request, job_requestapproval, current_city_request, current_city_requestapproval, countryofbirth_request, countryofbirth_requestapproval, created_at, updated_at) FROM stdin;
-2	5	8	t	t	t	t	t	f	t	f	f	f	2026-01-19 11:40:04.41368	2026-01-19 11:40:04.41368
-3	5	4	t	t	t	t	t	f	f	f	f	f	2026-01-19 13:49:06.349045	2026-01-19 13:49:06.349045
 \.
 
 
@@ -212,6 +221,8 @@ COPY public.singles (singles_id, password_hash, firstname, lastname, middlename,
 7	$2a$06$x6tjZrXaJBpA/Lxk3O0z3O7WH3Tij.FsI8xkbnpipYu0/npozP9Am	\N	\N	\N	active    	john@example.com	n/a       	+1-555-0107	f	n/a	f	https://i.pravatar.cc/150?img=17	n/a       	\N	\N	n/a	\N	n/a       	\N	\N	n/a	Senior Financial Analyst	n/a       	\N	\N	new	Austin, USA	n/a       	\N	\N	n/a	\N	n/a       	\N	\N	n/a	2026-01-12 11:57:00.279181	2026-01-12 11:57:00.279181
 9	$2a$06$ghCR9vNVirzRheim1lWG9OIhWSJB9tMa/hhDT8acuAPhe349YBELq	\N	\N	\N	active    	michael@example.com	n/a       	+1-555-0109	f	n/a	f	https://i.pravatar.cc/150?img=19	n/a       	\N	\N	n/a	\N	n/a       	\N	\N	n/a	Operations Coordinator	n/a       	\N	\N	new	Miami, USA	n/a       	\N	\N	n/a	\N	n/a       	\N	\N	n/a	2026-01-12 11:57:00.279181	2026-01-12 11:57:00.279181
 1	$2a$06$k.1pWyxJUJkE3LhOt99O8uUWwBxbriTGIYyrTteYMebJLEp0Djm2u	\N	\N	\N	active    	phoebe@example.com	n/a       	+1-555-0101	f	n/a	f	https://i.pravatar.cc/150?img=20	n/a       	\N	\N	n/a	\N	n/a       	\N	\N	n/a	Dynamic Operations Officer V2	n/a       	\N	\N	new	New York, USA	n/a       	\N	\N	n/a	\N	n/a       	\N	\N	n/a	2026-01-12 11:57:00.279181	2026-01-12 11:57:00.279181
+10	test	Auto	Increment	\N	active    	auto@test.com	n/a       	\N	f	n/a	f	\N	n/a       	\N	\N	n/a	\N	n/a       	\N	\N	n/a	\N	n/a       	\N	\N	new	\N	n/a       	\N	\N	n/a	\N	n/a       	\N	\N	n/a	2026-01-18 22:10:14.308406	2026-01-18 22:10:14.308406
+11	ok	final	check	\N	active    	final@test.com	n/a       	\N	f	n/a	f	\N	n/a       	\N	\N	n/a	\N	n/a       	\N	\N	n/a	\N	n/a       	\N	\N	new	\N	n/a       	\N	\N	n/a	\N	n/a       	\N	\N	n/a	2026-01-18 22:53:11.287937	2026-01-18 22:53:11.287937
 \.
 
 
@@ -219,7 +230,7 @@ COPY public.singles (singles_id, password_hash, firstname, lastname, middlename,
 -- Name: requests_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.requests_id_seq', 2, true);
+SELECT pg_catalog.setval('public.requests_id_seq', 1, true);
 
 
 --
@@ -229,12 +240,14 @@ SELECT pg_catalog.setval('public.requests_id_seq', 2, true);
 SELECT pg_catalog.setval('public.singles_id_seq', 11, true);
 
 
+
 --
 -- Name: requests requests_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.requests
     ADD CONSTRAINT requests_pkey PRIMARY KEY (requests_id);
+
 
 --
 -- Name: singles singles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -252,6 +265,8 @@ ALTER TABLE ONLY public.requests
     ADD CONSTRAINT uq_requests_from_to UNIQUE (singles_id_from, singles_id_to);
 
 
+
+
 --
 -- Name: idx_requests_from; Type: INDEX; Schema: public; Owner: postgres
 --
@@ -264,6 +279,10 @@ CREATE INDEX idx_requests_from ON public.requests USING btree (singles_id_from);
 --
 
 CREATE INDEX idx_requests_to ON public.requests USING btree (singles_id_to);
+
+
+
+
 
 --
 -- Name: requests fk_requests_from; Type: FK CONSTRAINT; Schema: public; Owner: postgres
@@ -285,5 +304,5 @@ ALTER TABLE ONLY public.requests
 -- PostgreSQL database dump complete
 --
 
-\unrestrict dNLfe5vpfjPJJPicbhna61ffVhvT0d5ciOqg03ETGYxduFc7Z44QgRenGw6Dwta
+\unrestrict PLuKRdrde2VmINrxpMMA7b28GmEFq1gw3XXGfsJmoMdvKunwnbQORb1mzo3iNhF
 
