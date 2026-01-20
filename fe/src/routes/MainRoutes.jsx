@@ -5,14 +5,7 @@ import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 
 // dashboard routing
-const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
-const VettedSingles = Loadable(lazy(() => import('views/dashboard/VettedSingles')));
-const AllSingles = Loadable(lazy(() => import('views/dashboard/AllSingles')));
-const NewSingles = Loadable(lazy(() => import('views/dashboard/NewSingles')));
-const Favorites = Loadable(lazy(() => import('views/dashboard/Favorites')));
-const RequestAboutMe = Loadable(lazy(() => import('views/dashboard/RequestAboutMe')));
-const RequestIveSent = Loadable(lazy(() => import('views/dashboard/RequestIveSent')));
-
+const AllSingles = Loadable(lazy(() => import('views/dashboard/allSingles/index')));
 // utilities routing
 const VerifySelf = Loadable(lazy(() => import('views/utilities/VerifySelf')));
 const RequestsAboutMe = Loadable(lazy(() => import('views/utilities/RequestsAboutMe')));
@@ -31,34 +24,34 @@ const MainRoutes = {
     {
       path: 'dashboard',
       children: [
-        {
-          path: 'default',
-          element: <DashboardDefault />
-        },
-        {
-          path: 'vetted-singles',
-          element: <VettedSingles />
-        },
+        // {
+        //   path: 'default',
+        //   element: <DashboardDefault />
+        // },
+        // {
+        //   path: 'vetted-singles',
+        //   element: <VettedSingles />
+        // },
         {
           path: 'all-singles',
           element: <AllSingles />
         },
-        {
-          path: 'new-singles',
-          element: <NewSingles />
-        },
-        {
-          path: 'favorites',
-          element: <Favorites />
-        },
-        {
-          path: 'request-about-me',
-          element: <RequestAboutMe />
-        },
-        {
-          path: 'request-ive-sent',
-          element: <RequestIveSent />
-        }
+        // {
+        //   path: 'new-singles',
+        //   element: <NewSingles />
+        // },
+        // {
+        //   path: 'favorites',
+        //   element: <Favorites />
+        // },
+        // {
+        //   path: 'request-about-me',
+        //   element: <RequestAboutMe />
+        // },
+        // {
+        //   path: 'request-ive-sent',
+        //   element: <RequestIveSent />
+        // }
       ]
     },
     {

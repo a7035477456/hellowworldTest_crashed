@@ -1,1 +1,1 @@
-export { default } from './all-singles-index';
+export { default } from './allSinglesIndex';
