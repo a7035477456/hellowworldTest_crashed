@@ -12,11 +12,11 @@ const fetcher = async (url) => {
 };
 
 const endpoints = {
-  key: 'api/requested-singles',
-  list: '/api/requested-singles'
+  key: 'api/all-singles',
+  list: '/api/all-singles'
 };
 
-export function useGetRequestedSingles() {
+export function useGetAllSingles() {
   const url = `${API_BASE_URL}${endpoints.list}`;
   const { data, error, isLoading, mutate } = useSWR(url, fetcher, {
     revalidateOnFocus: false,

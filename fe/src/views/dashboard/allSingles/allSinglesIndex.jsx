@@ -19,45 +19,41 @@ import Slider from '@mui/material/Slider';
 import MainCard from 'ui-component/cards/MainCard';
 import SubCard from 'ui-component/cards/SubCard';
 import { gridSpacing } from 'store/constant';
-import { useGetSingles } from 'api/all-singles';
+import { useGetAllSingles } from 'api/allSinglesFe';
 
 // assets
 import { IconSearch, IconChevronRight } from '@tabler/icons-react';
 import UserRound from 'assets/images/users/user-round.svg';
 
-// ==============================|| VETTED SINGLES ||============================== //
+// ==============================|| ALL SINGLES ||============================== //
 
-export default function VettedSingles() {
+export default function AllSingles() {
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('22003');
   const [maxDistance, setMaxDistance] = useState(19);
   const [gender, setGender] = useState('Men');
   const [ageRange, setAgeRange] = useState([21, 35]);
-  const { allSingles, allSinglesLoading, allSinglesError } = useGetAllSingles();
+  const { allSingles_AAAAAAAAA, singlesLoading, singlesError } = useGetAllSingles();
 
-  const filteredSingles = (allSingles || []).filter((person) => {
+  const filteredAllSingles_XXXXXXX = (allSingles_AAAAAAAAA || []).filter((person_CCCCCCCC) => {
     const query = searchQuery.toLowerCase();
-    const memberId = `member ${String(person.id).padStart(5, '0')}`;
+    const memberId = `member ${String(person_CCCCCCCC.singles_id).padStart(5, '0')}`;
     return memberId.includes(query);
   });
 
-  const handleMessage = (id) => {
-    console.log('Message clicked for:', id);
+  const handleMessage = (singles_id) => {
+    console.log('Message clicked for:', singles_id);
     // Add message functionality here
   };
 
-  const handleSaveAsFriend = (id) => {
-    console.log('Save to Favorites clicked for:', id);
-    // Add save to favorites functionality here
-  };
-
-  const handleAgeRangeChange = (event, newValue) => {
-    setAgeRange(newValue);
+  const handleMarkInterested = (singles_id) => {
+    console.log('Mark Interested clicked for:', singles_id);
+    // Add mark interested functionality here
   };
 
   return (
     <MainCard
-      title="Vetted Singles"
+      title="All Singles"
       secondary={
         <OutlinedInput
           id="input-search-cards"
@@ -73,13 +69,18 @@ export default function VettedSingles() {
         />
       }
     >
-      {/* First Informational Banner */}
-      <Alert severity="info" sx={{ mb: 2 }}>
-        All singles on this page, Vetted Singles page, have verified their photo, age, location, and career. If you have not done so, you can complete the verification under "My Vetting info page".
-      </Alert>
-
-      {/* Second Informational Banner */}
-      <Alert severity="info" sx={{ mb: 3 }}>
+      {/* Instructional Message */}
+      <Alert 
+        severity="info" 
+        sx={{ 
+          mb: 3,
+          backgroundColor: 'secondary.light',
+          color: 'secondary.dark',
+          '& .MuiAlert-icon': {
+            color: 'secondary.main'
+          }
+        }}
+      >
         When you Mark Interested someone, you then can visit the "Interested" page and request vetted information to learn more about them.
       </Alert>
 
@@ -198,7 +199,7 @@ export default function VettedSingles() {
               </Box>
               <Slider
                 value={ageRange}
-                onChange={handleAgeRangeChange}
+                onChange={(e, newValue) => setAgeRange(newValue)}
                 min={18}
                 max={100}
                 step={1}
@@ -234,8 +235,8 @@ export default function VettedSingles() {
       
       {!singlesLoading && !singlesError && (
         <Grid container spacing={gridSpacing}>
-          {filteredSingles.map((person) => (
-          <Grid key={person.id} size={{ xs: 12, sm: 6, md: 4 }}>
+          {filteredAllSingles_XXXXXXX.map((personIndex_DDDDDDD) => (
+          <Grid key={personIndex_DDDDDDD.singles_id} size={{ xs: 12, sm: 6, md: 4 }}>
             <Card
               sx={{
                 height: '100%',
@@ -249,8 +250,8 @@ export default function VettedSingles() {
               <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
                   <Avatar
-                    src={person.avatar && person.avatar !== 'user-round.svg' ? person.avatar : UserRound}
-                    alt={`Member ${String(person.id).padStart(5, '0')}`}
+                    src={personIndex_DDDDDDD.profile_image_url && personIndex_DDDDDDD.profile_image_url !== 'user-round.svg' ? personIndex_DDDDDDD.profile_image_url : UserRound}
+                    alt={`Member ${String(personIndex_DDDDDDD.singles_id).padStart(5, '0')}`}
                     sx={{
                       width: 80,
                       height: 80
@@ -266,7 +267,7 @@ export default function VettedSingles() {
                     fontWeight: 500
                   }}
                 >
-                  Member {String(person.id).padStart(5, '0')}
+                  Member {String(personIndex_DDDDDDD.singles_id).padStart(5, '0')}
                 </Typography>
               </CardContent>
 
@@ -275,7 +276,7 @@ export default function VettedSingles() {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  onClick={() => handleMessage(person.id)}
+                  onClick={() => handleMessage(personIndex_DDDDDDD.singles_id)}
                   sx={{ mr: 1 }}
                 >
                   Message
@@ -284,7 +285,7 @@ export default function VettedSingles() {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  onClick={() => handleSaveAsFriend(person.id)}
+                  onClick={() => handleMarkInterested(personIndex_DDDDDDD.singles_id)}
                 >
                   Mark Interested
                 </Button>
@@ -297,4 +298,3 @@ export default function VettedSingles() {
     </MainCard>
   );
 }
-
