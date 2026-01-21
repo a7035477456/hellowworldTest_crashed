@@ -12,16 +12,16 @@ const dashboard = {
   type: 'group',
   children: [
     {
-      id: 'vetted-singles',
+      id: 'vettedSingles',
       title: 'Singles',
       type: 'collapse',
       icon: icons.IconUsers,
       children: [
         {
-          id: 'all-singles',
+          id: 'allSingles',
           title: 'All Singles',
           type: 'item',
-          url: '/dashboard/all-singles',
+          url: '/dashboard/allSingles',
           breadcrumbs: false,
           customStyle: {
             fontFamily: 'Comic Sans MS',
@@ -30,10 +30,10 @@ const dashboard = {
           }
         },
         {
-          id: 'vetted-singles-list',
+          id: 'vettedSingles',
           title: 'Vetted Singles',
           type: 'item',
-          url: '/dashboard/vetted-singles',
+          url: '/dashboard/vettedSingles',
           breadcrumbs: false
         }
       ]

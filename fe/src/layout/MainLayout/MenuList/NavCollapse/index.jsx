@@ -39,8 +39,8 @@ export default function NavCollapse({ menu, level, parentId }) {
   const { menuMaster } = useGetMenuMaster();
   const drawerOpen = menuMaster.isDashboardDrawerOpened;
 
-  // Always keep "Singles" menu (vetted-singles) expanded
-  const isAlwaysExpanded = menu.id === 'vetted-singles';
+  // Always keep "Singles" menu (vettedSingles) expanded
+  const isAlwaysExpanded = menu.id === 'vettedSingles';
   const [open, setOpen] = useState(isAlwaysExpanded);
   const [selected, setSelected] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);

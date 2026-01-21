@@ -1,13 +1,13 @@
 import pool from '../db/connection.js';
 
-export const getSingles_BBBBBBBB = async (req, res) => {
+export const getAllSingles_BBBBBBBB = async (req, res) => {
   try {
     const result = await pool.query(
       `SELECT 
         singles_id, 
         profile_image_url
-      FROM singles 
-      ORDER BY created_at desc`
+      FROM public.singles s 
+      ORDER BY s.lastLoginTime desc`
     );
 
     res.json(result.rows);
@@ -20,6 +20,12 @@ export const getSingles_BBBBBBBB = async (req, res) => {
 export const getVettedSingles_CCCCCCCC = async (req, res) => {
   try {
     const result = await pool.query(
+        `SELECT 
+        s.singles_id,
+        s.profile_image_url
+      FROM public.singles s
+      WHERE (s.vetted_status=true)
+      ORDER BY s.lastLoginTime DESC`
     );
 
     res.json(result.rows);

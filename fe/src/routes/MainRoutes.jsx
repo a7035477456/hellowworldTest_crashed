@@ -3,10 +3,12 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
+import AllSingles from '../views/dashboard/allSingles/AllSingles';
+import VettedSingles from '../views/dashboard/vettedSingles/VettedSingles';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/default/defaultIndex')));
-const AllSingles = Loadable(lazy(() => import('views/dashboard/allSingles/allSinglesIndex')));
+// const AllSingles = Loadable(lazy(() => import('views/dashboard/allSingles/allSinglesIndex')));
 // utilities routing
 const VerifySelf = Loadable(lazy(() => import('views/utilities/VerifySelf')));
 const RequestsAboutMe = Loadable(lazy(() => import('views/utilities/requestsAboutMeIndex')));
@@ -29,12 +31,12 @@ const MainRoutes = {
           path: 'default',
           element: <DashboardDefault />
         },
-        // {
-        //   path: 'vetted-singles',
-        //   element: <VettedSingles />
-        // },
         {
-          path: 'all-singles',
+          path: 'vettedSingles',
+          element: <VettedSingles />
+        },
+        {
+          path: 'allSingles',
           element: <AllSingles />
         },
         // {

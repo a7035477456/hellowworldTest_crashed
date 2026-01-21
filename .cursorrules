@@ -3,13 +3,13 @@
 ## File Naming Conventions
 
 1. **Use camelCase for ALL file names and API endpoints**
-   - Example: `allSinglesIndex.jsx`, `allSinglesFe.js`
+   - Example: `AllSingles.jsx`, `allSinglesFe.js`
    - This enables global search to find all related files
-   - API endpoints: `/api/allSingles` (not `/api/all-singles`)
+   - API endpoints: `/api/allSingles` (not `/api/allSingles`)
 
 2. **NO index.jsx files - use descriptive names with path context**
    - Instead of: `views/dashboard/allSingles/index.jsx`
-   - Use: `views/dashboard/allSingles/allSinglesIndex.jsx`
+   - Use: `views/dashboard/allSingles/AllSingles.jsx`
    - The path should be part of the filename (camelCase)
 
 3. **Backend server file naming**

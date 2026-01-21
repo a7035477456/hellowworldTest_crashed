@@ -140,11 +140,15 @@ CREATE TABLE public.singles (
     current_city_vetted_date timestamp without time zone,
     current_city_vetted_by_userid bigint,
     current_city_vetted_note character varying(255) DEFAULT 'n/a'::character varying,
+
+    lastLoginTime timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+
     countryofbirth character varying(255),
     countryofbirth_vetted character(10) DEFAULT 'n/a'::bpchar,
     countryofbirth_vetted_date timestamp without time zone,
     countryofbirth_vetted_by_userid bigint,
     countryofbirth_vetted_note character varying(255) DEFAULT 'n/a'::character varying,
+
     created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );

@@ -19,23 +19,24 @@ import Slider from '@mui/material/Slider';
 import MainCard from 'ui-component/cards/MainCard';
 import SubCard from 'ui-component/cards/SubCard';
 import { gridSpacing } from 'store/constant';
-import { useGetAllSingles } from 'api/allSinglesFe';
+//import { useGetVettedSingles } from 'api/vettedSinglesFe';
 
 // assets
 import { IconSearch, IconChevronRight } from '@tabler/icons-react';
 import UserRound from 'assets/images/users/user-round.svg';
+import { useGetVettedSingles } from '../../../api/vettedSinglesFe';
 
 // ==============================|| ALL SINGLES ||============================== //
 
-export default function AllSingles() {
+export default function VettedSingles() {
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('22003');
   const [maxDistance, setMaxDistance] = useState(19);
   const [gender, setGender] = useState('Men');
   const [ageRange, setAgeRange] = useState([21, 35]);
-  const { singles, singlesLoading, singlesError } = useGetAllSingles();
+  const { vettedSingles: vetttedSingles, singlesLoading, singlesError } = useGetVettedSingles();
 
-  const filteredAllSingles_XXXXXXX = (singles || []).filter((person_CCCCCCCC) => {
+  const filteredVettedSingles_XXXXXXX = (vetttedSingles || []).filter((person_CCCCCCCC) => {
     const query = searchQuery.toLowerCase();
     const memberId = `member ${String(person_CCCCCCCC.singles_id).padStart(5, '0')}`;
     return memberId.includes(query);
@@ -235,7 +236,7 @@ export default function AllSingles() {
       
       {!singlesLoading && !singlesError && (
         <Grid container spacing={gridSpacing}>
-          {filteredAllSingles_XXXXXXX.map((personIndex_DDDDDDD) => (
+          {filteredVettedSingles_XXXXXXX.map((personIndex_DDDDDDD) => (
           <Grid key={personIndex_DDDDDDD.singles_id} size={{ xs: 12, sm: 6, md: 4 }}>
             <Card
               sx={{
