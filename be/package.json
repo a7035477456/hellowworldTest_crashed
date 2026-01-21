@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node server_be.js",
-    "dev": "node --watch server_be.js",
+    "build": "node --watch server_be.js",
     "seed": "node db/seed.js"
   },
   "dependencies": {

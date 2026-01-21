@@ -5,6 +5,7 @@ import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
 
 // dashboard routing
+const DashboardDefault = Loadable(lazy(() => import('views/dashboard/default/defaultIndex')));
 const AllSingles = Loadable(lazy(() => import('views/dashboard/allSingles/allSinglesIndex')));
 // utilities routing
 const VerifySelf = Loadable(lazy(() => import('views/utilities/VerifySelf')));
@@ -24,10 +25,10 @@ const MainRoutes = {
     {
       path: 'dashboard',
       children: [
-        // {
-        //   path: 'default',
-        //   element: <DashboardDefault />
-        // },
+        {
+          path: 'default',
+          element: <DashboardDefault />
+        },
         // {
         //   path: 'vetted-singles',
         //   element: <VettedSingles />

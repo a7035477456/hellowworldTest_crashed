@@ -12,8 +12,8 @@ const fetcher = async (url) => {
 };
 
 const endpoints = {
-  key: 'api/all-singles',
-  list: '/api/all-singles'
+  key: 'api/allSingles',
+  list: '/api/allSingles'
 };
 
 export function useGetAllSingles() {

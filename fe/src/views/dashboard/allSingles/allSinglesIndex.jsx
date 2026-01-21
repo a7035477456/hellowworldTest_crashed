@@ -33,9 +33,9 @@ export default function AllSingles() {
   const [maxDistance, setMaxDistance] = useState(19);
   const [gender, setGender] = useState('Men');
   const [ageRange, setAgeRange] = useState([21, 35]);
-  const { allSingles_AAAAAAAAA, singlesLoading, singlesError } = useGetAllSingles();
+  const { singles, singlesLoading, singlesError } = useGetAllSingles();
 
-  const filteredAllSingles_XXXXXXX = (allSingles_AAAAAAAAA || []).filter((person_CCCCCCCC) => {
+  const filteredAllSingles_XXXXXXX = (singles || []).filter((person_CCCCCCCC) => {
     const query = searchQuery.toLowerCase();
     const memberId = `member ${String(person_CCCCCCCC.singles_id).padStart(5, '0')}`;
     return memberId.includes(query);
