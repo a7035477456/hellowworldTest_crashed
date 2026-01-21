@@ -24,6 +24,7 @@ import { gridSpacing } from 'store/constant';
 // assets
 import { IconSearch, IconChevronRight } from '@tabler/icons-react';
 import UserRound from 'assets/images/users/user-round.svg';
+import VettedCheck from 'assets/images/vettedCheck.jpg';
 import { useGetVettedSingles } from '../../../api/vettedSinglesFe';
 
 // ==============================|| ALL SINGLES ||============================== //
@@ -260,7 +261,7 @@ export default function VettedSingles() {
                     }}
                   />
                 </Box>
-                <Typography 
+                {/* <Typography 
                   variant="h4" 
                   component="div"
                   sx={{ 
@@ -270,7 +271,40 @@ export default function VettedSingles() {
                   }}
                 >
                   Member {String(vettedPersonIndex_DDDDDDD.singles_id).padStart(5, '0')}
-                </Typography>
+                </Typography> */}
+                  <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 1
+                      }}
+                    >
+                      <Typography
+                        variant="h4"
+                        component="div"
+                        sx={{
+                          color: 'secondary.main',
+                          textAlign: 'center',
+                          fontWeight: 500
+                        }}
+                      >
+                        Member {String(vettedPersonIndex_DDDDDDD.singles_id).padStart(5, '0')}
+                      </Typography>
+                      {vettedPersonIndex_DDDDDDD?.vetted_status === true && (
+                        <Box
+                          component="img"
+                          src={VettedCheck}
+                          alt="Vetted"
+                          sx={{
+                            width: 24,
+                            height: 24,
+                            objectFit: 'contain'
+                          }}
+                        />
+                      )}
+                    </Box>
+
               </CardContent>
 
               <CardActions sx={{ p: 2, pt: 0 }}>

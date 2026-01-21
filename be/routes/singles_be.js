@@ -22,7 +22,8 @@ export const getVettedSingles_CCCCCCCC = async (req, res) => {
     const result = await pool.query(
         `SELECT 
         s.singles_id,
-        s.profile_image_url
+        s.profile_image_url,
+        s.vetted_status
       FROM public.singles s
       WHERE (s.vetted_status=true)
       ORDER BY s.lastLoginTime DESC`
@@ -52,18 +53,8 @@ export const getSinglesInterested_DDDDDDD = async (req, res) => {
         ORDER BY s.lastLoginTime DESC;
       `);
     } catch (fieldError) {
-      // // If interested field doesn't exist, try without the WHERE clause
-      // // This will return all requests (you may want to adjust this logic)
-      // console.log('interested field not found, trying alternative query');
-      // result = await pool.query(`
-      //   SELECT
-      //     r.singles_id_to,
-      //     s.singles_id,
-      //     s.profile_image_url
-      //   FROM public.requests r
-      //          JOIN public.singles s ON r.singles_id_to = s.singles_id
-      //   ORDER BY s.lastLoginTime DESC;
-      // `);
+      console.error('Error fetching singles:', error);
+      res.status(500).json({ error: 'Failed to fetch singles from database' });
     }
 
     console.log('Backend - result.rows:', JSON.stringify(result.rows, null, 2));
