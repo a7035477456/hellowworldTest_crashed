@@ -77,7 +77,7 @@ export const getSinglesInterested_DDDDDDD = async (req, res) => {
       return {
         singles_id_to: idValue != null ? String(idValue) : null,
         profile_image_url: row.profile_image_url || null,
-        vetted_status: row.vetted_status || false
+        vetted_status: row.vetted_status === true || row.vetted_status === 'true' || row.vetted_status === 1
       };
     }).filter((row) => row.singles_id_to != null); // Filter out any rows with null IDs
 

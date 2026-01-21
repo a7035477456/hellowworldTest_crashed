@@ -305,7 +305,7 @@ export default function InterestedSingles() {
                   </CardContent>
 
                   <CardActions sx={{ p: 2, pt: 0 }}>
-                    <Button
+                    {/* <Button
                       fullWidth
                       variant="contained"
                       color="primary"
@@ -313,14 +313,14 @@ export default function InterestedSingles() {
                       sx={{ mr: 1 }}
                     >
                       Message
-                    </Button>
+                    </Button> */}
                     <Button
                       fullWidth
                       variant="contained"
                       color="primary"
                       onClick={() => handleMarkInterested(singlesId)}
                     >
-                      Mark Interested
+                      Request Vetted Information
                     </Button>
                   </CardActions>
                 </Card>
