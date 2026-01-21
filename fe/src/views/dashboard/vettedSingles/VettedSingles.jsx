@@ -34,27 +34,27 @@ export default function VettedSingles() {
   const [maxDistance, setMaxDistance] = useState(19);
   const [gender, setGender] = useState('Men');
   const [ageRange, setAgeRange] = useState([21, 35]);
-  const { vettedSingles: vetttedSingles, singlesLoading, singlesError } = useGetVettedSingles();
+  const {vettedSingles, vettedSinglesLoading, vettedSinglesError } = useGetVettedSingles();
 
-  const filteredVettedSingles_XXXXXXX = (vetttedSingles || []).filter((person_CCCCCCCC) => {
+  const filteredVettedSingles_XXXXXXX = (vettedSingles || []).filter((person_CCCCCCCC) => {
     const query = searchQuery.toLowerCase();
     const memberId = `member ${String(person_CCCCCCCC.singles_id).padStart(5, '0')}`;
     return memberId.includes(query);
   });
 
-  const handleMessage = (singles_id) => {
-    console.log('Message clicked for:', singles_id);
+  const handleMessage = (vettedSingles_id) => {
+    console.log('Message clicked for:', vettedSingles_id);
     // Add message functionality here
   };
 
-  const handleMarkInterested = (singles_id) => {
-    console.log('Mark Interested clicked for:', singles_id);
+  const handleMarkInterested = (vettedSingles_id) => {
+    console.log('Mark Interested clicked for:', vettedSingles_id);
     // Add mark interested functionality here
   };
 
   return (
     <MainCard
-      title="All Singles"
+      title="Vetted Singles"
       secondary={
         <OutlinedInput
           id="input-search-cards"
@@ -222,22 +222,22 @@ export default function VettedSingles() {
         </Grid>
       </SubCard>
 
-      {singlesLoading && (
+      {vettedSinglesLoading && (
         <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
           <CircularProgress />
         </Box>
       )}
       
-      {singlesError && (
+      {vettedSinglesError && (
         <Alert severity="error" sx={{ mb: 2 }}>
           Failed to load singles. Please try again later.
         </Alert>
       )}
       
-      {!singlesLoading && !singlesError && (
+      {!vettedSinglesLoading && !vettedSinglesError && (
         <Grid container spacing={gridSpacing}>
-          {filteredVettedSingles_XXXXXXX.map((personIndex_DDDDDDD) => (
-          <Grid key={personIndex_DDDDDDD.singles_id} size={{ xs: 12, sm: 6, md: 4 }}>
+          {filteredVettedSingles_XXXXXXX.map((vettedPersonIndex_DDDDDDD) => (
+          <Grid key={vettedPersonIndex_DDDDDDD.singles_id} size={{ xs: 12, sm: 6, md: 4 }}>
             <Card
               sx={{
                 height: '100%',
@@ -251,8 +251,8 @@ export default function VettedSingles() {
               <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
                   <Avatar
-                    src={personIndex_DDDDDDD.profile_image_url && personIndex_DDDDDDD.profile_image_url !== 'user-round.svg' ? personIndex_DDDDDDD.profile_image_url : UserRound}
-                    alt={`Member ${String(personIndex_DDDDDDD.singles_id).padStart(5, '0')}`}
+                    src={vettedPersonIndex_DDDDDDD.profile_image_url && vettedPersonIndex_DDDDDDD.profile_image_url !== 'user-round.svg' ? vettedPersonIndex_DDDDDDD.profile_image_url : UserRound}
+                    alt={`Member ${String(vettedPersonIndex_DDDDDDD.vettedSingles_id).padStart(5, '0')}`}
                     sx={{
                       width: 80,
                       height: 80
@@ -268,7 +268,7 @@ export default function VettedSingles() {
                     fontWeight: 500
                   }}
                 >
-                  Member {String(personIndex_DDDDDDD.singles_id).padStart(5, '0')}
+                  Member {String(vettedPersonIndex_DDDDDDD.singles_id).padStart(5, '0')}
                 </Typography>
               </CardContent>
 
@@ -277,7 +277,7 @@ export default function VettedSingles() {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  onClick={() => handleMessage(personIndex_DDDDDDD.singles_id)}
+                  onClick={() => handleMessage(vettedPersonIndex_DDDDDDD.vettedSingles_id)}
                   sx={{ mr: 1 }}
                 >
                   Message
@@ -286,7 +286,7 @@ export default function VettedSingles() {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  onClick={() => handleMarkInterested(personIndex_DDDDDDD.singles_id)}
+                  onClick={() => handleMarkInterested(vettedPersonIndex_DDDDDDD.vettedSingles_id)}
                 >
                   Mark Interested
                 </Button>

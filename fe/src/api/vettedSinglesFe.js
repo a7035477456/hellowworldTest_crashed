@@ -35,9 +35,9 @@ export function useGetVettedSingles() {
 
   const memoizedValue = useMemo(
     () => ({
-      singles: transformedData,
-      singlesLoading: isLoading,
-      singlesError: error,
+      vettedSingles: transformedData,
+      vettedSinglesLoading: isLoading,
+      vettedSinglesError: error,
       refetch: mutate
     }),
     [transformedData, isLoading, error, mutate]
