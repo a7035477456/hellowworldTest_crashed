@@ -12,6 +12,7 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 
 // project imports
 import AnimateButton from 'ui-component/extended/AnimateButton';
@@ -21,13 +22,16 @@ import CustomFormControl from 'ui-component/extended/Form/CustomFormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3005';
+
 // ===============================|| JWT - LOGIN ||=============================== //
 
 export default function AuthLogin() {
   const navigate = useNavigate();
   const [checked, setChecked] = useState(true);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('a@b.com');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
@@ -38,16 +42,45 @@ export default function AuthLogin() {
     event.preventDefault();
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    // Check credentials
-    if (email === 'a@b.com' && password === 'ccc') {
-      // Successful login - redirect to AllSingles
-      navigate('/dashboard/allSingles');
-    } else {
-      // Failed login - redirect to Register
-      navigate('/pages/register');
+    setIsLoading(true);
+
+    // Debug logging
+    console.log('Frontend - Submitting login:');
+    console.log('Email:', email);
+    console.log('Password:', password);
+    console.log('Password length:', password.length);
+    console.log('Password charCodes:', password.split('').map(c => c.charCodeAt(0)));
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/verifyPassword`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        // Successful login - redirect to AllSingles
+        navigate('/dashboard/allSingles');
+      } else {
+        // Failed login - log email, password, and bcrypt hash
+        console.log('Email:', email);
+        console.log('Plain-text Password:', password);
+        console.log('Bcrypt of Password:', data.passwordHash || 'N/A');
+        // Redirect to LoginFailure
+        navigate('/pages/loginFailure');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      // On error, redirect to LoginFailure
+      navigate('/pages/loginFailure');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -106,8 +139,15 @@ export default function AuthLogin() {
       </Grid>
       <Box sx={{ mt: 2 }}>
         <AnimateButton>
-          <Button color="secondary" fullWidth size="large" type="submit" variant="contained">
-            Sign In
+          <Button 
+            color="secondary" 
+            fullWidth 
+            size="large" 
+            type="submit" 
+            variant="contained"
+            disabled={isLoading}
+          >
+            {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Sign In'}
           </Button>
         </AnimateButton>
       </Box>

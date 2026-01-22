@@ -14,28 +14,28 @@ const pages = {
   title: 'Authentication',
   type: 'group',
   children: [
-    {
-      id: 'authentication',
-      title: 'Authentication',
-      type: 'collapse',
-      icon: icons.IconKey,
-      children: [
-        {
-          id: 'login',
-          title: 'Login',
-          type: 'item',
-          url: '/pages/login',
-          target: true
-        },
-        {
-          id: 'register',
-          title: 'Register',
-          type: 'item',
-          url: '/pages/register',
-          target: true
-        }
-      ]
-    },
+    // {
+    //   id: 'authentication',
+    //   title: 'Authentication',
+    //   type: 'collapse',
+    //   icon: icons.IconKey,
+    //   children: [
+    //     {
+    //       id: 'login',
+    //       title: 'Login',
+    //       type: 'item',
+    //       url: '/pages/login',
+    //       target: true
+    //     },
+    //     {
+    //       id: 'register',
+    //       title: 'Register',
+    //       type: 'item',
+    //       url: '/pages/register',
+    //       target: true
+    //     }
+    //   ]
+    // },
     {
       id: 'util-vetself',
       title: 'My Vetting Info',

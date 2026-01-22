@@ -1,5 +1,79 @@
 import pool from '../db/connection.js';
 
+export const verifyLoginPassword = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required' });
+    }
+
+    // First, get the user by email along with their password (stored as plain text)
+    const result = await pool.query(
+      `SELECT 
+        singles_id, 
+        profile_image_url,
+        password_hash
+      FROM public.singles s 
+      WHERE s.email = $1
+      ORDER BY s.lastLoginTime DESC
+      LIMIT 1`,
+      [email]
+    );
+
+    if (result.rows.length === 0) {
+      // User doesn't exist
+      return res.status(401).json({ 
+        error: 'Login or Password fail'
+      });
+    }
+
+    const user = result.rows[0];
+    
+    // Debug logging to see what we're comparing
+    console.log('=== LOGIN DEBUG ===');
+    console.log('Email provided:', email);
+    console.log('Password provided:', password);
+    console.log('Password provided length:', password?.length);
+    console.log('Password provided charCodes:', password?.split('').map(c => c.charCodeAt(0)));
+    console.log('Password from DB:', user.password_hash);
+    console.log('Password from DB length:', user.password_hash?.length);
+    console.log('Password from DB charCodes:', user.password_hash?.split('').map(c => c.charCodeAt(0)));
+    console.log('Password from DB is null/undefined?', user.password_hash == null);
+    console.log('Are they equal (before trim)?', password === user.password_hash);
+    console.log('Type of provided:', typeof password);
+    console.log('Type of DB:', typeof user.password_hash);
+    
+    // Compare the provided password with the stored plain text password
+    // Trim both values to handle any whitespace issues
+    const providedPassword = password?.trim() || '';
+    const storedPassword = user.password_hash?.trim() || '';
+    const isPasswordValid = providedPassword === storedPassword;
+    
+    console.log('Provided (trimmed):', `"${providedPassword}"`);
+    console.log('Stored (trimmed):', `"${storedPassword}"`);
+    console.log('Are they equal (after trim)?', isPasswordValid);
+    console.log('==================');
+
+    if (!isPasswordValid) {
+      // Password is wrong
+      return res.status(401).json({ 
+        error: 'Login or Password fail'
+      });
+    }
+
+    // Remove password_hash from response for security
+    const { password_hash, ...userWithoutPassword } = user;
+    res.json({ success: true, user: userWithoutPassword });
+  } catch (error) {
+    console.error('Error verifying login:', error);
+    res.status(500).json({ error: 'Failed to verify login' });
+  }
+};
+
+
+
+
 export const getAllSingles_BBBBBBBB = async (req, res) => {
   try {
     const result = await pool.query(

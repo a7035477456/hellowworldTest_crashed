@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { verifyLoginPassword } from './routes/singles_be.js';
 import { getAllSingles_BBBBBBBB } from './routes/singles_be.js';
 import { getVettedSingles_CCCCCCCC } from './routes/singles_be.js';
 import { getSinglesInterested_DDDDDDD } from './routes/singles_be.js';
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.post('/api/verifyPassword', verifyLoginPassword);
 app.get('/api/allSingles', getAllSingles_BBBBBBBB);
 app.get('/api/vettedSingles', getVettedSingles_CCCCCCCC);
 app.get('/api/interestedSingles', getSinglesInterested_DDDDDDD);
