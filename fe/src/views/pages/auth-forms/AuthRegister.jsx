@@ -14,19 +14,33 @@ import Box from '@mui/material/Box';
 // project imports
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import CustomFormControl from 'ui-component/extended/Form/CustomFormControl';
+import { registerUser } from 'api/registerFe';
 
 // ===========================|| JWT - REGISTER ||=========================== //
 
 export default function AuthRegister() {
   const navigate = useNavigate();
   const [checked, setChecked] = useState(true);
-  const [email, setEmail] = useState('jones@doe.com');
+  const [email, setEmail] = useState('a7035477456@gmail.com');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    // Navigate to registration success page
-    navigate('/pages/registrationSuccess');
+    setError('');
+    setIsSubmitting(true);
+
+    try {
+      // Call the registration API to send email
+      await registerUser(email);
+      
+      // Navigate to registration success page after email is sent
+      navigate('/pages/registrationSuccess');
+    } catch (err) {
+      console.error('Registration error:', err);
+      setError(err.message || 'Failed to register. Please try again.');
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -59,10 +73,24 @@ export default function AuthRegister() {
         }
       />
 
+      {error && (
+        <Typography variant="body2" color="error" sx={{ mt: 1, mb: 1 }}>
+          {error}
+        </Typography>
+      )}
+
       <Box sx={{ mt: 2 }}>
         <AnimateButton>
-          <Button disableElevation fullWidth size="large" type="submit" variant="contained" color="secondary">
-            Sign up
+          <Button 
+            disableElevation 
+            fullWidth 
+            size="large" 
+            type="submit" 
+            variant="contained" 
+            color="secondary"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Sending...' : 'Sign up'}
           </Button>
         </AnimateButton>
       </Box>

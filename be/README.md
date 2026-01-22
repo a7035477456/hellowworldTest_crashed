@@ -9,7 +9,7 @@ Backend API server for the Vetted Singles application.
 npm install
 ```
 
-2. Create a `.env` file in the `server` directory with your PostgreSQL database credentials:
+2. Create a `.env` file in the `be` directory with your PostgreSQL database credentials and SMTP settings:
 ```
 DB_HOST=localhost
 DB_PORT=5432
@@ -17,7 +17,20 @@ DB_NAME=postgres
 DB_USER=postgres
 DB_PASSWORD=your_password
 PORT=3005
+
+# SMTP Configuration for sending registration emails
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-app-password
+NODE_ENV=development
 ```
+
+**SMTP Setup (Gmail):**
+- For Gmail, you need to use an App Password (not your regular password)
+- Go to your Google Account settings → Security → 2-Step Verification → App passwords
+- Generate an app password for "Mail" and use it as `SMTP_PASS`
+- Use your Gmail address as `SMTP_USER`
 
 3. Set up the database:
    - Create a PostgreSQL database (if not already created)
