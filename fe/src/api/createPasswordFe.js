@@ -1,13 +1,13 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3005';
 
-export const createPassword = async (email, password, phone) => {
+export const createPassword = async (token, email, password, phone) => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/createPassword`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email, password, phone })
+      body: JSON.stringify({ token, email, password, phone })
     });
 
     if (!response.ok) {

@@ -1,5 +1,11 @@
+import crypto from 'crypto';
 import pool from '../db/connection.js';
 import nodemailer from 'nodemailer';
+
+// Secure tokens for "Create Password" links (single-use, time-limited)
+// Format: { token: { email, expiresAt } }
+const createPasswordTokens_JJJJJJJJ = new Map();
+const TOKEN_EXPIRY_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 export const registerUser_FFFFFFFF = async (req, res) => {
   try {
@@ -30,8 +36,11 @@ export const registerUser_FFFFFFFF = async (req, res) => {
         }
       });
 
-      // Email content - include email as query parameter
-      const createPasswordLink = `http://localhost:3000/pages/createPassword?email=${encodeURIComponent(email)}`;
+      // Generate secure single-use token so only the person who received the email can create password
+      const token = crypto.randomBytes(32).toString('hex');
+      const expiresAt = Date.now() + TOKEN_EXPIRY_MS;
+      createPasswordTokens_JJJJJJJJ.set(token, { email, expiresAt });
+      const createPasswordLink = `http://localhost:3000/pages/createPassword?token=${token}&email=${encodeURIComponent(email)}`;
       const mailOptions = {
         from: smtpUser,
         to: email,
@@ -43,7 +52,7 @@ export const registerUser_FFFFFFFF = async (req, res) => {
             <p style="margin: 20px 0;">
               <a href="${createPasswordLink}" 
                  style="display: inline-block; padding: 12px 24px; background-color: #1976d2; color: white; text-decoration: none; border-radius: 4px;">
-                Create Password
+                Create Password V11
               </a>
             </p>
             <p>Or copy and paste this link into your browser:</p>
@@ -281,10 +290,23 @@ const pendingVerifications = new Map();
 
 export const createPassword_GGGGGGGG = async (req, res) => {
   try {
-    const { email, password, phone } = req.body;
+    const { token, email, password, phone } = req.body;
 
-    if (!email || !password || !phone) {
-      return res.status(400).json({ error: 'Email, password, and phone are required' });
+    if (!token || !email || !password || !phone) {
+      return res.status(400).json({ error: 'Invalid link. Please use the link from your registration email.' });
+    }
+
+    // Validate secure token (prevents anyone who knows the email from setting a password)
+    const stored = createPasswordTokens_JJJJJJJJ.get(token);
+    if (!stored) {
+      return res.status(400).json({ error: 'This link is invalid or has already been used. Please request a new registration email.' });
+    }
+    if (stored.email.toLowerCase() !== email.toLowerCase()) {
+      return res.status(400).json({ error: 'Invalid link. Please use the link from your registration email.' });
+    }
+    if (Date.now() > stored.expiresAt) {
+      createPasswordTokens_JJJJJJJJ.delete(token);
+      return res.status(400).json({ error: 'This link has expired. Please request a new registration email.' });
     }
 
     // Validate phone format (remove formatting)
@@ -345,6 +367,9 @@ export const createPassword_GGGGGGGG = async (req, res) => {
         email: email,
         phone: formattedPhone
       });
+
+      // One-time use: invalidate token so link cannot be reused
+      createPasswordTokens_JJJJJJJJ.delete(token);
 
       res.json({ 
         success: true, 

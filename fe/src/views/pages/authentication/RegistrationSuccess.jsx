@@ -55,7 +55,7 @@ export default function RegistrationSuccess() {
                     Registration almost done
                   </Typography>
                   <Typography variant="body1" sx={{ color: 'secondary.main', textAlign: 'center', mt: 1 }}>
-                    Please open our emal and click &quot;Create Password&quot; to continue.
+                    Please open our emal and click &quot;Create Password V10&quot; to continue.
                   </Typography>
                 </Stack>
                 <Box sx={{ width: 1, display: 'flex', flexDirection: 'column', gap: 2 }}>

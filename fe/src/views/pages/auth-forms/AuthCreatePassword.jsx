@@ -36,14 +36,15 @@ export default function AuthCreatePassword() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   
-  // Get email from URL params
+  // Get secure token and email from URL (link from registration email)
+  const token = searchParams.get('token') || '';
   const email = searchParams.get('email') || '';
 
   useEffect(() => {
-    if (!email) {
-      setError('Email is required. Please use the link from your email.');
+    if (!token || !email) {
+      setError('Invalid or expired link. Please use the link from your registration email.');
     }
-  }, [email]);
+  }, [token, email]);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -81,8 +82,8 @@ export default function AuthCreatePassword() {
     setError('');
     
     // Validation
-    if (!email) {
-      setError('Email is required. Please use the link from your email.');
+    if (!token || !email) {
+      setError('Invalid or expired link. Please use the link from your registration email.');
       return;
     }
     
@@ -116,8 +117,8 @@ export default function AuthCreatePassword() {
     setIsSubmitting(true);
  
     try {
-      // Call the createPassword API to send SMS and get verification code
-      await createPassword(email, password, phone);
+      // Call the createPassword API (validates token, then sends SMS)
+      await createPassword(token, email, password, phone);
       
       // Navigate to phone verification page with email and phone
       navigate(`/pages/phoneVerification?email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`);
@@ -130,7 +131,7 @@ export default function AuthCreatePassword() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Stack sx={{ mb: 2, alignItems: 'center' }}>
+      <Stack sx={{ mb: 2, alignItems: 'center' }}> 
         {/* <Typography variant="subtitle1">Sign up v3</Typography> */}
         {/* <Typography variant="body2" sx={{ mt: 0.5 }}>
           Enter your details to continue.
@@ -232,9 +233,9 @@ export default function AuthCreatePassword() {
             type="submit" 
             variant="contained" 
             color="secondary"
-            disabled={isSubmitting || !email}
+            disabled={isSubmitting || !token || !email}
           >
-            {isSubmitting ? 'Sending...' : 'Create Password'}
+            {isSubmitting ? 'Sending...' : 'Create Password V9'}
           </Button>
         </AnimateButton>
       </Box>
