@@ -6,6 +6,7 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
+    "start:prod": "serve -s dist -l 5000",
     "preview": "vite preview",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
@@ -38,7 +39,8 @@
     "vite": "7.2.6",
     "vite-jsconfig-paths": "2.0.1",
     "web-vitals": "5.1.0",
-    "yup": "1.7.1"
+    "yup": "1.7.1",
+    "serve": "^14.2.4"
   },
   "eslintConfig": {
     "extends": [

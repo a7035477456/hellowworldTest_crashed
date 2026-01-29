@@ -16,7 +16,7 @@ DB_PORT=5432
 DB_NAME=postgres
 DB_USER=postgres
 DB_PASSWORD=your_password
-PORT=3005
+PORT=4000
 
 # SMTP Configuration for sending registration emails
 SMTP_HOST=smtp.gmail.com

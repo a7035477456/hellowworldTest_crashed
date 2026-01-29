@@ -22,7 +22,7 @@ import CustomFormControl from 'ui-component/extended/Form/CustomFormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3005';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:4000';
 
 // ===============================|| JWT - LOGIN ||=============================== //
 

@@ -1,7 +1,12 @@
 import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { verifyLoginPassword } from './routes/singles_be.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import { registerUser_FFFFFFFF } from './routes/singles_be.js';
 import { getAllSingles_BBBBBBBB } from './routes/singles_be.js';
 import { getVettedSingles_CCCCCCCC } from './routes/singles_be.js';
@@ -13,7 +18,7 @@ import { verifyPhone_HHHHHHHH } from './routes/singles_be.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT || 4000;
 
 // Middleware
 app.use(cors());
@@ -33,6 +38,15 @@ app.get('/api/requestedSingles', getSinglesRequest_EEEEEEEE);
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
+
+// Serve built frontend from fe/dist when present (same port as API)
+const feDist = path.join(__dirname, '..', 'fe', 'dist');
+if (fs.existsSync(feDist)) {
+  app.use(express.static(feDist));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(feDist, 'index.html'));
+  });
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
