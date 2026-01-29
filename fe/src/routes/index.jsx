@@ -16,7 +16,7 @@ const router = createBrowserRouter(
     AuthenticationRoutes
   ],
   {
-    basename: import.meta.env.VITE_APP_BASE_NAME
+    basename: '/'
   }
 );
 

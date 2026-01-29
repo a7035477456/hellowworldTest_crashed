@@ -32,10 +32,10 @@ export default function PhoneVerification() {
                 </Box>
                 <Stack sx={{ alignItems: 'center', justifyContent: 'center', gap: 1 }}>
                   <Typography variant={downMD ? 'h3' : 'h2'} sx={{ color: 'secondary.main' }}>
-                    Sign up
+                    Sign up continue
                   </Typography>
                   <Typography variant="caption" sx={{ fontSize: '16px', textAlign: { xs: 'center', md: 'inherit' } }}>
-                    Enter your details to continue
+                    Please Enter phone verification code to continue
                   </Typography>
                 </Stack>
                 <Box sx={{ width: 1 }}>

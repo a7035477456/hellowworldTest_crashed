@@ -47,6 +47,17 @@ export default function RegistrationSuccess() {
                 <Box sx={{ mb: 3 }}>
                   <Logo />
                 </Box>
+                <Stack sx={{ alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                  <Typography variant={downMD ? 'h4' : 'h3'} sx={{ color: 'secondary.main', fontFamily: 'Comic Sans MS' }}>
+                    Congratulation V8,
+                  </Typography>
+                  <Typography variant={downMD ? 'h4' : 'h3'} sx={{ color: 'secondary.main', fontFamily: 'Comic Sans MS' }}>
+                    Registration almost done
+                  </Typography>
+                  <Typography variant="body1" sx={{ color: 'secondary.main', textAlign: 'center', mt: 1 }}>
+                    Please open our emal and click &quot;Create Password&quot; to continue.
+                  </Typography>
+                </Stack>
                 <Box sx={{ width: 1, display: 'flex', flexDirection: 'column', gap: 2 }}>
                   <AnimateButton>
                     <Button

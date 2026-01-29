@@ -68,22 +68,22 @@ export default function AuthPhoneVerification() {
       // Call the verifyPhone API
       await verifyPhone(email, phone, verificationCode);
       
-      // On success, redirect to login page
-      navigate('/pages/login');
+      // On success, redirect to Page 8 (Phone Verification Success)
+      navigate('/pages/phoneVerificationSuccess');
     } catch (err) {
       console.error('Phone verification error:', err);
       setError(err.message || 'Verification failed. Please try again.');
       setIsSubmitting(false);
       
-      // If verification fails, redirect back to create password page
-      navigate(`/pages/createPassword?email=${encodeURIComponent(email)}`);
+      // If verification fails, redirect to Page 9 (Phone Verification Failure)
+      navigate('/pages/phoneVerificationFailure');
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <Stack sx={{ mb: 2, alignItems: 'center' }}>
-        <Typography variant="subtitle1">Sign up</Typography>
+        <Typography variant="subtitle1">Sign up V4</Typography>
         <Typography variant="body2" sx={{ mt: 0.5 }}>
           Enter your details to continue.
         </Typography>

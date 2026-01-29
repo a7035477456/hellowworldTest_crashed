@@ -31,7 +31,7 @@ export const registerUser_FFFFFFFF = async (req, res) => {
       });
 
       // Email content - include email as query parameter
-      const createPasswordLink = `http://localhost:3000/free/pages/createPassword?email=${encodeURIComponent(email)}`;
+      const createPasswordLink = `http://localhost:3000/pages/createPassword?email=${encodeURIComponent(email)}`;
       const mailOptions = {
         from: smtpUser,
         to: email,

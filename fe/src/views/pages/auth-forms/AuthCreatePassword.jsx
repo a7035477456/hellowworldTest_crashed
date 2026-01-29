@@ -114,7 +114,7 @@ export default function AuthCreatePassword() {
     }
     
     setIsSubmitting(true);
-
+ 
     try {
       // Call the createPassword API to send SMS and get verification code
       await createPassword(email, password, phone);
@@ -131,10 +131,10 @@ export default function AuthCreatePassword() {
   return (
     <form onSubmit={handleSubmit}>
       <Stack sx={{ mb: 2, alignItems: 'center' }}>
-        <Typography variant="subtitle1">Sign up</Typography>
-        <Typography variant="body2" sx={{ mt: 0.5 }}>
+        {/* <Typography variant="subtitle1">Sign up v3</Typography> */}
+        {/* <Typography variant="body2" sx={{ mt: 0.5 }}>
           Enter your details to continue.
-        </Typography>
+        </Typography> */}
       </Stack>
 
       <CustomFormControl fullWidth>

@@ -11,6 +11,8 @@ const LoginFailurePage = Loadable(lazy(() => import('views/pages/authentication/
 const RegistrationSuccessPage = Loadable(lazy(() => import('views/pages/authentication/RegistrationSuccess')));
 const CreatePasswordPage = Loadable(lazy(() => import('views/pages/authentication/CreatePassword')));
 const PhoneVerificationPage = Loadable(lazy(() => import('views/pages/authentication/PhoneVerification')));
+const PhoneVerificationSuccessPage = Loadable(lazy(() => import('views/pages/authentication/PhoneVerificationSuccess')));
+const PhoneVerificationFailurePage = Loadable(lazy(() => import('views/pages/authentication/PhoneVerificationFailure')));
 
 // ==============================|| AUTHENTICATION ROUTING ||============================== //
 
@@ -31,7 +33,7 @@ const AuthenticationRoutes = {
       element: <LoginFailurePage />
     },
     {
-      path: '/pages/registrationSuccess',
+      path: '/pages/registrationEmailed',
       element: <RegistrationSuccessPage />
     },
     {
@@ -45,6 +47,14 @@ const AuthenticationRoutes = {
     {
       path: '/pages/phoneVerification',
       element: <PhoneVerificationPage />
+    },
+    {
+      path: '/pages/phoneVerificationSuccess',
+      element: <PhoneVerificationSuccessPage />
+    },
+    {
+      path: '/pages/phoneVerificationFailure',
+      element: <PhoneVerificationFailurePage />
     }
   ]
 };

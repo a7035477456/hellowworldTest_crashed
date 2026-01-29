@@ -35,7 +35,7 @@ export default function AuthRegister() {
       await registerUser(email);
       
       // Navigate to registration success page after email is sent, passing email in state
-      navigate('/pages/registrationSuccess', { state: { email } });
+      navigate('/pages/registrationEmailed', { state: { email } });
     } catch (err) {
       console.error('Registration error:', err);
       setError(err.message || 'Failed to register. Please try again.');
@@ -45,12 +45,12 @@ export default function AuthRegister() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Stack sx={{ mb: 2, alignItems: 'center' }}>
+      {/* <Stack sx={{ mb: 2, alignItems: 'center' }}>
         <Typography variant="subtitle1">Sign up with Email address </Typography>
-      </Stack>
+      </Stack> */}
 
       <CustomFormControl fullWidth>
-        <InputLabel htmlFor="outlined-adornment-email-register">Email Address / Username</InputLabel>
+        <InputLabel htmlFor="outlined-adornment-email-register">Email Address</InputLabel>
         <OutlinedInput 
           id="outlined-adornment-email-register" 
           type="email" 
@@ -90,7 +90,7 @@ export default function AuthRegister() {
             color="secondary"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Sending...' : 'Sign up'}
+            {isSubmitting ? 'Sending...' : 'Sign up V7'}
           </Button>
         </AnimateButton>
       </Box>
