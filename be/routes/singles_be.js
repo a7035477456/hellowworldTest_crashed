@@ -148,6 +148,9 @@ export const verifyLoginPassword = async (req, res) => {
       ? await bcrypt.compare(providedPassword, storedHash)
       : providedPassword === storedHash;
 
+    // Temporary debug: remove once login works
+    console.log('Login attempt:', { email, gotRow: true, singles_id: user.singles_id, storedHashPreview: storedHash.slice(0, 20) + (storedHash.length > 20 ? '...' : ''), looksLikeBcrypt, isPasswordValid });
+
     if (!isPasswordValid) {
       // Password is wrong
       return res.status(401).json({ 
