@@ -13,11 +13,16 @@ import { verifyPhone_HHHHHHHH } from './routes/singles_be.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT || 40000;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Root health check for HAProxy (httpchk GET /)
+app.get('/', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
 
 // Routes
 app.post('/api/verifyPassword', verifyLoginPassword);

@@ -7,7 +7,10 @@
   "scripts": {
     "start": "node server_be.js",
     "build": "node --watch server_be.js",
-    "seed": "node db/seed.js"
+    "seed": "node db/seed.js",
+    "pm2:start": "pm2 start ecosystem.config.cjs --env production",
+    "pm2:stop": "pm2 stop ecosystem.config.cjs",
+    "pm2:restart": "pm2 restart ecosystem.config.cjs --env production"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
