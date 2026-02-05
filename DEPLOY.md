@@ -39,3 +39,40 @@ alias febeprod='cleancompilebuildfeprod; cleancompileresetrunbeprod'
 
 - `npm run pm2:start` starts the API from `ecosystem.config.cjs` (2 instances, port 40000).
 - Ensure `be/.env` exists (copy from `be/.env.example`) with DB and other vars per server.
+
+## Verify (command line)
+
+**On a webserver (e.g. xbox3) – backend on this host:**
+
+```bash
+curl -s http://localhost:40000/
+# expect: {"status":"ok"}
+
+curl -s http://localhost:40000/health
+# expect: {"status":"ok"}
+```
+
+**From any machine – direct to a webserver (no HAProxy):**
+
+```bash
+curl -s http://192.168.222.203:40000/
+curl -s http://192.168.222.204:40000/
+# ... 205, 206, 207
+```
+
+**Through HAProxy / vsingles.club (HTTPS):**
+
+```bash
+curl -s https://vsingles.club/
+# expect: {"status":"ok"} or HTML depending on HAProxy routing
+
+curl -sI https://vsingles.club/
+# check HTTP status (200, 301, etc.)
+```
+
+**PM2 on a webserver:**
+
+```bash
+pm2 list
+pm2 logs
+```

@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import { verifyLoginPassword } from './routes/singles_be.js';
 import { registerUser_FFFFFFFF } from './routes/singles_be.js';
@@ -12,6 +14,7 @@ import { verifyPhone_HHHHHHHH } from './routes/singles_be.js';
 
 dotenv.config();
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 40000;
 
@@ -19,12 +22,12 @@ const PORT = process.env.PORT || 40000;
 app.use(cors());
 app.use(express.json());
 
-// Root health check for HAProxy (httpchk GET /)
-app.get('/', (req, res) => {
+// Health check for HAProxy (httpchk GET /health)
+app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
-// Routes
+// API routes
 app.post('/api/verifyPassword', verifyLoginPassword);
 app.post('/api/register', registerUser_FFFFFFFF);
 app.post('/api/createPassword', createPassword_GGGGGGGG);
@@ -34,9 +37,12 @@ app.get('/api/vettedSingles', getVettedSingles_CCCCCCCC);
 app.get('/api/interestedSingles', getSinglesInterested_DDDDDDD);
 app.get('/api/requestedSingles', getSinglesRequest_EEEEEEEE);
 
-// Health check
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok' });
+// Serve built frontend (fe/dist) – run fe build first (febedev/febeprod)
+app.use(express.static(path.join(__dirname, '../fe/dist')));
+
+// SPA: all other routes serve index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../fe/dist/index.html'));
 });
 
 // Error handling middleware
