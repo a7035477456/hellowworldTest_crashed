@@ -4,7 +4,7 @@
  */
 module.exports = {
   apps: [{
-    name: 'currentProject2-api',
+    name: 'vsingles',
     script: './server_be.js',
     instances: 2,
     exec_mode: 'cluster',
