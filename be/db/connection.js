@@ -12,7 +12,7 @@ console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
 
 const pool = new Pool({
   host: process.env.DB_HOST || 'localhost',
-  port: process.env.DB_PORT || 5432,
+  port: process.env.DB_PORT || 50010,
   database: process.env.DB_NAME || 'postgres',
   user: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASSWORD || '',
@@ -36,7 +36,7 @@ pool.query('SELECT NOW()')
   })
   .catch((err) => {
     console.error('Database connection test failed:', err.message);
-    console.error('Using: host=%s port=%s database=%s user=%s', process.env.DB_HOST || 'localhost', process.env.DB_PORT || 5432, process.env.DB_NAME || 'postgres', process.env.DB_USER || 'postgres');
+    console.error('Using: host=%s port=%s database=%s   username=%s password=%s', process.env.DB_HOST || 'localhost', process.env.DB_PORT || 50010, process.env.DB_NAME || 'postgres', process.env.DB_USER || 'postgres', process.env.DB_PASSWORD || 'w2332w2332w');
     console.error('Fix: ensure PostgreSQL is running and be/.env has correct DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD (e.g. port 50010, database vsingles)');
   });
 

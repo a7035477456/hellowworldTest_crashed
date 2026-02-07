@@ -162,7 +162,8 @@ export const verifyLoginPassword = async (req, res) => {
     const { password_hash, ...userWithoutPassword } = user;
     res.json({ success: true, user: userWithoutPassword });
   } catch (error) {
-    console.error('Error verifying login:', error);
+    console.error('Error verifying login:', error.message);
+    console.error('Stack:', error.stack);
     res.status(500).json({ error: 'Failed to verify login' });
   }
 };
