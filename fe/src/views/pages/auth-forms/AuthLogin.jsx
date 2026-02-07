@@ -48,6 +48,7 @@ export default function AuthLogin() {
     setIsLoading(true);
 
     // Debug logging
+    console.log("=== INPUT DATA =================================================");
     console.log('Frontend - Submitting login:');
     console.log('Email:', email);
     console.log('Password:', password);
@@ -65,11 +66,16 @@ export default function AuthLogin() {
 
       const data = await response.json();
 
+      console.log("=== CRITICAL DATA =================================================");
+      console.log('response.ok:', response.ok);
+      console.log('data.success:', data.success);
       if (response.ok && data.success) {
         // Successful login - redirect to AllSingles
         navigate('/dashboard/allSingles');
       } else {
         // Failed login - log email, password, and bcrypt hash
+        console.log("=== ELSE ERROR =================================================");
+ 
         console.log('Email:', email);
         console.log('Plain-text Password:', password);
         console.log('Bcrypt of Password:', data.passwordHash || 'N/A');
