@@ -24,12 +24,22 @@ export async function verifyLoginPassword(req, res) {
 
     const user = result.rows[0];
     const providedPassword = (password && typeof password === 'string') ? password.trim() : '';
-    const storedHash = user.password_hash?.trim() || '';
+    const storedHash = (user.password_hash != null && typeof user.password_hash === 'string')
+      ? String(user.password_hash).trim()
+      : '';
 
-    const looksLikeBcrypt = /^\$2[aby]\$\d{2}\$/.test(storedHash);
-    const isPasswordValid = looksLikeBcrypt
-      ? await bcrypt.compare(providedPassword, storedHash)
-      : providedPassword === storedHash;
+    const looksLikeBcrypt = storedHash.length >= 59 && /^\$2[aby]\$\d{2}\$/.test(storedHash);
+    let isPasswordValid = false;
+    if (looksLikeBcrypt) {
+      try {
+        isPasswordValid = await bcrypt.compare(providedPassword, storedHash);
+      } catch (bcryptErr) {
+        console.error('bcrypt.compare error:', bcryptErr.message);
+        return res.status(401).json({ error: 'Login or Password fail' });
+      }
+    } else {
+      isPasswordValid = providedPassword === storedHash;
+    }
 
     console.log('Login attempt:', { email, gotRow: true, singles_id: user.singles_id, storedHashPreview: storedHash.slice(0, 20) + (storedHash.length > 20 ? '...' : ''), looksLikeBcrypt, isPasswordValid });
 
