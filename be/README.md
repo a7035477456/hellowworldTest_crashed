@@ -17,7 +17,7 @@ DB_HOST=localhost
 DB_PORT=50010
 DB_NAME=vsingles
 DB_USER=postgres
-DB_PASSWORD=w2332w2332w
+DB_PASSWORD=[fix me]
 PORT=40000
 
 # SMTP Configuration for sending registration emails

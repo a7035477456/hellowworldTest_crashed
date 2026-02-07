@@ -36,7 +36,7 @@ pool.query('SELECT NOW()')
   })
   .catch((err) => {
     console.error('Database connection test failed:', err.message);
-    console.error('Using: host=%s port=%s database=%s   username=%s password=%s', process.env.DB_HOST || 'localhost', process.env.DB_PORT || 50010, process.env.DB_NAME || 'postgres', process.env.DB_USER || 'postgres', process.env.DB_PASSWORD || 'w2332w2332w');
+    console.error('Using: host=%s port=%s database=%s   username=%s password=%s', process.env.DB_HOST , process.env.DB_PORT, process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD);
     console.error('Fix: ensure PostgreSQL is running and be/.env has correct DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD (e.g. port 50010, database vsingles)');
   });
 

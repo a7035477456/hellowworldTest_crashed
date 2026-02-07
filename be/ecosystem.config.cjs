@@ -1,11 +1,14 @@
 /**
  * PM2 ecosystem config (from originalProject1 setup).
  * Run: npm run pm2:start  or  pm2 start ecosystem.config.cjs
+ * Start from be/ so cwd is correct, or set cwd below (we set it so be/.env is always found).
  */
+const path = require('path');
 module.exports = {
   apps: [{
     name: 'vsingles',
     script: './server_be.js',
+    cwd: path.join(__dirname),
     instances: 2,
     exec_mode: 'cluster',
     max_memory_restart: '12G',
