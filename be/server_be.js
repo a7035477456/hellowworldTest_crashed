@@ -20,8 +20,23 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 40000;
 
-// Middleware
-app.use(cors());
+// Middleware – CORS: allow FE origins (default cors() allows all; explicit for clarity and credentials)
+const allowedOrigins = [
+  'http://localhost:40000',
+  'http://localhost:3000',
+  'https://vsingles.club',
+  'http://vsingles.club',
+  /^https:\/\/.*\.vsingles\.club$/
+];
+app.use(cors({
+  origin: (origin, cb) => {
+    const allowed = !origin || allowedOrigins.some(o => (typeof o === 'string' ? o === origin : o.test(origin)));
+    cb(null, allowed ? (origin || true) : false);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 // Health check for HAProxy (httpchk GET /health)
