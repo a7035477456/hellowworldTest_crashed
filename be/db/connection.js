@@ -3,10 +3,16 @@ const { Pool } = pkg;
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-// Load be/.env so DB_* are set even when process cwd is not be/
-dotenv.config({ path: path.join(__dirname, '..', '.env') });
+const beEnvPath = path.resolve(__dirname, '..', '.env');
+// Reload be/.env if loadEnv didn't run first (e.g. script run directly from db/) or vars still missing
+if (!process.env.DB_HOST) {
+  const result = dotenv.config({ path: beEnvPath });
+  if (result.error) console.error('[connection] dotenv fallback:', result.error.message);
+  if (!process.env.DB_HOST && fs.existsSync(beEnvPath)) console.error('[connection] .env exists but DB_HOST not set – check variable names (DB_HOST=, DB_PORT=, etc.)');
+}
 
 console.log ('DB_HOST:', process.env.DB_HOST);
 console.log('DB_PORT:', process.env.DB_PORT);
