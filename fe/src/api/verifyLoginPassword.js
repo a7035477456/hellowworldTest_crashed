@@ -5,8 +5,12 @@ import { useNavigate } from 'react-router-dom';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:40000');
 
 const fetcher = async (url) => {
+  console.log('[verifyLoginPassword.js] fetcher called, url:', url);
   const response = await fetch(url);
+  console.log('[verifyLoginPassword.js] response:', { ok: response.ok, status: response.status, statusText: response.statusText });
   if (!response.ok) {
+    const text = await response.text();
+    console.log('[verifyLoginPassword.js] non-ok body:', text?.slice(0, 300));
     throw new Error('Failed to fetch singles');
   }
   return response.json();
@@ -20,14 +24,17 @@ const endpoints = {
 export function verifyLoginPassword() {
   const navigate = useNavigate();
   const url = `${API_BASE_URL}${endpoints.list}`;
+  console.log('[verifyLoginPassword.js] hook init, API_BASE_URL:', API_BASE_URL, 'url:', url);
   const { data, error, isLoading, mutate } = useSWR(url, fetcher, {
     revalidateOnFocus: false,
     revalidateOnReconnect: true
   });
+  console.log('[verifyLoginPassword.js] SWR state:', { hasData: !!data, error: error?.message, isLoading });
 
   // Redirect to login page if there's an error (e.g., 500 status)
   useEffect(() => {
     if (error) {
+      console.log('[verifyLoginPassword.js] error effect → redirect to /pages/login', error?.message);
       navigate('/pages/login');
     }
   }, [error, navigate]);

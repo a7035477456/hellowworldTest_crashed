@@ -55,8 +55,11 @@ export default function AuthLogin() {
     console.log('Password length:', password.length);
     console.log('Password charCodes:', password.split('').map(c => c.charCodeAt(0)));
 
+    const url = `${API_BASE_URL}/api/verifyPassword`;
+    console.log('[AuthLogin] fetch URL:', url);
+
     try {
-      const response = await fetch(`${API_BASE_URL}/api/verifyPassword`, {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,27 +67,52 @@ export default function AuthLogin() {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
-
-      console.log("=== CRITICAL DATA =================================================");
+      console.log("=== RESPONSE METADATA =================================================");
       console.log('response.ok:', response.ok);
+      console.log('response.status:', response.status);
+      console.log('response.statusText:', response.statusText);
+      console.log('response.type:', response.type);
+      console.log('response.url:', response.url);
+      console.log('response.headers:', Object.fromEntries(response.headers.entries()));
+
+      let data;
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        console.log('[AuthLogin] response body (non-JSON):', text?.slice(0, 500));
+        data = {};
+      }
+
+      console.log("=== RESPONSE BODY (data) =================================================");
+      console.log('data:', data);
       console.log('data.success:', data.success);
+      console.log('data.error:', data.error);
+      console.log('data.user:', data.user);
+      console.log('data.passwordHash:', data.passwordHash);
+
+      console.log("=== WHY response.ok IS FALSE =================================================");
+      console.log('response.ok is false when response.status is not 2xx (e.g. 500 = Internal Server Error)');
+      console.log('Current response.status:', response.status, response.status === 500 ? '→ Backend threw an exception; check server logs.' : '');
+
       if (response.ok && data.success) {
-        // Successful login - redirect to AllSingles
+        console.log('[AuthLogin] success branch → redirecting to dashboard');
         navigate('/dashboard/allSingles');
       } else {
-        // Failed login - log email, password, and bcrypt hash
-        console.log("=== ELSE ERROR =================================================");
- 
+        console.log("=== ELSE ERROR (login failed or non-2xx) =================================================");
         console.log('Email:', email);
         console.log('Plain-text Password:', password);
         console.log('Bcrypt of Password:', data.passwordHash || 'N/A');
-        // Redirect to LoginFailure
+        console.log('Backend error message (data.error):', data.error || '(none)');
         navigate('/pages/loginFailure');
       }
     } catch (error) {
+      console.error("=== FETCH EXCEPTION =================================================");
       console.error('Login error:', error);
-      // On error, redirect to LoginFailure
+      console.error('error.name:', error?.name);
+      console.error('error.message:', error?.message);
+      console.error('error.cause:', error?.cause);
       navigate('/pages/loginFailure');
     } finally {
       setIsLoading(false);
