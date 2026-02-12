@@ -13,6 +13,9 @@ const CreatePasswordPage = Loadable(lazy(() => import('views/pages/authenticatio
 const PhoneVerificationPage = Loadable(lazy(() => import('views/pages/authentication/PhoneVerification')));
 const PhoneVerificationSuccessPage = Loadable(lazy(() => import('views/pages/authentication/PhoneVerificationSuccess')));
 const PhoneVerificationFailurePage = Loadable(lazy(() => import('views/pages/authentication/PhoneVerificationFailure')));
+const AboutUsPage = Loadable(lazy(() => import('views/pages/authentication/AboutUs')));
+const TermsAndConditionsPage = Loadable(lazy(() => import('views/pages/authentication/TermsAndConditions')));
+const PrivacyPolicyPage = Loadable(lazy(() => import('views/pages/authentication/PrivacyPolicy')));
 
 // ==============================|| AUTHENTICATION ROUTING ||============================== //
 
@@ -55,6 +58,18 @@ const AuthenticationRoutes = {
     {
       path: '/pages/phoneVerificationFailure',
       element: <PhoneVerificationFailurePage />
+    },
+    {
+      path: '/pages/aboutUs',
+      element: <AboutUsPage />
+    },
+    {
+      path: '/pages/termsAndConditions',
+      element: <TermsAndConditionsPage />
+    },
+    {
+      path: '/pages/privacyPolicy',
+      element: <PrivacyPolicyPage />
     }
   ]
 };

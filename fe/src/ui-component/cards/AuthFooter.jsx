@@ -1,8 +1,10 @@
 // material-ui
 import { useState, useEffect } from 'react';
-import Link from '@mui/material/Link';
+import { Link as RouterLink } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
+import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
 
 // ==============================|| FOOTER - AUTHENTICATION 2 & 3 ||============================== //
 
@@ -21,20 +23,34 @@ export default function AuthFooter() {
   }, []);
 
   return (
-    <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 0.5 }}>
-      <Stack direction="row" spacing={1} alignItems="center">
-        {internalIp && (
-          <Typography variant="subtitle2" component="span" color="text.secondary">
+    <Stack spacing={2} sx={{ alignItems: 'center', textAlign: 'center' }}>
+      <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" flexWrap="wrap" useFlexGap>
+        <Typography component={RouterLink} to="/pages/aboutUs" variant="subtitle2" sx={{ color: 'text.secondary', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+          About us
+        </Typography>
+        <Typography variant="subtitle2" color="text.secondary">|</Typography>
+        <Typography component={RouterLink} to="/pages/termsAndConditions" variant="subtitle2" sx={{ color: 'text.secondary', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+          Terms &amp; Conditions
+        </Typography>
+        <Typography variant="subtitle2" color="text.secondary">|</Typography>
+        <Typography component={RouterLink} to="/pages/privacyPolicy" variant="subtitle2" sx={{ color: 'text.secondary', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+          Privacy Policy
+        </Typography>
+      </Stack>
+      <Divider sx={{ width: '100%', maxWidth: 360 }} />
+      <Typography variant="h6" sx={{ fontWeight: 700 }}>
+        Vetted Singles
+      </Typography>
+      <Typography variant="subtitle2" color="text.secondary">
+        © 2000-2026 eharmony, Inc. - Made with ❤️ in Los Angeles
+      </Typography>
+      {internalIp && (
+        <Box sx={{ alignSelf: 'flex-start', mt: 1 }}>
+          <Typography variant="caption" color="text.secondary">
             {internalIp}
           </Typography>
-        )}
-        {/* <Typography variant="subtitle2" component={Link} href="https://berrydashboard.com" target="_blank" underline="hover">
-          berrydashboard.com
-        </Typography> */}
-      </Stack>
-      {/* <Typography variant="subtitle2" component={Link} href="https://codedthemes.com" target="_blank" underline="hover">
-        &copy; codedthemes.com
-      </Typography> */}
+        </Box>
+      )}
     </Stack>
   );
 }
