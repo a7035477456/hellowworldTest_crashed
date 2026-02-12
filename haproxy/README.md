@@ -4,13 +4,24 @@ Config for HAProxy on **xbox2** (192.168.222.202). Backends: webservers xbox3–
 
 ## Deploy
 
-Copy `haproxy.cfg` to the server and reload:
+Copy config and Cloudflare IP lists to the server, then reload:
 
 ```bash
 sudo cp haproxy.cfg /etc/haproxy/haproxy.cfg
+sudo cp cloudflare-ips-v4.txt cloudflare-ips-v6.txt /etc/haproxy/
 sudo haproxy -c -f /etc/haproxy/haproxy.cfg   # config check
 sudo systemctl reload haproxy
 ```
+
+**Cloudflare-only:** The config restricts HTTP/HTTPS to Cloudflare IPs. To refresh lists:
+
+```bash
+curl -s https://www.cloudflare.com/ips-v4 -o /etc/haproxy/cloudflare-ips-v4.txt
+curl -s https://www.cloudflare.com/ips-v6 -o /etc/haproxy/cloudflare-ips-v6.txt
+sudo systemctl reload haproxy
+```
+
+See `cloudflare-allowlist.md` for UFW and other options.
 
 ## Socket
 
