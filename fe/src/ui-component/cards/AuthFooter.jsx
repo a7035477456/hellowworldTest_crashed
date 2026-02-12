@@ -42,7 +42,7 @@ export default function AuthFooter() {
         Vetted Singles
       </Typography>
       <Typography variant="subtitle2" color="text.secondary">
-        © 2000-2026 eharmony, Inc. - Made with ❤️ in Los Angeles
+        © 2000-2026 vsingles.club, Inc. - Made with ❤️ in Los Angeles
       </Typography>
       {internalIp && (
         <Box sx={{ alignSelf: 'flex-start', mt: 1 }}>
