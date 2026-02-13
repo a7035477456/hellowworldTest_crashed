@@ -25,6 +25,7 @@ import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
 export default function MainLayout() {
   const theme = useTheme();
   const downMD = useMediaQuery(theme.breakpoints.down('md'));
+  const downSM = useMediaQuery(theme.breakpoints.down('sm'));
 
   const {
     state: { borderRadius, miniDrawer }
@@ -44,8 +45,18 @@ export default function MainLayout() {
 
   if (menuMasterLoading) return <Loader />;
 
-  return (
-    <Box sx={{ display: 'flex' }}>
+  const innerLayout = (
+    <Box
+      sx={{
+        display: 'flex',
+        ...(downSM && {
+          width: '200%',
+          minHeight: '200vh',
+          transform: 'scale(0.5)',
+          transformOrigin: '0 0'
+        })
+      }}
+    >
       {/* header */}
       <AppBar enableColorOnDark position="fixed" color="inherit" elevation={0} sx={{ bgcolor: 'background.default' }}>
         <Toolbar sx={{ p: 2 }}>
@@ -67,5 +78,11 @@ export default function MainLayout() {
       </MainContentStyled>
       <Customization />
     </Box>
+  );
+
+  return downSM ? (
+    <Box sx={{ overflow: 'auto', width: '100vw', height: '100vh' }}>{innerLayout}</Box>
+  ) : (
+    innerLayout
   );
 }

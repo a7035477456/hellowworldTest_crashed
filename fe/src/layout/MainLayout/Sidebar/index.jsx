@@ -10,7 +10,7 @@ import LogoSection from '../LogoSection';
 import MiniDrawerStyled from './MiniDrawerStyled';
 
 import useConfig from 'hooks/useConfig';
-import { drawerWidth } from 'store/constant';
+import { drawerWidth, drawerWidthMobile } from 'store/constant';
 import SimpleBar from 'ui-component/third-party/SimpleBar';
 
 import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
@@ -19,6 +19,7 @@ import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
 
 function Sidebar() {
   const downMD = useMediaQuery((theme) => theme.breakpoints.down('md'));
+  const downSM = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
   const { menuMaster } = useGetMenuMaster();
   const drawerOpen = menuMaster.isDashboardDrawerOpened;
@@ -68,7 +69,7 @@ function Sidebar() {
               sx: {
                 mt: downMD ? 0 : 11,
                 zIndex: 1099,
-                width: drawerWidth,
+                width: downSM ? drawerWidthMobile : drawerWidth,
                 bgcolor: 'background.default',
                 color: 'text.primary',
                 borderRight: 'none'
