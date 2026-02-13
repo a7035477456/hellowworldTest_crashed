@@ -126,14 +126,13 @@ export default function NavItem({ item, level, isParents = false, setSelectedID 
               primary={
                 <Typography
                   ref={ref}
-                  noWrap={!downSM}
+                  noWrap
                   variant={isSelected ? 'h5' : 'body1'}
                   sx={{
-                    overflow: downSM ? 'visible' : 'hidden',
-                    textOverflow: downSM ? 'clip' : 'ellipsis',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
                     maxWidth: '100%',
                     color: 'inherit',
-                    ...(downSM && drawerOpen && { fontSize: '0.75rem', lineHeight: 1.3 }),
                     ...(item.customStyle && item.customStyle)
                   }}
                 >

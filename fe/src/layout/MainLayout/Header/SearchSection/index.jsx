@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
@@ -20,7 +21,7 @@ import Transitions from 'ui-component/extended/Transitions';
 // assets
 import { IconAdjustmentsHorizontal, IconSearch, IconX } from '@tabler/icons-react';
 
-function HeaderAvatar({ children, ref, ...others }) {
+function HeaderAvatar({ children, ref, mobileLarge, ...others }) {
   const theme = useTheme();
 
   return (
@@ -29,7 +30,7 @@ function HeaderAvatar({ children, ref, ...others }) {
       variant="rounded"
       sx={{
         ...theme.typography.commonAvatar,
-        ...theme.typography.mediumAvatar,
+        ...(mobileLarge ? { width: 68, height: 68, minWidth: 68, fontSize: '1.2rem' } : theme.typography.mediumAvatar),
         color: theme.vars.palette.secondary.dark,
         background: theme.vars.palette.secondary.light,
         '&:hover': {
@@ -92,7 +93,10 @@ function MobileSearch({ value, setValue, popupState }) {
 // ==============================|| SEARCH INPUT ||============================== //
 
 export default function SearchSection() {
+  const theme = useTheme();
+  const downSM = useMediaQuery(theme.breakpoints.down('sm'));
   const [value, setValue] = useState('');
+  const searchIconSize = downSM ? '38px' : '19.2px';
 
   return (
     <>
@@ -101,8 +105,8 @@ export default function SearchSection() {
           {(popupState) => (
             <>
               <Box sx={{ ml: 2 }}>
-                <HeaderAvatar {...bindToggle(popupState)}>
-                  <IconSearch stroke={1.5} size="19.2px" />
+                <HeaderAvatar mobileLarge={downSM} {...bindToggle(popupState)}>
+                  <IconSearch stroke={1.5} size={searchIconSize} />
                 </HeaderAvatar>
               </Box>
               <Popper
@@ -157,6 +161,6 @@ export default function SearchSection() {
   );
 }
 
-HeaderAvatar.propTypes = { children: PropTypes.node, ref: PropTypes.any, others: PropTypes.any };
+HeaderAvatar.propTypes = { children: PropTypes.node, ref: PropTypes.any, mobileLarge: PropTypes.bool, others: PropTypes.any };
 
 MobileSearch.propTypes = { value: PropTypes.string, setValue: PropTypes.func, popupState: PropTypes.any };

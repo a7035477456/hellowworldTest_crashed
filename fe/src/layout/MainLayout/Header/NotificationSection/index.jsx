@@ -50,6 +50,7 @@ const status = [
 export default function NotificationSection() {
   const theme = useTheme();
   const downMD = useMediaQuery(theme.breakpoints.down('md'));
+  const downSM = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
@@ -89,7 +90,7 @@ export default function NotificationSection() {
           variant="rounded"
           sx={{
             ...theme.typography.commonAvatar,
-            ...theme.typography.mediumAvatar,
+            ...(downSM ? { width: 68, height: 68, minWidth: 68, fontSize: '1.2rem' } : theme.typography.mediumAvatar),
             transition: 'all .2s ease-in-out',
             color: theme.vars.palette.warning.dark,
             background: theme.vars.palette.warning.light,
@@ -103,7 +104,7 @@ export default function NotificationSection() {
           aria-haspopup="true"
           onClick={handleToggle}
         >
-          <IconBell stroke={1.5} size="20px" />
+          <IconBell stroke={1.5} size={downSM ? '40px' : '20px'} />
         </Avatar>
       </Box>
       <Popper

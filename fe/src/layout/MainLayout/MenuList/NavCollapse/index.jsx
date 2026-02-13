@@ -197,15 +197,13 @@ export default function NavCollapse({ menu, level, parentId }) {
               primary={
                 <Typography
                   ref={ref}
-                  noWrap={!downSM}
+                  noWrap
                   variant={isSelected || anchorEl ? 'h5' : 'body1'}
                   sx={{
                     color: 'inherit',
-                    overflow: downSM ? 'visible' : 'hidden',
-                    textOverflow: downSM ? 'clip' : 'ellipsis',
-                    width: downSM ? '100%' : 120,
-                    maxWidth: '100%',
-                    ...(downSM && drawerOpen && { fontSize: '0.75rem', lineHeight: 1.3 })
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    maxWidth: '100%'
                   }}
                 >
                   {menu.title}

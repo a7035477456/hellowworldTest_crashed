@@ -20,9 +20,15 @@ import { IconMenu2 } from '@tabler/icons-react';
 export default function Header() {
   const theme = useTheme();
   const downMD = useMediaQuery(theme.breakpoints.down('md'));
+  const downSM = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { menuMaster } = useGetMenuMaster();
   const drawerOpen = menuMaster.isDashboardDrawerOpened;
+
+  const iconSize = downSM ? '40px' : '20px';
+  const avatarSx = downSM
+    ? { width: 68, height: 68, minWidth: 68, fontSize: '1.2rem' }
+    : { ...theme.typography.mediumAvatar };
 
   return (
     <>
@@ -35,7 +41,7 @@ export default function Header() {
           variant="rounded"
           sx={{
             ...theme.typography.commonAvatar,
-            ...theme.typography.mediumAvatar,
+            ...avatarSx,
             overflow: 'hidden',
             transition: 'all .2s ease-in-out',
             color: theme.vars.palette.secondary.dark,
@@ -47,7 +53,7 @@ export default function Header() {
           }}
           onClick={() => handlerDrawerOpen(!drawerOpen)}
         >
-          <IconMenu2 stroke={1.5} size="20px" />
+          <IconMenu2 stroke={1.5} size={iconSize} />
         </Avatar>
       </Box>
 

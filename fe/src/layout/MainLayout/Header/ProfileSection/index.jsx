@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -35,6 +36,7 @@ import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons-re
 
 export default function ProfileSection() {
   const theme = useTheme();
+  const downSM = useMediaQuery(theme.breakpoints.down('sm'));
   const {
     state: { borderRadius }
   } = useConfig();
@@ -85,19 +87,29 @@ export default function ProfileSection() {
     <>
       <Chip
         slotProps={{ label: { sx: { lineHeight: 0 } } }}
-        sx={{ ml: 2, height: '48px', alignItems: 'center', borderRadius: '27px' }}
+        sx={{
+          ml: 2,
+          height: downSM ? '96px' : '48px',
+          alignItems: 'center',
+          borderRadius: downSM ? '54px' : '27px',
+          '& .MuiChip-icon': downSM ? { width: 68, height: 68, margin: '14px 0 14px 14px !important' } : undefined
+        }}
         icon={
           <Avatar
             src={User1}
             alt="user-images"
-            sx={{ typography: 'mediumAvatar', margin: '8px 0 8px 8px !important', cursor: 'pointer' }}
+            sx={{
+              ...(downSM ? { width: 68, height: 68 } : { typography: 'mediumAvatar' }),
+              margin: downSM ? '14px 0 14px 14px !important' : '8px 0 8px 8px !important',
+              cursor: 'pointer'
+            }}
             ref={anchorRef}
             aria-controls={open ? 'menu-list-grow' : undefined}
             aria-haspopup="true"
             color="inherit"
           />
         }
-        label={<IconSettings stroke={1.5} size="24px" />}
+        label={<IconSettings stroke={1.5} size={downSM ? '48px' : '24px'} />}
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"

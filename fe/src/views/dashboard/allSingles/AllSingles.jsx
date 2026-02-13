@@ -256,7 +256,7 @@ export default function AllSingles() {
       {!singlesLoading && !singlesError && (
         <Grid container spacing={downSM ? 1.5 : gridSpacing}>
           {filteredAllSingles_XXXXXXX.map((personIndex_DDDDDDD) => (
-            <Grid key={personIndex_DDDDDDD.singles_id} size={{ xs: 12, sm: 6, md: 4 }}>
+            <Grid key={personIndex_DDDDDDD.singles_id} size={{ xs: 6, sm: 6, md: 4 }}>
               <Card
                 sx={{
                   height: '100%',
