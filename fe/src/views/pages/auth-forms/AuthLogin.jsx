@@ -98,6 +98,13 @@ export default function AuthLogin() {
 
       if (response.ok && data.success) {
         console.log('[AuthLogin] success branch → redirecting to dashboard');
+        if (data.user) {
+          try {
+            localStorage.setItem('vsingles-user', JSON.stringify(data.user));
+          } catch (e) {
+            console.warn('[AuthLogin] could not store user', e);
+          }
+        }
         navigate('/dashboard/allSingles');
       } else {
         console.log("=== ELSE ERROR (login failed or non-2xx) =================================================");

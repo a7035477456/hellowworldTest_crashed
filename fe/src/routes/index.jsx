@@ -10,7 +10,7 @@ const router = createBrowserRouter(
   [
     {
       path: '/',
-      element: <Navigate to="/pages/login" replace />
+      element: <Navigate to="/world/pages" replace />
     },
     MainRoutes,
     AuthenticationRoutes

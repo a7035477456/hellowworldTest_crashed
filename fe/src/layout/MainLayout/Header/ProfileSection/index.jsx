@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
+import useLocalStorage from 'hooks/useLocalStorage';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
@@ -40,6 +41,11 @@ export default function ProfileSection() {
   const {
     state: { borderRadius }
   } = useConfig();
+  const { state: storedUser_AAAAA } = useLocalStorage('vsingles-user', null);
+  const profileImageUrl_BBBBB =
+    storedUser_AAAAA?.profile_image_url && storedUser_AAAAA.profile_image_url !== 'user-round.svg'
+      ? storedUser_AAAAA.profile_image_url
+      : null;
 
   const [sdm, setSdm] = useState(true);
   const [value, setValue] = useState('');
@@ -68,7 +74,7 @@ export default function ProfileSection() {
     sessionStorage.clear();
     // Clear any auth-related localStorage keys (add more here if you store tokens)
     try {
-      const authKeys = ['vsingles-auth', 'token', 'authToken', 'user'];
+      const authKeys = ['vsingles-auth', 'vsingles-user', 'token', 'authToken', 'user'];
       authKeys.forEach((key) => localStorage.removeItem(key));
     } catch (_) {}
     window.location.href = 'https://vsingles.club';
@@ -96,7 +102,7 @@ export default function ProfileSection() {
         }}
         icon={
           <Avatar
-            src={User1}
+            src={profileImageUrl_BBBBB || User1}
             alt="user-images"
             sx={{
               ...(downSM ? { width: 68, height: 68 } : { typography: 'mediumAvatar' }),
