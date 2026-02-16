@@ -41,7 +41,7 @@ export const registerUser_FFFFFFFF = async (req, res) => {
       const token = crypto.randomBytes(32).toString('hex');
       const expiresAt = Date.now() + TOKEN_EXPIRY_MS;
       createPasswordTokens_JJJJJJJJ.set(token, { email, expiresAt });
-      const createPasswordLink = `http://localhost:3000/pages/createPassword?token=${token}&email=${encodeURIComponent(email)}`;
+      const createPasswordLink = `https://vsingles.club/pages/createPassword?token=${token}&email=${encodeURIComponent(email)}`;
       const mailOptions = {
         from: smtpUser,
         to: email,
