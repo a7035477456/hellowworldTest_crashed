@@ -63,10 +63,11 @@ export async function registerUser(req, res) {
         });
       }
     } else {
-      console.error('SMTP not configured. Cannot send registration email.');
+      const detailsMsg = 'SMTP_USER and SMTP_PASS must be set in backend .env (and not placeholders). For Gmail use an App Password.';
+      console.error('SMTP not configured. Cannot send registration email.', detailsMsg);
       return res.status(500).json({
         error: 'Email service not configured. Cannot send registration email.',
-        details: 'Please configure SMTP_USER and SMTP_PASS in your backend .env file. For Gmail, you need to use an App Password.'
+        details: detailsMsg
       });
     }
 

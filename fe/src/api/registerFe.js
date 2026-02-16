@@ -17,8 +17,9 @@ export const registerUser = async (email) => {
         errorData = JSON.parse(text);
       } catch (_) {}
       const message = errorData.error || response.statusText || text;
-      alert("SEND MAIL ERROR: " + response.status + " " + message);
-      throw new Error(errorData.error || text || 'Registration failed');
+      const details = errorData.details ? `\n\n${errorData.details}` : '';
+      alert("SEND MAIL ERROR: " + response.status + " " + message + details);
+      throw new Error(errorData.details || errorData.error || text || 'Registration failed');
     }
 
     const data = await response.json();
