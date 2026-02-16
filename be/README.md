@@ -10,7 +10,7 @@ Backend API server for the Vetted Singles application.
 npm install
 ```
 
-1. Create a `.env` file in the `be` directory with your PostgreSQL database credentials, SMTP settings, and Twilio configuration:
+1. Create a `.env` file at `~/.ssh/be/.env` (e.g. `/Users/a/.ssh/be/.env` on Mac) with your PostgreSQL database credentials, SMTP settings, and Twilio configuration:
 
 ```
 DB_HOST=localhost
@@ -48,7 +48,7 @@ TWILIO_PHONE_NUMBER=+1234567890
 2. **Get Your Credentials:**
   - After signing up, go to the [Twilio Console Dashboard](https://console.twilio.com/)
   - Your **Account SID** and **Auth Token** are displayed on the dashboard
-  - Copy these values to your `.env` file:
+  - Copy these values to your `~/.ssh/be/.env` file:
     - `TWILIO_ACCOUNT_SID` = Your Account SID
     - `TWILIO_AUTH_TOKEN` = Your Auth Token
 3. **Get a Phone Number:**
@@ -56,7 +56,7 @@ TWILIO_PHONE_NUMBER=+1234567890
   - For trial accounts, you can use a Twilio trial number (free, but can only send to verified numbers)
   - For production, purchase a phone number
   - Copy the phone number (including the `+` and country code, e.g., `+1234567890`)
-  - Add it to your `.env` file as `TWILIO_PHONE_NUMBER`
+  - Add it to your `~/.ssh/be/.env` file as `TWILIO_PHONE_NUMBER`
 4. **Trial Account Limitations:**
   - Trial accounts can only send SMS to verified phone numbers
   - To verify a number: Twilio Console → Phone Numbers → Verified Caller IDs → Add a new number

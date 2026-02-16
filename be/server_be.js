@@ -1,4 +1,4 @@
-import './loadEnv.js'; // load be/.env first so DB_* etc. are set regardless of cwd
+import './loadEnv.js'; // load ~/.ssh/be/.env first so DB_* etc. are set regardless of cwd
 import express from 'express';
 import cors from 'cors';
 import path from 'path';

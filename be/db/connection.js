@@ -2,16 +2,15 @@ import pkg from 'pg';
 const { Pool } = pkg;
 import dotenv from 'dotenv';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import os from 'os';
 import fs from 'fs';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const beEnvPath = path.resolve(__dirname, '..', '.env');
-// Reload be/.env if loadEnv didn't run first (e.g. script run directly from db/) or vars still missing
+const homeEnvPath = path.join(os.homedir(), '.ssh', 'be', '.env');
+// Reload ~/.ssh/be/.env if loadEnv didn't run first (e.g. script run directly from db/) or vars still missing
 if (!process.env.DB_HOST) {
-  const result = dotenv.config({ path: beEnvPath });
+  const result = dotenv.config({ path: homeEnvPath });
   if (result.error) console.error('[connection] dotenv fallback:', result.error.message);
-  if (!process.env.DB_HOST && fs.existsSync(beEnvPath)) console.error('[connection] .env exists but DB_HOST not set – check variable names (DB_HOST=, DB_PORT=, etc.)');
+  if (!process.env.DB_HOST && fs.existsSync(homeEnvPath)) console.error('[connection] .env exists but DB_HOST not set – check variable names (DB_HOST=, DB_PORT=, etc.)');
 }
 
 console.log ('DB_HOST:', process.env.DB_HOST);
@@ -40,7 +39,7 @@ pool.on('error', (err) => {
   process.exit(-1);
 });
 
-// Test connection on startup (uses DB_* from be/.env)
+// Test connection on startup (uses DB_* from ~/.ssh/be/.env)
 pool.query('SELECT NOW()')
   .then(() => {
     console.log('Database connection test successful');
@@ -48,7 +47,7 @@ pool.query('SELECT NOW()')
   .catch((err) => {
     console.error('Database connection test failed:', err.message);
     console.error('Using: host=%s port=%s database=%s   username=%s password=%s', process.env.DB_HOST , process.env.DB_PORT, process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD);
-    console.error('Fix: ensure PostgreSQL is running and be/.env has correct DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD (e.g. port 50010, database vsingles)');
+    console.error('Fix: ensure PostgreSQL is running and ~/.ssh/be/.env has correct DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD (e.g. port 50010, database vsingles)');
   });
 
 export default pool;

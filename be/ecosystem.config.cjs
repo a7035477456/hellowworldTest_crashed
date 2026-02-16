@@ -1,7 +1,7 @@
 /**
  * PM2 ecosystem config (from originalProject1 setup).
  * Run: npm run pm2:start  or  pm2 start ecosystem.config.cjs
- * Start from be/ so cwd is correct, or set cwd below (we set it so be/.env is always found).
+ * Start from be/ so cwd is correct. Env is loaded from ~/.ssh/be/.env (no project .env).
  */
 const path = require('path');
 module.exports = {
