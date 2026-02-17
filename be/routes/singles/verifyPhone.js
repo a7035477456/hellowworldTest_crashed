@@ -31,7 +31,7 @@ export async function verifyPhone(req, res) {
     if (!isTwilioConfigured) {
       console.error('❌ Twilio Verify not configured');
       return res.status(500).json({
-        error: 'SMS service not configured',
+        error: 'SMS service not configured (v4)',
         details: 'Please configure Twilio Verify in your .env file'
       });
     }

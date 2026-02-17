@@ -85,8 +85,11 @@ app.get('/api/requestedSingles', getSinglesRequest_EEEEEEEE);
 // On Ubuntu: ensure both vsingles.club and www.vsingles.club route to this app so /assets/* (e.g. Login-*.js) are served.
 app.use(express.static(path.join(__dirname, '../fe/dist'), { index: false }));
 
-// SPA: all other GET routes serve index.html
+// SPA: all other GET routes serve index.html (no-cache so registration/auth get fresh code)
 app.get('*', (req, res) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
   res.sendFile(path.join(__dirname, '../fe/dist/index.html'));
 });
 

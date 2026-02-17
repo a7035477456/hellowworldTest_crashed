@@ -34,7 +34,7 @@ export async function createPassword(req, res) {
     if (!isTwilioConfigured) {
       console.error('❌ Twilio Verify not configured.');
       return res.status(500).json({
-        error: 'SMS service not configured',
+        error: 'SMS service not configured (v3)',
         details: 'Please configure TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, and TWILIO_ServiceSID in your .env file'
       });
     }
