@@ -244,7 +244,7 @@ export default function AuthCreatePassword() {
             color="secondary"
             disabled={isSubmitting || !token || !email || !checked}
           >
-            {isSubmitting ? 'Sending...' : 'Create Password V9'}
+            {isSubmitting ? 'Sending...' : 'Create Password'}
           </Button>
         </AnimateButton>
       </Box>

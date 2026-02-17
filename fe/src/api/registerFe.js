@@ -24,7 +24,7 @@ export const registerUser = async (email) => {
 
     const data = await response.json();
     const successMsg = typeof data === 'object' && data !== null ? (data.message || JSON.stringify(data)) : data;
-    alert("SEND MAIL SUCCESS: " + successMsg);
+    //alert("SEND MAIL SUCCESS: " + successMsg);
     return data;
   } catch (error) {
     alert("SEND MAIL ERROR: "+error);

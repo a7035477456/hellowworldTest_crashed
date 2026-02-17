@@ -43,7 +43,7 @@ export default function Register() {
                 <Divider sx={{ width: 1 }} />
                 <Stack sx={{ alignItems: 'center' }}>
                   <Typography component={Link} to="/pages/login" variant="subtitle1" sx={{ textDecoration: 'none' }}>
-                    Already have an account? V6
+                    Already have an account?
                   </Typography>
                 </Stack>
               </Stack>

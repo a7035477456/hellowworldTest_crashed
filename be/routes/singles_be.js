@@ -59,7 +59,7 @@ export const registerUser_FFFFFFFF = async (req, res) => {
             <p style="margin: 20px 0;">
               <a href="${createPasswordLink}" 
                  style="display: inline-block; padding: 12px 24px; background-color: #1976d2; color: white; text-decoration: none; border-radius: 4px;">
-                Create Password V11
+                Create Password
               </a>
             </p>
             <p>Or copy and paste this link into your browser:</p>
