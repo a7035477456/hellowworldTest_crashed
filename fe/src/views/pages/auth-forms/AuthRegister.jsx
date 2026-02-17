@@ -21,7 +21,7 @@ import { registerUser } from 'api/registerFe';
 export default function AuthRegister() {
   const navigate = useNavigate();
   const [checked, setChecked] = useState(false);
-  const [email, setEmail] = useState('a7035477456@gmail.com');
+  const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
 

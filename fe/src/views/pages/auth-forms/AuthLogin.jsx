@@ -30,7 +30,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (typeof window !== 'un
 export default function AuthLogin() {
   const navigate = useNavigate();
   const [checked, setChecked] = useState(true);
-  const [email, setEmail] = useState('a7038700246@gmail.com');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
