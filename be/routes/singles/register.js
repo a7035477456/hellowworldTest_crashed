@@ -43,7 +43,7 @@ export async function registerUser(req, res) {
             <h2 style="color: #333;">Welcome to VSingles!</h2>
             <p>Thank you for registering. To complete your registration, please create your password by clicking the link below:</p>
             <p style="margin: 20px 0;">
-              <a href="${createPasswordLink}" style="display: inline-block; padding: 12px 24px; background-color: #1976d2; color: white; text-decoration: none; border-radius: 4px;">Create Password V11</a>
+              <a href="${createPasswordLink}" style="display: inline-block; padding: 12px 24px; background-color: #1976d2; color: white; text-decoration: none; border-radius: 4px;">Create Password</a>
             </p>
             <p>Or copy and paste this link into your browser:</p>
             <p style="color: #666; word-break: break-all;">${createPasswordLink}</p>
