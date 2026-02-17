@@ -31,7 +31,7 @@ export default function Register() {
                 </Box>
                 <Stack sx={{ alignItems: 'center', justifyContent: 'center', gap: 1 }}>
                   <Typography gutterBottom variant={downMD ? 'h3' : 'h2'} sx={{ color: 'secondary.main', mb: 0 }}>
-                    Sign up v2
+                    Sign up
                   </Typography>
                   <Typography variant="caption" sx={{ fontSize: '16px', textAlign: { xs: 'center', md: 'inherit' } }}>
                     Please enter your email address to continue

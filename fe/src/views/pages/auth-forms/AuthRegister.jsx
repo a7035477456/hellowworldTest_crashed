@@ -28,6 +28,10 @@ export default function AuthRegister() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
+    if (!checked) {
+      setError('Please agree to the terms and conditions.');
+      return;
+    }
     setIsSubmitting(true);
 
     try {
@@ -63,15 +67,19 @@ export default function AuthRegister() {
 
       <FormControlLabel
         control={<Checkbox checked={checked} onChange={(event) => setChecked(event.target.checked)} name="checked" color="primary" />}
-        label={
-          <Typography variant="subtitle1">
-            Agree with &nbsp;
-            <Typography variant="subtitle1" component={Link} to="#">
-              Terms & Condition.
-            </Typography>
-          </Typography>
-        }
+        label={<Typography variant="subtitle1">Agree with</Typography>}
       />
+
+      <Typography variant="body2" sx={{ mt: 1, mb: 1.5, color: 'text.secondary' }}>
+        By providing your email you agree to receive email from vsingles.club for account security, identity verification, and service updates. Consent is not a condition of purchase.{' '}
+        <Typography component={Link} to="/pages/privacyPolicy" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+          Privacy Policy
+        </Typography>
+        {' and '}
+        <Typography component={Link} to="/pages/termsAndConditions" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+          Terms &amp; Conditions
+        </Typography>
+      </Typography>
 
       {error && (
         <Typography variant="body2" color="error" sx={{ mt: 1, mb: 1 }}>
@@ -88,9 +96,9 @@ export default function AuthRegister() {
             type="submit" 
             variant="contained" 
             color="secondary"
-            disabled={isSubmitting}
+            disabled={isSubmitting || !checked}
           >
-            {isSubmitting ? 'Sending...' : 'Sign up V7'}
+            {isSubmitting ? 'Sending...' : 'Sign Up'}
           </Button>
         </AnimateButton>
       </Box>
