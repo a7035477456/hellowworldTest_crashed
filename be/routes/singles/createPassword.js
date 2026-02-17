@@ -34,10 +34,13 @@ export async function createPassword(req, res) {
     }
     const formattedPhone = `+1${phoneDigits}`;
 
+
     const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID;
     const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
     const twilioServiceSid = process.env.TWILIO_ServiceSID;
+
     const twilioEnvKeys = Object.keys(process.env).filter((k) => k.startsWith('TWILIO_'));
+
     console.log(LOG_PREFIX, 'Twilio env', {
       TWILIO_ACCOUNT_SID: twilioAccountSid ? `set (len ${twilioAccountSid.length})` : 'MISSING',
       TWILIO_AUTH_TOKEN: twilioAuthToken ? `set (len ${twilioAuthToken.length})` : 'MISSING',
