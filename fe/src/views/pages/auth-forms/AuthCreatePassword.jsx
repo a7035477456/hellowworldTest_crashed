@@ -21,6 +21,8 @@ import { createPassword } from 'api/createPasswordFe';
 // assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import CheckCircle from '@mui/icons-material/CheckCircle';
+import RadioButtonUnchecked from '@mui/icons-material/RadioButtonUnchecked';
 
 // ===========================|| CREATE PASSWORD ||=========================== //
 
@@ -77,6 +79,17 @@ export default function AuthCreatePassword() {
     setPhone(formatted);
   };
 
+  // First password: 4 requirements (only first password; confirm only must match)
+  const pwRequirement_8Chars = password.length >= 8;
+  const pwRequirement_smallLetter = /[a-z]/.test(password);
+  const pwRequirement_capitalLetter = /[A-Z]/.test(password);
+  const pwRequirement_numberOrSymbol = /[0-9]/.test(password) || /[^a-zA-Z0-9]/.test(password);
+  const passwordMeetsAllRequirements =
+    pwRequirement_8Chars &&
+    pwRequirement_smallLetter &&
+    pwRequirement_capitalLetter &&
+    pwRequirement_numberOrSymbol;
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
@@ -92,13 +105,13 @@ export default function AuthCreatePassword() {
       return;
     }
     
-    if (password !== confirmPassword) {
-      setError('Passwords do not match.');
+    if (!passwordMeetsAllRequirements) {
+      setError('Please meet all 4 password requirements.');
       return;
     }
-    
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters long.');
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.');
       return;
     }
     
@@ -136,6 +149,12 @@ export default function AuthCreatePassword() {
 
   return (
     <form onSubmit={handleSubmit}>
+      {error && (
+        <Typography variant="subtitle1" sx={{ color: 'error.main', fontWeight: 700, textAlign: 'center', mb: 2 }}>
+          Error: {error}
+        </Typography>
+      )}
+
       <Stack sx={{ mb: 2, alignItems: 'center' }}> 
         {/* <Typography variant="subtitle1">Sign up v3</Typography> */}
         {/* <Typography variant="body2" sx={{ mt: 0.5 }}>
@@ -167,6 +186,29 @@ export default function AuthCreatePassword() {
           }
           label="Password"
         />
+        <Typography variant="caption" sx={{ mt: 0.5, color: 'text.secondary' }}>
+          Password strength: {Math.round(([pwRequirement_8Chars, pwRequirement_smallLetter, pwRequirement_capitalLetter, pwRequirement_numberOrSymbol].filter(Boolean).length / 4) * 100)}%
+        </Typography>
+        <Box sx={{ border: '2px solid', borderColor: 'error.main', borderRadius: 1, p: 1.5, mt: 1 }}>
+          <Stack component="ul" sx={{ listStyle: 'none', pl: 0, m: 0, gap: 0.5 }}>
+            <Stack component="li" direction="row" alignItems="center" gap={1}>
+              {pwRequirement_8Chars ? <CheckCircle sx={{ color: 'success.main', fontSize: 20 }} /> : <RadioButtonUnchecked sx={{ color: 'text.secondary', fontSize: 20 }} />}
+              <Typography variant="body2">At least 8 characters</Typography>
+            </Stack>
+            <Stack component="li" direction="row" alignItems="center" gap={1}>
+              {pwRequirement_smallLetter ? <CheckCircle sx={{ color: 'success.main', fontSize: 20 }} /> : <RadioButtonUnchecked sx={{ color: 'text.secondary', fontSize: 20 }} />}
+              <Typography variant="body2">At least one small letter</Typography>
+            </Stack>
+            <Stack component="li" direction="row" alignItems="center" gap={1}>
+              {pwRequirement_capitalLetter ? <CheckCircle sx={{ color: 'success.main', fontSize: 20 }} /> : <RadioButtonUnchecked sx={{ color: 'text.secondary', fontSize: 20 }} />}
+              <Typography variant="body2">At least one capital letter</Typography>
+            </Stack>
+            <Stack component="li" direction="row" alignItems="center" gap={1}>
+              {pwRequirement_numberOrSymbol ? <CheckCircle sx={{ color: 'success.main', fontSize: 20 }} /> : <RadioButtonUnchecked sx={{ color: 'text.secondary', fontSize: 20 }} />}
+              <Typography variant="body2">At least one number or symbol</Typography>
+            </Stack>
+          </Stack>
+        </Box>
       </CustomFormControl>
 
       <CustomFormControl fullWidth>
@@ -206,9 +248,6 @@ export default function AuthCreatePassword() {
           placeholder="(100) 000-0000"
           required
         />
-        <Typography variant="caption" sx={{ mt: 0.5, color: 'text.secondary' }}>
-          Please enter a valid phone number.
-        </Typography>
       </CustomFormControl>
 
       <FormControlLabel
@@ -227,12 +266,6 @@ export default function AuthCreatePassword() {
         </Typography>
       </Typography>
 
-      {error && (
-        <Typography variant="body2" color="error" sx={{ mt: 1, mb: 1 }}>
-          {error}
-        </Typography>
-      )}
-
       <Box sx={{ mt: 2 }}>
         <AnimateButton>
           <Button 
@@ -242,7 +275,7 @@ export default function AuthCreatePassword() {
             type="submit" 
             variant="contained" 
             color="secondary"
-            disabled={isSubmitting || !token || !email || !checked}
+            disabled={isSubmitting || !token || !email || !checked || !passwordMeetsAllRequirements}
           >
             {isSubmitting ? 'Sending...' : 'Create Password'}
           </Button>
