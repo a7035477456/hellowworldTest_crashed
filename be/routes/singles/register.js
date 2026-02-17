@@ -17,6 +17,11 @@ export async function registerUser(req, res) {
       smtpUser !== 'your-email@gmail.com' &&
       smtpPass !== 'your-app-password';
 
+    const smtpHost = process.env.SMTP_HOST || 'smtp.gmail.com';
+    const smtpPort = process.env.SMTP_PORT || '587';
+    const maskPass = (p) => (p && p.length >= 4) ? p.slice(0, 2) + '****' + p.slice(-2) : '(not set or too short)';
+    console.log('[SMTP] Using: SMTP_HOST=' + smtpHost + ' SMTP_PORT=' + smtpPort + ' SMTP_USER=' + (smtpUser || '(not set)') + ' SMTP_PASS=' + maskPass(smtpPass));
+
     if (isSmtpConfigured) {
       const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST || 'smtp.gmail.com',

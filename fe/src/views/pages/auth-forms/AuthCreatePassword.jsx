@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link as RouterLink } from 'react-router-dom';
 
 // material-ui
 import Button from '@mui/material/Button';
@@ -27,7 +27,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 export default function AuthCreatePassword() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phone, setPhone] = useState('');
@@ -102,6 +102,11 @@ export default function AuthCreatePassword() {
       return;
     }
     
+    if (!checked) {
+      setError('Please agree to the terms and conditions.');
+      return;
+    }
+
     if (!phone) {
       setError('Phone number is required.');
       return;
@@ -208,15 +213,19 @@ export default function AuthCreatePassword() {
 
       <FormControlLabel
         control={<Checkbox checked={checked} onChange={(event) => setChecked(event.target.checked)} name="checked" color="primary" />}
-        label={
-          <Typography variant="subtitle1">
-            Agree with &nbsp;
-            <Typography variant="subtitle1" component="span" sx={{ color: 'primary.main' }}>
-              Terms & Condition.
-            </Typography>
-          </Typography>
-        }
+        label={<Typography variant="subtitle1">Agree with</Typography>}
       />
+
+      <Typography variant="body2" sx={{ mt: 1, mb: 1.5, color: 'text.secondary' }}>
+        By providing your phone number, you agree to receive text messages from vsingles.club for account security, identity verification, and service updates. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Text HELP for help or STOP to cancel.{' '}
+        <Typography component={RouterLink} to="/pages/privacyPolicy" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+          Privacy Policy
+        </Typography>
+        {' and '}
+        <Typography component={RouterLink} to="/pages/termsAndConditions" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+          Terms &amp; Conditions
+        </Typography>
+      </Typography>
 
       {error && (
         <Typography variant="body2" color="error" sx={{ mt: 1, mb: 1 }}>
@@ -233,7 +242,7 @@ export default function AuthCreatePassword() {
             type="submit" 
             variant="contained" 
             color="secondary"
-            disabled={isSubmitting || !token || !email}
+            disabled={isSubmitting || !token || !email || !checked}
           >
             {isSubmitting ? 'Sending...' : 'Create Password V9'}
           </Button>

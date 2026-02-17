@@ -64,6 +64,46 @@ TWILIO_PHONE_NUMBER=+1234567890
 
 **Note:** If Twilio is not configured, the app will run in "mock mode" and log SMS messages to the console instead of sending them.
 
+**Verify SMTP credentials (without changing app code):**
+
+1. **Confirm which env the app uses**  
+   The backend loads from `~/.ssh/be/.env`. Your shell’s `showenv` may show a different env. After a sign-up attempt, check app logs for `[SMTP] Using: SMTP_HOST=... SMTP_PORT=... SMTP_USER=... SMTP_PASS=jj****ii` to see exactly what the process is using.
+
+2. **Test host and port** (no auth):
+   ```bash
+   openssl s_client -connect smtp.gmail.com:587 -starttls smtp -brief
+   ```
+   You should see a TLS handshake and connection; type `QUIT` and Enter to exit.
+
+3. **Test full login (Gmail)**  
+   From the machine where the app runs, run this from the **`be/`** directory. It loads `~/.ssh/be/.env` the same way the app does (via dotenv), so you don’t need to source the file in the shell:
+   ```bash
+   cd be
+   node -e "
+   const path = require('path');
+   const os = require('os');
+   require('dotenv').config({ path: path.join(os.homedir(), '.ssh', 'be', '.env') });
+   const nodemailer = require('nodemailer');
+   const pass = (process.env.SMTP_PASS || '').replace(/\s+/g, '');
+   const host = process.env.SMTP_HOST || 'smtp.gmail.com';
+   const port = process.env.SMTP_PORT || '587';
+   const user = process.env.SMTP_USER || '';
+   const mask = (p) => (p && p.length >= 4) ? p.slice(0,2) + '****' + p.slice(-2) : '(empty or short)';
+   console.log('[SMTP] Using: SMTP_HOST=' + host + ' SMTP_PORT=' + port + ' SMTP_USER=' + user + ' SMTP_PASS=' + mask(pass));
+   const t = nodemailer.createTransport({
+     host: host,
+     port: +port,
+     secure: false,
+     auth: { user: process.env.SMTP_USER, pass }
+   });
+   t.verify().then(() => console.log('SMTP OK')).catch(e => console.error('SMTP verify failed:', e.message));
+   "
+   ```
+   If you see “Missing credentials for PLAIN”, the env file wasn’t loaded (check that `~/.ssh/be/.env` exists and has `SMTP_USER` and `SMTP_PASS`). If this fails with “Username and Password not accepted”, use a Gmail App Password (see [Google BadCredentials](https://support.google.com/mail/?p=BadCredentials)) and set it in `~/.ssh/be/.env` as `SMTP_PASS` (spaces optional; the app strips them).
+
+4. **Gmail 535 / BadCredentials**  
+   If you still get 535 after setting an App Password, ensure 2-Step Verification is on, the App Password is for “Mail”, and there are no typos or extra quotes in `~/.ssh/be/.env`. Restart the backend (e.g. `pm2 restart vsingles`) so it reloads the file.
+
 1. Set up the database:
   - Create a PostgreSQL database (if not already created)
   - Run the schema file to create the table:

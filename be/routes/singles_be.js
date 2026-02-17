@@ -24,6 +24,12 @@ export const registerUser_FFFFFFFF = async (req, res) => {
                              smtpUser !== 'your-email@gmail.com' && 
                              smtpPass !== 'your-app-password';
 
+    // Log SMTP config the process is using (mask password)
+    const smtpHost = process.env.SMTP_HOST || 'smtp.gmail.com';
+    const smtpPort = process.env.SMTP_PORT || '587';
+    const maskPass = (p) => (p && p.length >= 4) ? p.slice(0, 2) + '****' + p.slice(-2) : '(not set or too short)';
+    console.log('[SMTP] Using: SMTP_HOST=' + smtpHost + ' SMTP_PORT=' + smtpPort + ' SMTP_USER=' + (smtpUser || '(not set)') + ' SMTP_PASS=' + maskPass(smtpPass));
+
     // Only send email if SMTP is properly configured
     if (isSmtpConfigured) {
       // Create a transporter for sending emails
