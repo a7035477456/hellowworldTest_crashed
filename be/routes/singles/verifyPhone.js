@@ -23,6 +23,7 @@ export async function verifyPhone(req, res) {
       return res.status(400).json({ error: 'Phone number must be 10 digits' });
     }
     const formattedPhone = `+1${phoneDigits}`;
+    const emailNorm = String(email).trim().toLowerCase();
 
     const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID;
     const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
@@ -37,7 +38,7 @@ export async function verifyPhone(req, res) {
       });
     }
 
-    const key = `${email}_${formattedPhone}`;
+    const key = `${emailNorm}_${formattedPhone}`;
     const storedData = pendingVerifications.get(key);
     if (!storedData) {
       return res.status(400).json({ error: 'Verification session not found. Please start the verification process again.' });
@@ -55,18 +56,18 @@ export async function verifyPhone(req, res) {
       if (check.status === 'approved') {
         try {
           const passwordHash = await bcrypt.hash(storedData.password, 6);
-          const existingUser = await pool.query('SELECT singles_id FROM public.singles WHERE email = $1', [email]);
+          const existingUser = await pool.query('SELECT singles_id FROM public.singles WHERE LOWER(email) = $1', [emailNorm]);
 
           if (existingUser.rows.length > 0) {
             await pool.query(
-              `UPDATE public.singles SET password_hash = $1, phone = $2, updated_at = CURRENT_TIMESTAMP WHERE email = $3`,
-              [passwordHash, formattedPhone, email]
+              `UPDATE public.singles SET password_hash = $1, phone = $2, updated_at = CURRENT_TIMESTAMP WHERE LOWER(email) = $3`,
+              [passwordHash, formattedPhone, emailNorm]
             );
           } else {
             await pool.query(
               `INSERT INTO public.singles (email, password_hash, phone, user_status, created_at, updated_at)
                VALUES ($1, $2, $3, 'active', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`,
-              [email, passwordHash, formattedPhone]
+              [emailNorm, passwordHash, formattedPhone]
             );
           }
 

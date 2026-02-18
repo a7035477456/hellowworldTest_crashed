@@ -75,8 +75,9 @@ export async function createPassword(req, res) {
 
       console.log(LOG_PREFIX, 'Twilio Verify SMS sent', { to: formattedPhone });
 
-      const key = `${email}_${formattedPhone}`;
-      pendingVerifications.set(key, { password, email, phone: formattedPhone });
+      const emailNorm = String(email).trim().toLowerCase();
+      const key = `${emailNorm}_${formattedPhone}`;
+      pendingVerifications.set(key, { password, email: emailNorm, phone: formattedPhone });
       createPasswordTokens.delete(token);
 
       res.json({ success: true, message: 'Verification code sent to your phone' });

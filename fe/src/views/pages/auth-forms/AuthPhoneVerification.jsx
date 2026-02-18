@@ -34,9 +34,9 @@ export default function AuthPhoneVerification() {
   }, [email, phone]);
 
   const handleCodeChange = (e) => {
-    // Only allow digits and limit to 6 characters
     const value = e.target.value.replace(/\D/g, '').slice(0, 6);
     setVerificationCode(value);
+    setError('');
   };
 
   const handleSubmit = async (event) => {
@@ -69,11 +69,8 @@ export default function AuthPhoneVerification() {
       navigate(`/pages/phoneVerificationSuccess?email=${encodeURIComponent(email)}`);
     } catch (err) {
       console.error('Phone verification error:', err);
-      setError(err.message || 'Verification failed. Please try again.');
+      setError(err.message || 'The phone verification code is incorrect. Please enter again or register phone number again.');
       setIsSubmitting(false);
-      
-      // If verification fails, redirect to Page 9 (Phone Verification Failure)
-      navigate('/pages/phoneVerificationFailure');
     }
   };
 
