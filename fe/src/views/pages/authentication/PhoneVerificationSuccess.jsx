@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Stack from '@mui/material/Stack';
@@ -18,10 +18,12 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 
 export default function PhoneVerificationSuccess() {
   const downMD = useMediaQuery((theme) => theme.breakpoints.down('md'));
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const email = searchParams.get('email') || '';
 
-  const handleClose = () => {
-    // Redirect to localhost:3000
-    window.location.href = 'http://localhost:3000';
+  const handleGoToLogin = () => {
+    navigate('/pages/login');
   };
 
   return (
@@ -38,7 +40,7 @@ export default function PhoneVerificationSuccess() {
                 </Box>
                 <Stack sx={{ alignItems: 'center', justifyContent: 'center', gap: 1 }}>
                   <Typography variant={downMD ? 'h4' : 'h3'} sx={{ color: 'secondary.main', fontFamily: 'Comic Sans MS', textAlign: 'center' }}>
-                    Congratulation, Registration and Phone verification completed. You can login now.
+                    Congratulation, Registration email {email || '[your email]'} and Phone verification completed. You can login now.
                   </Typography>
                 </Stack>
                 <Box sx={{ width: 1, display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -48,9 +50,9 @@ export default function PhoneVerificationSuccess() {
                       fullWidth
                       size="large"
                       variant="contained"
-                      onClick={handleClose}
+                      onClick={handleGoToLogin}
                     >
-                      Close
+                      Go to Login
                     </Button>
                   </AnimateButton>
                 </Box>

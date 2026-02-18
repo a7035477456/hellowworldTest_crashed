@@ -18,31 +18,48 @@ import { registerUser } from 'api/registerFe';
 
 // ===========================|| JWT - REGISTER ||=========================== //
 
+const EMAIL_EXISTS_MSG = 'Account with this email already exists. Please enter another email or login with link below';
+
 export default function AuthRegister() {
   const navigate = useNavigate();
   const [checked, setChecked] = useState(false);
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [emailError, setEmailError] = useState('');
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setEmailError('');
+    setError('');
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
+    setEmailError('');
     if (!checked) {
       setError('Please agree to the terms and conditions.');
+      return;
+    }
+    const emailTrimmed = email.trim();
+    if (!emailTrimmed) {
+      setError('Please enter your email address.');
       return;
     }
     setIsSubmitting(true);
 
     try {
-      // Call the registration API to send email
-      await registerUser(email);
-      
-      // Navigate to registration success page after email is sent, passing email in state
-      navigate('/pages/registrationEmailed', { state: { email } });
+      await registerUser(emailTrimmed);
+      navigate('/pages/registrationEmailed', { state: { email: emailTrimmed } });
     } catch (err) {
       console.error('Registration error:', err);
-      setError(err.message || 'Failed to register. Please try again.');
+      const msg = err.message || 'Failed to register. Please try again.';
+      if (msg.includes('already exists') || msg.includes(EMAIL_EXISTS_MSG)) {
+        setEmailError(EMAIL_EXISTS_MSG);
+      } else {
+        setError(msg);
+      }
       setIsSubmitting(false);
     }
   };
@@ -59,11 +76,17 @@ export default function AuthRegister() {
           id="outlined-adornment-email-register" 
           type="email" 
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleEmailChange}
           name="email"
           required
+          error={!!emailError}
         />
       </CustomFormControl>
+      {emailError && (
+        <Typography variant="body2" color="error" sx={{ mt: 0.5, mb: 0 }}>
+          {emailError}
+        </Typography>
+      )}
 
       <FormControlLabel
         control={<Checkbox checked={checked} onChange={(event) => setChecked(event.target.checked)} name="checked" color="primary" />}
@@ -96,7 +119,7 @@ export default function AuthRegister() {
             type="submit" 
             variant="contained" 
             color="secondary"
-            disabled={isSubmitting || !checked}
+            disabled={isSubmitting || !checked || !email.trim() || !!emailError}
           >
             {isSubmitting ? 'Sending...' : 'Sign Up'}
           </Button>

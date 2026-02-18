@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import pool from '../../db/connection.js';
 import { pendingVerifications } from './store.js';
 
@@ -53,18 +54,19 @@ export async function verifyPhone(req, res) {
 
       if (check.status === 'approved') {
         try {
+          const passwordHash = await bcrypt.hash(storedData.password, 6);
           const existingUser = await pool.query('SELECT singles_id FROM public.singles WHERE email = $1', [email]);
 
           if (existingUser.rows.length > 0) {
             await pool.query(
               `UPDATE public.singles SET password_hash = $1, phone = $2, updated_at = CURRENT_TIMESTAMP WHERE email = $3`,
-              [storedData.password, formattedPhone, email]
+              [passwordHash, formattedPhone, email]
             );
           } else {
             await pool.query(
               `INSERT INTO public.singles (email, password_hash, phone, user_status, created_at, updated_at)
                VALUES ($1, $2, $3, 'active', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`,
-              [email, storedData.password, formattedPhone]
+              [email, passwordHash, formattedPhone]
             );
           }
 

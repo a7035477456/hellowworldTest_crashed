@@ -18,9 +18,9 @@ export default function AboutUs() {
   return (
     <AuthWrapper1>
       <Stack sx={{ justifyContent: 'flex-end', minHeight: '100vh' }}>
-        <Stack sx={{ justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 68px)' }}>
-          <Box sx={{ m: { xs: 1, sm: 3 }, mb: 0, maxWidth: 720 }}>
-            <AuthCardWrapper>
+        <Stack sx={{ justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 68px)', py: { xs: 1, sm: 1.5 } }}>
+          <Box sx={{ m: { xs: 0.5, sm: 1 }, mb: 0, maxWidth: 720 }}>
+            <AuthCardWrapper tight>
               <Stack spacing={3} sx={{ alignItems: 'center', textAlign: 'left' }}>
                 <Box>
                   <Link to="/pages/login" aria-label="logo">
@@ -62,7 +62,7 @@ export default function AboutUs() {
             </AuthCardWrapper>
           </Box>
         </Stack>
-        <Box sx={{ px: 3, my: 3 }}>
+        <Box sx={{ px: 2, my: 1.5 }}>
           <AuthFooter />
         </Box>
       </Stack>
