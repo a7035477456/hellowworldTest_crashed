@@ -1,9 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -20,7 +19,6 @@ import AuthFooter from 'ui-component/cards/AuthFooter';
 // ================================|| PRIVACY POLICY ||================================ //
 
 export default function PrivacyPolicy() {
-  const navigate = useNavigate();
   return (
     <AuthWrapper1>
       <Stack sx={{ justifyContent: 'flex-end', minHeight: '100vh' }}>
@@ -118,15 +116,12 @@ export default function PrivacyPolicy() {
                 <Typography variant="body2" color="text.secondary">
                   © 2025 vsingles.club. All Rights Reserved.
                 </Typography>
-                <Button onClick={() => navigate(-1)} variant="contained" color="secondary" sx={{ alignSelf: 'center', mt: 1 }}>
-                  Close
-                </Button>
               </Stack>
             </AuthCardWrapper>
           </Box>
         </Stack>
         <Box sx={{ px: 1, my: 1 }}>
-          <AuthFooter />
+          <AuthFooter hideVettedSinglesText />
         </Box>
       </Stack>
     </AuthWrapper1>

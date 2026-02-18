@@ -82,7 +82,7 @@ export default function AuthPhoneVerification() {
         </Typography>
       </Stack>
 
-      <CustomFormControl fullWidth>
+      <CustomFormControl fullWidth error={!!error}>
         <InputLabel htmlFor="outlined-adornment-verification-code">Verification Code</InputLabel>
         <OutlinedInput 
           id="outlined-adornment-verification-code" 
@@ -92,6 +92,7 @@ export default function AuthPhoneVerification() {
           name="verificationCode"
           placeholder="Enter the code sent to your phone"
           required
+          error={!!error}
           inputProps={{
             maxLength: 6,
             pattern: '[0-9]*',
@@ -101,7 +102,7 @@ export default function AuthPhoneVerification() {
       </CustomFormControl>
 
       {error && (
-        <Typography variant="body2" color="error" sx={{ mt: 1, mb: 1 }}>
+        <Typography variant="body2" sx={{ mt: 1, mb: 1, color: 'error.main' }}>
           {error}
         </Typography>
       )}

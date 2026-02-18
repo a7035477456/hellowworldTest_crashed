@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 // material-ui
 import Button from '@mui/material/Button';
@@ -29,10 +29,18 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (typeof window !== 'un
 
 export default function AuthLogin() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [checked, setChecked] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const stateEmail = location.state?.email;
+    if (stateEmail && typeof stateEmail === 'string') {
+      setEmail(stateEmail.trim());
+    }
+  }, [location.state]);
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {

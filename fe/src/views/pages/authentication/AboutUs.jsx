@@ -1,9 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 
 // project imports
 import AuthWrapper1 from './AuthWrapper1';
@@ -14,12 +13,11 @@ import AuthFooter from 'ui-component/cards/AuthFooter';
 // ================================|| ABOUT US - OUR VISION & HEART ||================================ //
 
 export default function AboutUs() {
-  const navigate = useNavigate();
   return (
     <AuthWrapper1>
       <Stack sx={{ justifyContent: 'flex-end', minHeight: '100vh' }}>
         <Stack sx={{ justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 68px)', py: { xs: 1, sm: 1.5 } }}>
-          <Box sx={{ m: { xs: 0.5, sm: 1 }, mb: 0, maxWidth: 720 }}>
+          <Box sx={{ m: { xs: 0.5, sm: 1 }, mb: 0, maxWidth: 960, width: '100%' }}>
             <AuthCardWrapper tight>
               <Stack spacing={3} sx={{ alignItems: 'center', textAlign: 'left' }}>
                 <Box>
@@ -55,15 +53,12 @@ export default function AboutUs() {
                     </Typography>
                   </Stack>
                 </Box>
-                <Button onClick={() => navigate(-1)} variant="contained" color="secondary" sx={{ alignSelf: 'center', mt: 2 }}>
-                  Close
-                </Button>
               </Stack>
             </AuthCardWrapper>
           </Box>
         </Stack>
         <Box sx={{ px: 2, my: 1.5 }}>
-          <AuthFooter />
+          <AuthFooter hideVettedSinglesText />
         </Box>
       </Stack>
     </AuthWrapper1>

@@ -1,9 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 
 // project imports
 import AuthWrapper1 from './AuthWrapper1';
@@ -14,7 +13,6 @@ import AuthFooter from 'ui-component/cards/AuthFooter';
 // ================================|| TERMS AND CONDITIONS ||================================ //
 
 export default function TermsAndConditions() {
-  const navigate = useNavigate();
   return (
     <AuthWrapper1>
       <Stack sx={{ justifyContent: 'flex-end', minHeight: '100vh' }}>
@@ -97,15 +95,12 @@ export default function TermsAndConditions() {
                 <Typography variant="body2" color="text.secondary">
                   © 2026 vsingles.club. All rights reserved.
                 </Typography>
-                <Button onClick={() => navigate(-1)} variant="contained" color="secondary" sx={{ alignSelf: 'center', mt: 1 }}>
-                  Close
-                </Button>
               </Stack>
             </AuthCardWrapper>
           </Box>
         </Stack>
         <Box sx={{ px: 1, my: 1 }}>
-          <AuthFooter />
+          <AuthFooter hideVettedSinglesText />
         </Box>
       </Stack>
     </AuthWrapper1>

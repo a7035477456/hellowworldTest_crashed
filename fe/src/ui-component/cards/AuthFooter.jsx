@@ -1,6 +1,5 @@
 // material-ui
 import { useState, useEffect } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
@@ -8,7 +7,9 @@ import Box from '@mui/material/Box';
 
 // ==============================|| FOOTER - AUTHENTICATION 2 & 3 ||============================== //
 
-export default function AuthFooter() {
+const linkSx = { fontSize: '0.875rem', color: '#673AB7', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } };
+
+export default function AuthFooter({ hideVettedSinglesText = false }) {
   const [internalIp, setInternalIp] = useState('');
 
   useEffect(() => {
@@ -25,22 +26,24 @@ export default function AuthFooter() {
   return (
     <Stack spacing={1} sx={{ alignItems: 'center', textAlign: 'center' }}>
       <Stack direction="row" spacing={0.5} alignItems="center" justifyContent="center" flexWrap="wrap" useFlexGap>
-        <Typography component={RouterLink} to="/pages/aboutUs" variant="subtitle2" sx={{ fontSize: '0.875rem', color: '#673AB7', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+        <Typography component="a" href="/pages/aboutUs" target="_blank" rel="noopener noreferrer" variant="subtitle2" sx={linkSx}>
           About us
         </Typography>
         <Typography variant="subtitle2" sx={{ fontSize: '0.875rem', color: '#673AB7' }}>|</Typography>
-        <Typography component={RouterLink} to="/pages/termsAndConditions" variant="subtitle2" sx={{ fontSize: '0.875rem', color: '#673AB7', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+        <Typography component="a" href="/pages/termsAndConditions" target="_blank" rel="noopener noreferrer" variant="subtitle2" sx={linkSx}>
           Terms &amp; Conditions
         </Typography>
         <Typography variant="subtitle2" sx={{ fontSize: '0.875rem', color: '#673AB7' }}>|</Typography>
-        <Typography component={RouterLink} to="/pages/privacyPolicy" variant="subtitle2" sx={{ fontSize: '0.875rem', color: '#673AB7', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+        <Typography component="a" href="/pages/privacyPolicy" target="_blank" rel="noopener noreferrer" variant="subtitle2" sx={linkSx}>
           Privacy Policy
         </Typography>
       </Stack>
       <Divider sx={{ width: '100%', maxWidth: 180 }} />
-      <Typography variant="body2" sx={{ fontWeight: 700, fontSize: '0.875rem' }}>
-        Vetted Singles
-      </Typography>
+      {!hideVettedSinglesText && (
+        <Typography variant="body2" sx={{ fontWeight: 700, fontSize: '0.875rem' }}>
+          Vetted Singles
+        </Typography>
+      )}
       <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.6875rem' }}>
         © 2000-2026 vsingles.club, Inc. - Made with ❤️ in Los Angeles
       </Typography>

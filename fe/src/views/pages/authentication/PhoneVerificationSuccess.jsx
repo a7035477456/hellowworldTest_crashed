@@ -23,7 +23,7 @@ export default function PhoneVerificationSuccess() {
   const email = searchParams.get('email') || '';
 
   const handleGoToLogin = () => {
-    navigate('/pages/login');
+    navigate('/pages/login', { state: { email } });
   };
 
   return (
