@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
-import { createPasswordTokens, TOKEN_EXPIRY_MS } from './store.js';
+import pool from '../../db/connection.js';
+import { TOKEN_EXPIRY_MS } from './store.js';
 
 export async function registerUser(req, res) {
   try {
@@ -32,7 +33,10 @@ export async function registerUser(req, res) {
 
       const token = crypto.randomBytes(32).toString('hex');
       const expiresAt = Date.now() + TOKEN_EXPIRY_MS;
-      createPasswordTokens.set(token, { email, expiresAt });
+      await pool.query(
+        'INSERT INTO public.create_password_tokens (token, email, expires_at) VALUES ($1, $2, $3)',
+        [token, email, new Date(expiresAt)]
+      );
       const createPasswordLink = `https://vsingles.club/pages/createPassword?token=${token}&email=${encodeURIComponent(email)}`;
       const mailOptions = {
         from: smtpUser,

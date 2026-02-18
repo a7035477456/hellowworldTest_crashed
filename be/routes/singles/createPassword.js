@@ -1,4 +1,5 @@
-import { createPasswordTokens, pendingVerifications } from './store.js';
+import pool from '../../db/connection.js';
+import { pendingVerifications } from './store.js';
 
 const LOG_PREFIX = '[createPassword]';
 
@@ -12,7 +13,11 @@ export async function createPassword(req, res) {
       return res.status(400).json({ error: 'Invalid link. Please use the link from your registration email.' });
     }
 
-    const stored = createPasswordTokens.get(token);
+    const tokenResult = await pool.query(
+      'SELECT email, expires_at FROM public.create_password_tokens WHERE token = $1',
+      [token]
+    );
+    const stored = tokenResult.rows[0];
     if (!stored) {
       console.log(LOG_PREFIX, 'reject: token not found or expired');
       return res.status(400).json({ error: 'This link is invalid or has already been used. Please request a new registration email.' });
@@ -21,8 +26,9 @@ export async function createPassword(req, res) {
       console.log(LOG_PREFIX, 'reject: email mismatch');
       return res.status(400).json({ error: 'Invalid link. Please use the link from your registration email.' });
     }
-    if (Date.now() > stored.expiresAt) {
-      createPasswordTokens.delete(token);
+    const expiresAt = stored.expires_at instanceof Date ? stored.expires_at.getTime() : new Date(stored.expires_at).getTime();
+    if (Date.now() > expiresAt) {
+      await pool.query('DELETE FROM public.create_password_tokens WHERE token = $1', [token]);
       console.log(LOG_PREFIX, 'reject: token expired');
       return res.status(400).json({ error: 'This link has expired. Please request a new registration email.' });
     }
@@ -77,7 +83,7 @@ export async function createPassword(req, res) {
 
       const key = `${email}_${formattedPhone}`;
       pendingVerifications.set(key, { password, email, phone: formattedPhone });
-      createPasswordTokens.delete(token);
+      await pool.query('DELETE FROM public.create_password_tokens WHERE token = $1', [token]);
 
       res.json({ success: true, message: 'Verification code sent to your phone' });
     } catch (error) {
