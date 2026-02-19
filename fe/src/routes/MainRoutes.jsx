@@ -3,6 +3,7 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
+import AuthGuard from 'ui-component/AuthGuard';
 import AllSingles from '../views/dashboard/allSingles/AllSingles';
 import VettedSingles from '../views/dashboard/vettedSingles/VettedSingles';
 import InterestedSingles from '../views/dashboard/interested/InterestedSingles';
@@ -19,7 +20,11 @@ const RequestsSent = Loadable(lazy(() => import('views/utilities/requestsSentInd
 
 const MainRoutes = {
   path: '/',
-  element: <MainLayout />,
+  element: (
+    <AuthGuard>
+      <MainLayout />
+    </AuthGuard>
+  ),
   children: [
     {
       path: '/',

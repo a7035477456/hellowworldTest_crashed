@@ -106,6 +106,7 @@ export default function AuthLogin() {
 
       if (response.ok && data.success) {
         console.log('[AuthLogin] success branch → redirecting to dashboard');
+        sessionStorage.setItem('vsingles-logged-in', '1');
         navigate('/dashboard/allSingles');
       } else {
         console.log("=== ELSE ERROR (login failed or non-2xx) =================================================");
