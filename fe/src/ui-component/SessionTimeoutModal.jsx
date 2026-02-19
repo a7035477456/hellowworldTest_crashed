@@ -11,7 +11,8 @@ import Typography from '@mui/material/Typography';
 // project imports
 import { doLogout } from 'utils/authUtils';
 
-const IDLE_MS = 10 * 60 * 1000; // 10 minutes
+const IDLE_MS =
+  (Number(import.meta.env.VITE_SESSION_IDLE_MINUTES) || 10) * 60 * 1000;
 const WARNING_SECONDS = 60;
 
 const ACTIVITY_EVENTS = ['mousedown', 'mousemove', 'keydown', 'scroll', 'touchstart', 'click'];
