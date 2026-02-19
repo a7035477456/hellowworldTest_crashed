@@ -1,6 +1,4 @@
-import bcrypt from 'bcrypt';
 import pool from '../../db/connection.js';
-import { pendingVerifications } from './store.js';
 
 export async function verifyPhone(req, res) {
   try {
@@ -38,9 +36,13 @@ export async function verifyPhone(req, res) {
       });
     }
 
-    const key = `${emailNorm}_${formattedPhone}`;
-    const storedData = pendingVerifications.get(key);
-    if (!storedData) {
+    const sessionResult_AAAAA = await pool.query(
+      `SELECT id, password_hash FROM public.pending_phone_verifications
+       WHERE email = $1 AND phone = $2 AND used_at IS NULL AND expires_at > now()`,
+      [emailNorm, formattedPhone]
+    );
+    const storedRow_AAAAA = sessionResult_AAAAA.rows[0];
+    if (!storedRow_AAAAA) {
       return res.status(400).json({ error: 'Verification session not found. Please start the verification process again.' });
     }
 
@@ -55,23 +57,25 @@ export async function verifyPhone(req, res) {
 
       if (check.status === 'approved') {
         try {
-          const passwordHash = await bcrypt.hash(storedData.password, 6);
+          await pool.query(
+            `UPDATE public.pending_phone_verifications SET used_at = now() WHERE id = $1`,
+            [storedRow_AAAAA.id]
+          );
+          const passwordHash_AAAAA = storedRow_AAAAA.password_hash;
           const existingUser = await pool.query('SELECT singles_id FROM public.singles WHERE LOWER(email) = $1', [emailNorm]);
 
           if (existingUser.rows.length > 0) {
             await pool.query(
               `UPDATE public.singles SET password_hash = $1, phone = $2, updated_at = CURRENT_TIMESTAMP WHERE LOWER(email) = $3`,
-              [passwordHash, formattedPhone, emailNorm]
+              [passwordHash_AAAAA, formattedPhone, emailNorm]
             );
           } else {
             await pool.query(
               `INSERT INTO public.singles (email, password_hash, phone, user_status, created_at, updated_at)
                VALUES ($1, $2, $3, 'active', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`,
-              [emailNorm, passwordHash, formattedPhone]
+              [emailNorm, passwordHash_AAAAA, formattedPhone]
             );
           }
-
-          pendingVerifications.delete(key);
           console.log('✅ Phone verified successfully. Account created.');
           return res.json({ success: true, message: 'Phone verified successfully. Account created.' });
         } catch (dbError) {

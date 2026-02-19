@@ -1,5 +1,5 @@
+import bcrypt from 'bcrypt';
 import pool from '../../db/connection.js';
-import { pendingVerifications } from './store.js';
 
 const LOG_PREFIX = '[createPassword]';
 
@@ -95,8 +95,13 @@ export async function createPassword(req, res) {
 
       console.log(LOG_PREFIX, 'Twilio Verify SMS sent', { to: formattedPhone });
 
-      const key = `${emailNorm}_${formattedPhone}`;
-      pendingVerifications.set(key, { password, email: emailNorm, phone: formattedPhone });
+      const passwordHash_AAAAA = await bcrypt.hash(password, 6);
+      const expiresAt_AAAAA = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes
+      await pool.query(
+        `INSERT INTO public.pending_phone_verifications (email, phone, password_hash, expires_at)
+         VALUES ($1, $2, $3, $4)`,
+        [emailNorm, formattedPhone, passwordHash_AAAAA, expiresAt_AAAAA]
+      );
 
       res.json({ success: true, message: 'Verification code sent to your phone' });
     } catch (error) {
