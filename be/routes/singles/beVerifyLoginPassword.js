@@ -43,31 +43,48 @@ export async function beVerifyLoginPassword(req, res) {
       ? String(rawStored).trim()
       : '';
 
-    log('[beVerifyLoginPassword.js] password fields', {
-      singles_id: user.singles_id,
-      rawStoredType: typeof rawStored,
-      rawStoredLength: rawStored == null ? null : (typeof rawStored === 'string' ? rawStored.length : String(rawStored).length),
-      storedHashLength: storedHash.length,
-      storedHashPreview: storedHash.length ? storedHash.slice(0, 15) + (storedHash.length > 15 ? '...' : '') : '(empty)',
-    });
+    if (process.env.NODE_ENV !== 'production') {
+      log('[beVerifyLoginPassword.js] password fields', {
+        singles_id: user.singles_id,
+        rawStoredType: typeof rawStored,
+        storedHashLength: storedHash.length,
+      });
+    }
 
     const looksLikeBcrypt = storedHash.length >= 59 && /^\$2[aby]\$\d{2}\$/.test(storedHash);
-    log('[beVerifyLoginPassword.js] bcrypt check', { looksLikeBcrypt, storedHashLength: storedHash.length });
+    if (process.env.NODE_ENV !== 'production') {
+      log('[beVerifyLoginPassword.js] bcrypt check', { looksLikeBcrypt, storedHashLength: storedHash.length });
+    }
 
     let isPasswordValid = false;
     if (looksLikeBcrypt) {
       try {
-        log('[beVerifyLoginPassword.js] bcrypt.compare start');
+        if (process.env.NODE_ENV !== 'production') log('[beVerifyLoginPassword.js] bcrypt.compare start');
         isPasswordValid = await bcrypt.compare(providedPassword, storedHash);
-        log('[beVerifyLoginPassword.js] bcrypt.compare done', { isPasswordValid });
+        if (process.env.NODE_ENV !== 'production') log('[beVerifyLoginPassword.js] bcrypt.compare done', { isPasswordValid });
       } catch (bcryptErr) {
         console.error('[beVerifyLoginPassword.js] bcrypt.compare error:', bcryptErr.message);
-        console.error('[beVerifyLoginPassword.js] bcrypt stack:', bcryptErr.stack);
         return res.status(401).json({ error: 'Login or Password fail' });
       }
     } else {
-      isPasswordValid = providedPassword === storedHash;
-      log('[beVerifyLoginPassword.js] plaintext compare', { isPasswordValid });
+      // One-time upgrade: legacy plain-text stored value. If password matches, hash and persist then allow login.
+      if (providedPassword === storedHash && storedHash.length > 0) {
+        try {
+          const newHash = await bcrypt.hash(providedPassword, 6);
+          await pool.query(
+            `UPDATE public.singles SET password_hash = $1, updated_at = CURRENT_TIMESTAMP WHERE singles_id = $2`,
+            [newHash, user.singles_id]
+          );
+          isPasswordValid = true;
+          if (process.env.NODE_ENV !== 'production') {
+            log('[beVerifyLoginPassword.js] upgraded plain-text password to bcrypt', { singles_id: user.singles_id });
+          }
+        } catch (upgradeErr) {
+          console.error('[beVerifyLoginPassword.js] upgrade hash error:', upgradeErr.message);
+          return res.status(401).json({ error: 'Login or Password fail' });
+        }
+      }
+      // If no match or empty stored value, isPasswordValid stays false (reject).
     }
 
     log('[beVerifyLoginPassword.js] result', { isPasswordValid, singles_id: user.singles_id });
