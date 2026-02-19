@@ -54,7 +54,7 @@ export async function registerUser(req, res) {
         createPasswordTokens.set(token, { email: emailTrimmed, expiresAt });
         const createPasswordLink = `https://vsingles.club/pages/createPassword?token=${token}&email=${encodeURIComponent(emailTrimmed)}`;
         const mailOptions = {
-          from: smtpUser,
+          from: '"VSingles Support" <support@vsingles.club>',
           to: emailTrimmed,
           subject: 'Complete Your Registration - Create Password',
           html: `

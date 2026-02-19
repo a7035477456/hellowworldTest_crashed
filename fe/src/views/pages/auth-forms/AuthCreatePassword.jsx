@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams, Link as RouterLink } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 // material-ui
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
@@ -259,22 +258,29 @@ export default function AuthCreatePassword() {
           required
         />
       </CustomFormControl>
-
-      <FormControlLabel
-        control={<Checkbox checked={checked} onChange={(event) => setChecked(event.target.checked)} name="checked" color="primary" />}
-        label={<Typography variant="subtitle1">Agree with</Typography>}
-      />
-
-      <Typography variant="body2" sx={{ mt: 1, mb: 1.5, color: 'text.secondary' }}>
-        By providing your phone number, you agree to receive text messages from vsingles.club for account security, identity verification, and service updates. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Text HELP for help or STOP to cancel.{' '}
-        <Typography component={RouterLink} to="/pages/privacyPolicy" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
-          Privacy Policy
-        </Typography>
-        {' and '}
-        <Typography component={RouterLink} to="/pages/termsAndConditions" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
-          Terms &amp; Conditions
-        </Typography>
+      <Typography variant="body2" sx={{ mt: 1, mb: 0, color: '#1976d2' }}>
+        For your security, we limit one account per person per phone number and email. You can update your email address anytime in your account settings.
       </Typography>
+
+      <Box sx={{ display: 'flex', alignItems: 'flex-start', mt: 2, mb: 1.5 }}>
+        <Checkbox
+          checked={checked}
+          onChange={(e) => setChecked(e.target.checked)}
+          name="checked"
+          color="primary"
+          sx={{ p: 0, mr: 1, mt: 0.25 }}
+        />
+        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          Agree: by providing your phone number you agree to receive text messages from vsingles.club for account security, identity verification, and service updates. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Text HELP for help or STOP to cancel.{' '}
+          <Typography component="a" href="/pages/privacyPolicy" target="_blank" rel="noopener noreferrer" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+            Privacy Policy
+          </Typography>
+          {' and '}
+          <Typography component="a" href="/pages/termsAndConditions" target="_blank" rel="noopener noreferrer" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+            Terms &amp; Conditions
+          </Typography>
+        </Typography>
+      </Box>
 
       <Box sx={{ mt: 2 }}>
         <AnimateButton>

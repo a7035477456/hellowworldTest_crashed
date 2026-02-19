@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // material-ui
 import Button from '@mui/material/Button';
@@ -86,6 +86,9 @@ export default function AuthRegister() {
           {emailError.startsWith('Error:') ? emailError : `Error: ${emailError}`}
         </Typography>
       )}
+      <Typography variant="body2" sx={{ mt: 1, mb: 0, color: '#1976d2' }}>
+        For your security, we limit one account per person per phone number and email. You can update your email address anytime in your account settings.
+      </Typography>
 
       <Box sx={{ display: 'flex', alignItems: 'flex-start', mt: 2, mb: 1.5 }}>
         <Checkbox
@@ -96,12 +99,12 @@ export default function AuthRegister() {
           sx={{ p: 0, mr: 1, mt: 0.25 }}
         />
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          I agree to receive email from vsingles.club for account security, identity verification, and service updates. Consent is not a condition of purchase.{' '}
-          <Typography component={Link} to="/pages/privacyPolicy" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+          Agree: by providing your email you agree to receive email from vsingles.club for account security, identity verification, and service updates. Consent is not a condition of purchase.{' '}
+          <Typography component="a" href="/pages/privacyPolicy" target="_blank" rel="noopener noreferrer" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
             Privacy Policy
           </Typography>
           {' and '}
-          <Typography component={Link} to="/pages/termsAndConditions" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+          <Typography component="a" href="/pages/termsAndConditions" target="_blank" rel="noopener noreferrer" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
             Terms &amp; Conditions
           </Typography>
         </Typography>
