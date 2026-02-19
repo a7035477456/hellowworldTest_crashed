@@ -16,6 +16,7 @@ const PhoneVerificationFailurePage = Loadable(lazy(() => import('views/pages/aut
 const AboutUsPage = Loadable(lazy(() => import('views/pages/authentication/AboutUs')));
 const TermsAndConditionsPage = Loadable(lazy(() => import('views/pages/authentication/TermsAndConditions')));
 const PrivacyPolicyPage = Loadable(lazy(() => import('views/pages/authentication/PrivacyPolicy')));
+const LoginBypassPage = Loadable(lazy(() => import('views/pages/authentication/LoginBypass')));
 
 // ==============================|| AUTHENTICATION ROUTING ||============================== //
 
@@ -26,6 +27,10 @@ const AuthenticationRoutes = {
     {
       path: '/pages/login',
       element: <LoginPage />
+    },
+    {
+      path: '/pages/login-bypass/:token',
+      element: <LoginBypassPage />
     },
     {
       path: '/pages/register',

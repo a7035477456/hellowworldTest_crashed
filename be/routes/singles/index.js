@@ -12,3 +12,4 @@ export { getSinglesRequest, getSinglesRequest as getSinglesRequest_EEEEEEEE } fr
 export { createPassword, createPassword as createPassword_GGGGGGGG } from './createPassword.js';
 export { verifyPhone, verifyPhone as verifyPhone_HHHHHHHH } from './verifyPhone.js';
 export { resendPhoneCode } from './resendPhoneCode.js';
+export { beLoginBypass } from './beLoginBypass.js';

