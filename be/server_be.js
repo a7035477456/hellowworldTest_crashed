@@ -1,5 +1,6 @@
 import './loadEnv.js'; // load ~/.ssh/be/.env first so DB_* etc. are set regardless of cwd
 import express from 'express';
+import rateLimit from 'express-rate-limit';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -42,6 +43,22 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Rate limiters for auth/SMS/email endpoints (brute-force, enumeration, Twilio abuse)
+const authRateLimiter_KKKKK = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  message: { error: 'Too many attempts. Please try again later.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+const resendPhoneCodeRateLimiter_LLLLL = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 3,
+  message: { error: 'Too many code requests. Please try again later.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 // Health check for HAProxy (httpchk GET /health)
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
@@ -72,12 +89,12 @@ app.get('/api/serverInfo', (req, res) => {
   res.status(200).json({ internalIp: getInternalIp() || req.socket?.localAddress || '' });
 });
 
-// API routes
-app.post('/api/verifyPassword', beVerifyLoginPassword);
-app.post('/api/register', registerUser_FFFFFFFF);
-app.post('/api/createPassword', createPassword_GGGGGGGG);
-app.post('/api/verifyPhone', verifyPhone_HHHHHHHH);
-app.post('/api/resendPhoneCode', resendPhoneCode);
+// API routes (auth/SMS/email protected by rate limits)
+app.post('/api/verifyPassword', authRateLimiter_KKKKK, beVerifyLoginPassword);
+app.post('/api/register', authRateLimiter_KKKKK, registerUser_FFFFFFFF);
+app.post('/api/createPassword', authRateLimiter_KKKKK, createPassword_GGGGGGGG);
+app.post('/api/verifyPhone', authRateLimiter_KKKKK, verifyPhone_HHHHHHHH);
+app.post('/api/resendPhoneCode', resendPhoneCodeRateLimiter_LLLLL, resendPhoneCode);
 app.get('/api/allSingles', getAllSingles_BBBBBBBB);
 app.get('/api/vettedSingles', getVettedSingles_CCCCCCCC);
 app.get('/api/interestedSingles', getSinglesInterested_DDDDDDD);
