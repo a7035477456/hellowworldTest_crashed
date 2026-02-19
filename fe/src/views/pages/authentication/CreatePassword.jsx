@@ -16,27 +16,29 @@ import AuthCreatePassword from '../auth-forms/AuthCreatePassword';
 export default function CreatePassword() {
   return (
     <AuthWrapper1>
-      <Stack sx={{ justifyContent: 'flex-end', minHeight: '100vh' }}>
-        <Stack sx={{ justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 68px)' }}>
-          <Box sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>
-            <AuthCardWrapper>
-              <Stack sx={{ alignItems: 'center', justifyContent: 'center', gap: 2 }}>
-                <Box sx={{ mb: 3 }}>
-                  <Link to="#" aria-label="logo">
-                    <Logo />
-                  </Link>
-                </Box>
-                <Box sx={{ width: 1 }}>
-                  <AuthCreatePassword />
-                </Box>
-              </Stack>
-            </AuthCardWrapper>
+      <Box sx={{ fontFamily: '"Comic Sans MS", "Comic Sans", cursive' }}>
+        <Stack sx={{ justifyContent: 'flex-end', minHeight: '100vh' }}>
+          <Stack sx={{ justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 68px)' }}>
+            <Box sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>
+              <AuthCardWrapper>
+                <Stack sx={{ alignItems: 'center', justifyContent: 'center', gap: 2 }}>
+                  <Box sx={{ mb: 3 }}>
+                    <Link to="#" aria-label="logo">
+                      <Logo />
+                    </Link>
+                  </Box>
+                  <Box sx={{ width: 1 }}>
+                    <AuthCreatePassword />
+                  </Box>
+                </Stack>
+              </AuthCardWrapper>
+            </Box>
+          </Stack>
+          <Box sx={{ px: 3, my: 3 }}>
+            <AuthFooter />
           </Box>
         </Stack>
-        <Box sx={{ px: 3, my: 3 }}>
-          <AuthFooter />
-        </Box>
-      </Stack>
+      </Box>
     </AuthWrapper1>
   );
 }

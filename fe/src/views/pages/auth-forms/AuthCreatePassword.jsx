@@ -147,7 +147,7 @@ export default function AuthCreatePassword() {
   };
 
   const sectionHeaderSx = {
-    bgcolor: 'grey.900',
+    bgcolor: '#7e57c2',
     color: 'white',
     px: 2,
     py: 1.5,
@@ -167,7 +167,7 @@ export default function AuthCreatePassword() {
         <Typography variant="h6" sx={{ color: 'white', fontWeight: 700 }}>
           Verify email code
         </Typography>
-        <Typography variant="body2" sx={{ color: 'grey.300', mt: 0.5 }}>
+        <Typography variant="body2" sx={{ color: '#f3e5f5', mt: 0.5 }}>
           Enter the 6-character code we just email to you
         </Typography>
       </Box>
@@ -189,7 +189,7 @@ export default function AuthCreatePassword() {
         <Typography variant="h6" sx={{ color: 'white', fontWeight: 700 }}>
           Create password
         </Typography>
-        <Typography variant="body2" sx={{ color: 'grey.300', mt: 0.5 }}>
+        <Typography variant="body2" sx={{ color: '#f3e5f5', mt: 0.5 }}>
           Please create your password, email verification code, your password, and your personal phone number to continue
         </Typography>
       </Box>
@@ -200,9 +200,10 @@ export default function AuthCreatePassword() {
           id="outlined-adornment-email-create"
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
           name="email"
           placeholder="you@example.com"
+          disabled
+          inputProps={{ readOnly: true }}
           required
         />
       </CustomFormControl>
