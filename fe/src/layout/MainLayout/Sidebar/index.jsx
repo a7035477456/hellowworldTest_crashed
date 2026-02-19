@@ -46,10 +46,19 @@ function Sidebar() {
           justifyContent: drawerOpen ? 'flex-start' : 'center',
           px: drawerOpen ? 2 : 1,
           py: 1.25,
-          borderRadius: 1,
+          borderRadius: 1.5,
           color: theme.vars.palette.secondary.dark,
+          bgcolor: theme.vars.palette.background.paper,
+          border: '1px solid',
+          borderColor: theme.vars.palette.divider,
+          boxShadow: '0 2px 0 0 rgba(0,0,0,0.08), 0 3px 4px 0 rgba(0,0,0,0.06)',
+          transition: 'transform 0.12s ease, box-shadow 0.12s ease',
           '&:hover': {
             bgcolor: theme.vars.palette.action.hover
+          },
+          '&:active': {
+            transform: 'translateY(2px)',
+            boxShadow: '0 0 0 0 rgba(0,0,0,0.08), 0 1px 2px 0 rgba(0,0,0,0.06)'
           }
         }}
       >
