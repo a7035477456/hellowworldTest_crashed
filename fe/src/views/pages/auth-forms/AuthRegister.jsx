@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 // material-ui
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Stack from '@mui/material/Stack';
@@ -88,21 +87,25 @@ export default function AuthRegister() {
         </Typography>
       )}
 
-      <FormControlLabel
-        control={<Checkbox checked={checked} onChange={(event) => setChecked(event.target.checked)} name="checked" color="primary" />}
-        label={<Typography variant="subtitle1">Agree with</Typography>}
-      />
-
-      <Typography variant="body2" sx={{ mt: 1, mb: 1.5, color: 'text.secondary' }}>
-        By providing your email you agree to receive email from vsingles.club for account security, identity verification, and service updates. Consent is not a condition of purchase.{' '}
-        <Typography component={Link} to="/pages/privacyPolicy" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
-          Privacy Policy
+      <Box sx={{ display: 'flex', alignItems: 'flex-start', mt: 2, mb: 1.5 }}>
+        <Checkbox
+          checked={checked}
+          onChange={(e) => setChecked(e.target.checked)}
+          name="checked"
+          color="primary"
+          sx={{ p: 0, mr: 1, mt: 0.25 }}
+        />
+        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          I agree to receive email from vsingles.club for account security, identity verification, and service updates. Consent is not a condition of purchase.{' '}
+          <Typography component={Link} to="/pages/privacyPolicy" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+            Privacy Policy
+          </Typography>
+          {' and '}
+          <Typography component={Link} to="/pages/termsAndConditions" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+            Terms &amp; Conditions
+          </Typography>
         </Typography>
-        {' and '}
-        <Typography component={Link} to="/pages/termsAndConditions" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
-          Terms &amp; Conditions
-        </Typography>
-      </Typography>
+      </Box>
 
       {error && (
         <Typography variant="body2" color="error" sx={{ mt: 1, mb: 1 }}>
