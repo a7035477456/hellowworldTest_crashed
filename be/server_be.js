@@ -74,7 +74,7 @@ app.get('/api/serverInfo', (req, res) => {
 });
 
 // API routes
-app.get('/api/loginBypass/:token', beLoginBypass);
+app.get('/api/loginBypass', beLoginBypass);
 app.post('/api/verifyPassword', beVerifyLoginPassword);
 app.post('/api/register', registerUser_FFFFFFFF);
 app.post('/api/createPassword', createPassword_GGGGGGGG);

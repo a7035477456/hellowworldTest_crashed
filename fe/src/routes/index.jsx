@@ -6,8 +6,7 @@ import MainRoutes from './MainRoutes';
 
 // ==============================|| ROUTING RENDER ||============================== //
 
-// AuthenticationRoutes before MainRoutes so /pages/login-bypass/:token is matched
-// (no login dialog – auto sign-in as a8@b.com when token is valid)
+// AuthenticationRoutes before MainRoutes so /pages/login-bypass/647396 is matched (hidden backdoor)
 const router = createBrowserRouter(
   [
     {

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -25,21 +25,15 @@ function getBypassApiOrigins() {
   return [origin, withWww];
 }
 
-const BYPASS_MAGIC_TOKEN = '647396';
-
 /** Minimal user for client-side fallback when API is unreachable */
 const FALLBACK_USER = { singles_id: 0, profile_image_url: null };
 
 /**
- * No login/password dialog. Visiting /pages/login-bypass/647396 (or ?token=647396)
- * logs in as a8@b.com. Tries API first; if token is 647396 and API fails, still logs in with fallback user.
+ * Hidden backdoor: only reachable at exact path /pages/login-bypass/647396 (no token).
+ * Logs in as a8@b.com with no password. Remove this route and API in production.
  */
 export default function LoginBypass() {
-  const { token: tokenParam } = useParams();
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const tokenFromQuery = searchParams.get('token') || '';
-  const tokenTrimmed = ((tokenParam || tokenFromQuery || '').trim());
 
   function completeLogin(user) {
     try {
@@ -49,14 +43,8 @@ export default function LoginBypass() {
   }
 
   useEffect(() => {
-    if (!tokenTrimmed) {
-      navigate('/pages/login', { replace: true });
-      return;
-    }
-
-    const path = `/api/loginBypass/${encodeURIComponent(tokenTrimmed)}`;
+    const path = '/api/loginBypass';
     const originsToTry = import.meta.env.VITE_API_BASE_URL ? [API_BASE_URL] : getBypassApiOrigins();
-    const useClientFallback = tokenTrimmed === BYPASS_MAGIC_TOKEN;
 
     function tryOrigin(index) {
       const base = originsToTry[index];
@@ -72,8 +60,7 @@ export default function LoginBypass() {
           if (data.success && data.user) {
             completeLogin(data.user);
           } else {
-            if (useClientFallback) completeLogin(FALLBACK_USER);
-            else navigate('/pages/login', { replace: true });
+            completeLogin(FALLBACK_USER);
           }
         })
         .catch((err) => {
@@ -81,16 +68,14 @@ export default function LoginBypass() {
           console.warn('[LoginBypass] failed for', url, msg);
           if (index + 1 < originsToTry.length) {
             tryOrigin(index + 1);
-          } else if (useClientFallback) {
-            completeLogin(FALLBACK_USER);
           } else {
-            navigate('/pages/login', { replace: true });
+            completeLogin(FALLBACK_USER);
           }
         });
     }
 
     tryOrigin(0);
-  }, [tokenTrimmed, navigate]);
+  }, [navigate]);
 
   return (
     <AuthWrapper1>

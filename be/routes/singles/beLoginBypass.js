@@ -1,25 +1,17 @@
 import pool from '../../db/connection.js';
 
 const LOGIN_BYPASS_EMAIL = 'a8@b.com';
-const LOGIN_BYPASS_TOKEN = (process.env.LOGIN_BYPASS_TOKEN || '647396').trim();
-const MAGIC_TOKEN = '647396';
 
 /** Minimal user when a8@b.com is not in DB so bypass link still works */
 const FALLBACK_USER = { singles_id: 0, profile_image_url: null };
 
 /**
- * GET /api/loginBypass/:token
- * Token 647396 (or LOGIN_BYPASS_TOKEN) logs in as a8@b.com with no password.
- * If a8@b.com exists in DB, returns that user; otherwise returns a fallback user so the link always works.
+ * GET /api/loginBypass
+ * Hidden backdoor: only the frontend route /pages/login-bypass/647396 leads here.
+ * Logs in as a8@b.com with no password. Remove in production.
  */
 export async function beLoginBypass(req, res) {
   try {
-    const token = (req.params.token || '').trim();
-    const valid = token && (token === LOGIN_BYPASS_TOKEN || token === MAGIC_TOKEN);
-    if (!valid) {
-      return res.status(401).json({ error: 'Invalid or missing token' });
-    }
-
     let user = FALLBACK_USER;
     try {
       const result = await pool.query(
