@@ -17,7 +17,7 @@ export async function beVerifyLoginPassword(req, res) {
     let result;
     try {
       result = await pool.query(
-        `SELECT singles_id, profile_image_url, password_hash
+        `SELECT singles_id, profile_image_url, profile_image_pk, password_hash
          FROM public.singles s
          WHERE s.email = $1
          ORDER BY COALESCE(s.updated_at, s.created_at) DESC

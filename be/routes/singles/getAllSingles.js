@@ -3,9 +3,9 @@ import pool from '../../db/connection.js';
 export async function getAllSingles(req, res) {
   try {
     const result = await pool.query(
-      `SELECT singles_id, profile_image_url
+      `SELECT singles_id, profile_image_url, profile_image_pk
        FROM public.singles s
-       ORDER BY s.lastLoginTime desc`
+       ORDER BY COALESCE(s.updated_at, s.created_at) DESC`
     );
     res.json(result.rows);
   } catch (error) {

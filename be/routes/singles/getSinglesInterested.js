@@ -3,11 +3,11 @@ import pool from '../../db/connection.js';
 export async function getSinglesInterested(req, res) {
   try {
     const result = await pool.query(`
-      SELECT r.singles_id_to, s.singles_id, s.profile_image_url, s.vetted_status
+      SELECT r.singles_id_to, s.singles_id, s.profile_image_url, s.profile_image_pk, s.vetted_status
       FROM public.requests r
       JOIN public.singles s ON r.singles_id_to = s.singles_id
       WHERE r.interested = true
-      ORDER BY s.lastLoginTime DESC
+      ORDER BY COALESCE(s.updated_at, s.created_at) DESC
     `);
 
     const processedRows = result.rows.map((row) => {
@@ -15,6 +15,7 @@ export async function getSinglesInterested(req, res) {
       return {
         singles_id_to: idValue != null ? String(idValue) : null,
         profile_image_url: row.profile_image_url || null,
+        profile_image_pk: row.profile_image_pk ?? null,
         vetted_status: row.vetted_status === true || row.vetted_status === 'true' || row.vetted_status === 1
       };
     }).filter((row) => row.singles_id_to != null);

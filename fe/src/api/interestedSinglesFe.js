@@ -44,9 +44,10 @@ export function useGetInterestedSingles() {
       // const validId = singles_id_to != null ? singles_id_to : `fallback_${index_FFFFFFFF}`;
       
       const result = {
-        // singles_id_to: validId,
         singles_id_to: single_EEEEEEEE.singles_id_to,
-        profile_image_url: single_EEEEEEEE?.profile_image_url || 'profile.jpeg',
+        profile_image_url: single_EEEEEEEE?.profile_image_pk
+          ? `${API_BASE_URL}/api/photo/${single_EEEEEEEE.profile_image_pk}`
+          : (single_EEEEEEEE?.profile_image_url || 'profile.jpeg'),
         vetted_status: single_EEEEEEEE?.vetted_status === true || single_EEEEEEEE?.vetted_status === 'true' || single_EEEEEEEE?.vetted_status === 1
       };
       // console.log('Original item:', single_EEEEEEEE);

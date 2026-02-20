@@ -17,6 +17,7 @@ import {
   verifyPhone_HHHHHHHH,
   resendPhoneCode,
 } from './routes/singles/index.js';
+import { getPhoto } from './routes/photo/getPhoto.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -84,6 +85,7 @@ app.get('/api/allSingles', getAllSingles_BBBBBBBB);
 app.get('/api/vettedSingles', getVettedSingles_CCCCCCCC);
 app.get('/api/interestedSingles', getSinglesInterested_DDDDDDD);
 app.get('/api/requestedSingles', getSinglesRequest_EEEEEEEE);
+app.get('/api/photo/:id', getPhoto);
 
 // Serve built frontend (fe/dist) – run fe build first (febedev/febeprod).
 // On Ubuntu: ensure both vsingles.club and www.vsingles.club route to this app so /assets/* (e.g. Login-*.js) are served.

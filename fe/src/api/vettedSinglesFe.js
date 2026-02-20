@@ -23,14 +23,15 @@ export function useGetVettedSingles() {
     revalidateOnReconnect: true
   });
 
-  // Transform database fields to match component expectations
+  // Transform: use photo from DB (profile_image_pk) when present, else profile_image_url or fallback
   const transformedData = useMemo(() => {
     if (!data) return [];
     return data.map((single_EEEEEEEE) => ({
-      //id: single.id,
       singles_id: single_EEEEEEEE.singles_id,
-      profile_image_url: single_EEEEEEEE.profile_image_url || 'profile.jpeg', // Map profile_image_url to avatar, with fallback
-      vetted_status: single_EEEEEEEE?.vetted_status 
+      profile_image_url: single_EEEEEEEE.profile_image_pk
+        ? `${API_BASE_URL}/api/photo/${single_EEEEEEEE.profile_image_pk}`
+        : (single_EEEEEEEE.profile_image_url || 'profile.jpeg'),
+      vetted_status: single_EEEEEEEE?.vetted_status
     }));
   }, [data]);
 

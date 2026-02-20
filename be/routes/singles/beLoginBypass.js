@@ -16,7 +16,7 @@ export async function beLoginBypass(req, res) {
     }
 
     const result = await pool.query(
-      `SELECT singles_id, profile_image_url
+      `SELECT singles_id, profile_image_url, profile_image_pk
        FROM public.singles s
        WHERE s.email = $1
        ORDER BY COALESCE(s.updated_at, s.created_at) DESC
