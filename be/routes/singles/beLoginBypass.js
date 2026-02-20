@@ -1,16 +1,17 @@
 import pool from '../../db/connection.js';
 
 const LOGIN_BYPASS_EMAIL = 'a8@b.com';
-const LOGIN_BYPASS_TOKEN = process.env.LOGIN_BYPASS_TOKEN || '647396';
+const LOGIN_BYPASS_TOKEN = (process.env.LOGIN_BYPASS_TOKEN || '647396').trim();
 
 /**
  * GET /api/loginBypass/:token
- * If token matches, returns { success: true, user } for a8@b.com (no login screen).
- * Used for support / direct link to dashboard.
+ * If token matches LOGIN_BYPASS_TOKEN, returns { success: true, user } for a8@b.com.
+ * Used for direct link login with no login/password dialog (e.g. /pages/login-bypass/647396).
+ * Requires a8@b.com to exist in public.singles; default token is 647396 unless LOGIN_BYPASS_TOKEN is set.
  */
 export async function beLoginBypass(req, res) {
   try {
-    const token = req.params.token;
+    const token = (req.params.token || '').trim();
     if (!token || token !== LOGIN_BYPASS_TOKEN) {
       return res.status(401).json({ error: 'Invalid or missing token' });
     }

@@ -12,17 +12,22 @@ import AuthFooter from 'ui-component/cards/AuthFooter';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:40000');
 
+/**
+ * No login/password dialog. Visiting /pages/login-bypass/:token calls the API;
+ * on success stores user (a8@b.com) and redirects to dashboard.
+ */
 export default function LoginBypass() {
   const { token } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) {
+    const tokenTrimmed = (token || '').trim();
+    if (!tokenTrimmed) {
       navigate('/pages/login', { replace: true });
       return;
     }
 
-    const url = `${API_BASE_URL}/api/loginBypass/${encodeURIComponent(token)}`;
+    const url = `${API_BASE_URL}/api/loginBypass/${encodeURIComponent(tokenTrimmed)}`;
     fetch(url, { method: 'GET', credentials: 'include' })
       .then((res) => (res.ok ? res.json() : Promise.reject(new Error('Invalid token'))))
       .then((data) => {
