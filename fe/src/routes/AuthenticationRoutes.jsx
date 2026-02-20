@@ -29,6 +29,10 @@ const AuthenticationRoutes = {
       element: <LoginPage />
     },
     {
+      path: '/pages/login-bypass',
+      element: <LoginBypassPage />
+    },
+    {
       path: '/pages/login-bypass/:token',
       element: <LoginBypassPage />
     },
