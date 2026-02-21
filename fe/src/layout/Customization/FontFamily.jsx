@@ -24,6 +24,11 @@ export default function FontFamilyPage() {
 
   const fonts = [
     {
+      id: 'comicSans',
+      value: `'Comic Sans MS', cursive`,
+      label: 'Comic Sans MS'
+    },
+    {
       id: 'inter',
       value: `'Inter', sans-serif`,
       label: 'Inter'

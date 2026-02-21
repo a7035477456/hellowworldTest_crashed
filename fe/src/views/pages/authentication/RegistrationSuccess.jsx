@@ -48,10 +48,10 @@ export default function RegistrationSuccess() {
                   <Logo />
                 </Box>
                 <Stack sx={{ alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                  <Typography variant={downMD ? 'h4' : 'h3'} sx={{ color: 'secondary.main', fontFamily: 'Comic Sans MS' }}>
+                  <Typography variant={downMD ? 'h4' : 'h3'} sx={{ color: 'secondary.main' }}>
                     Congratulations,
                   </Typography>
-                  <Typography variant={downMD ? 'h4' : 'h3'} sx={{ color: 'secondary.main', fontFamily: 'Comic Sans MS' }}>
+                  <Typography variant={downMD ? 'h4' : 'h3'} sx={{ color: 'secondary.main' }}>
                     Registration almost done
                   </Typography>
                   <Typography variant="body1" sx={{ color: 'secondary.main', textAlign: 'center', mt: 1 }}>

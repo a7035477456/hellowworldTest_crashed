@@ -10,6 +10,7 @@ import CardContent from './CardContent';
 import CardHeader from './CardHeader';
 import Checkbox from './Checkbox';
 import Chip from './Chip';
+import CssBaseline from './CssBaseline';
 import DataGrid from './DataGrid';
 import DatePicker from './DatePicker';
 import Divider from './Divider';
@@ -31,6 +32,7 @@ import Typography from './Typography';
 
 export default function ComponentsOverrides(theme, borderRadius, outlinedFilled) {
   return merge(
+    CssBaseline(theme),
     Alert(theme),
     Avatar(theme),
     Button(theme),

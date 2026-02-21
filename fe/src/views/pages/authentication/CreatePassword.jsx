@@ -16,7 +16,7 @@ import AuthCreatePassword from '../auth-forms/AuthCreatePassword';
 export default function CreatePassword() {
   return (
     <AuthWrapper1>
-      <Box sx={{ fontFamily: '"Comic Sans MS", "Comic Sans", cursive' }}>
+      <Box>
         <Stack sx={{ justifyContent: 'flex-end', minHeight: '100vh' }}>
           <Stack sx={{ justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 68px)' }}>
             <Box sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>

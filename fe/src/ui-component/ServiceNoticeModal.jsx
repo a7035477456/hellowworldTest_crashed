@@ -51,7 +51,7 @@ export default function ServiceNoticeModal({ onExit }) {
               fontSize: '1rem',
               lineHeight: 1.6,
               color: 'secondary.dark',
-              fontFamily: '"Comic Neue", "Segoe Print", cursive',
+              fontFamily: '"Comic Sans MS", cursive',
               textAlign: 'center'
             }}
           >

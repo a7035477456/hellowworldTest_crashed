@@ -293,7 +293,7 @@ export default function VerifySelf() {
 
   return (
     <>
-      <MainCard title={<Typography sx={{ fontFamily: 'Comic Sans MS', fontSize: '1.5rem' }}>Verify Your Information</Typography>}>
+      <MainCard title={<Typography sx={{ fontSize: '1.5rem', color: '#56367C' }}>Verify Your Information</Typography>}>
         <Grid container spacing={gridSpacing}>
           <Grid size={12}>
             <Alert severity="info" sx={{ mb: 2 }}>
@@ -301,7 +301,7 @@ export default function VerifySelf() {
             </Alert>
           </Grid>
           <Grid size={12}>
-            <Typography variant="h3" gutterBottom>
+            <Typography variant="h3" gutterBottom sx={{ color: '#56367C' }}>
               Important:{' '}
               <Link
                 component="button"
@@ -309,10 +309,10 @@ export default function VerifySelf() {
                 onClick={handleOpenDialog}
                 sx={{
                   textDecoration: 'underline',
-                  color: 'primary.main',
+                  color: '#56367C',
                   cursor: 'pointer',
                   '&:hover': {
-                    color: 'primary.dark'
+                    opacity: 0.85
                   }
                 }}
               >

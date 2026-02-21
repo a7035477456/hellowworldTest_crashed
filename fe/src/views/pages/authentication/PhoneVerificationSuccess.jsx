@@ -39,7 +39,7 @@ export default function PhoneVerificationSuccess() {
                   </Link>
                 </Box>
                 <Stack sx={{ alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                  <Typography variant={downMD ? 'h4' : 'h3'} sx={{ color: 'secondary.main', fontFamily: 'Comic Sans MS', textAlign: 'center' }}>
+                  <Typography variant={downMD ? 'h4' : 'h3'} sx={{ color: 'secondary.main', textAlign: 'center' }}>
                     Congratulation, Registration email {email || '[your email]'} and Phone verification completed. You can login now.
                   </Typography>
                 </Stack>

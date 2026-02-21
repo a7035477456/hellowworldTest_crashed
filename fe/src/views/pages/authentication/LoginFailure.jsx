@@ -33,7 +33,7 @@ export default function LoginFailure() {
                   </Link>
                 </Box>
                 <Stack sx={{ alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                  <Typography variant={downMD ? 'h3' : 'h2'} sx={{ color: 'error.main', fontFamily: 'Comic Sans MS' }}>
+                  <Typography variant={downMD ? 'h3' : 'h2'} sx={{ color: 'error.main' }}>
                     Login or Password fail
                   </Typography>
                 </Stack>

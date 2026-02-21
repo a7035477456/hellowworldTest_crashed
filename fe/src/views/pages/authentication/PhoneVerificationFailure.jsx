@@ -37,7 +37,7 @@ export default function PhoneVerificationFailure() {
                   </Link>
                 </Box>
                 <Stack sx={{ alignItems: 'center', justifyContent: 'center', gap: 1 }}>
-                  <Typography variant={downMD ? 'h4' : 'h3'} sx={{ color: 'error.main', fontFamily: 'Comic Sans MS', textAlign: 'center' }}>
+                  <Typography variant={downMD ? 'h4' : 'h3'} sx={{ color: 'error.main', textAlign: 'center' }}>
                     The phone verification code is incorrect. Please try register again.
                   </Typography>
                 </Stack>

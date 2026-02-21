@@ -23,7 +23,7 @@ import SubCard from 'ui-component/cards/SubCard';
 import { gridSpacing } from 'store/constant';
 
 // assets
-import { IconSearch, IconChevronRight } from '@tabler/icons-react';
+import { IconSearch, IconChevronRight, IconAdjustmentsHorizontal } from '@tabler/icons-react';
 import UserRound from 'assets/images/users/profile.jpeg';
 
 //import { useGetAllSingles } from 'api/allSinglesFe';
@@ -62,26 +62,12 @@ export default function AllSingles() {
       title={
         <Typography
           sx={{
-            fontFamily: 'Comic Sans MS',
-            fontSize: downSM ? '1.125rem' : '1.5rem'
+            fontSize: downSM ? '1.125rem' : '1.5rem',
+            color: '#56367C'
           }}
         >
           All Singles
         </Typography>
-      }
-      secondary={
-        <OutlinedInput
-          id="input-search-cards"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search"
-          startAdornment={
-            <InputAdornment position="start">
-              <IconSearch stroke={1.5} size="16px" />
-            </InputAdornment>
-          }
-          sx={{ width: { xs: '100%', sm: 250 } }}
-        />
       }
     >
       {/* Instructional Message */}
@@ -101,6 +87,41 @@ export default function AllSingles() {
       >
         When you Mark Interested someone, you then can visit the "Interested" page and request vetted information to learn more about them.
       </Alert>
+
+      {/* Search bar */}
+      <OutlinedInput
+        id="input-search-cards"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="Search"
+        startAdornment={
+          <InputAdornment position="start">
+            <IconSearch stroke={1.5} size="16px" />
+          </InputAdornment>
+        }
+        endAdornment={
+          <InputAdornment position="end">
+            <Avatar
+              variant="rounded"
+              sx={{
+                ...theme.typography.commonAvatar,
+                ...theme.typography.mediumAvatar,
+                color: theme.vars.palette.secondary.dark,
+                background: theme.vars.palette.secondary.light,
+                '&:hover': {
+                  color: theme.vars.palette.secondary.light,
+                  background: theme.vars.palette.secondary.dark
+                }
+              }}
+            >
+              <IconAdjustmentsHorizontal stroke={1.5} size="20px" />
+            </Avatar>
+          </InputAdornment>
+        }
+        aria-describedby="search-helper-text"
+        slotProps={{ input: { 'aria-label': 'Search singles', sx: { bgcolor: 'transparent', pl: 0.5 } } }}
+        sx={{ width: '100%', mb: downSM ? 2 : 3, px: 2 }}
+      />
 
       {/* Singles Discovery Search Block */}
       <SubCard
