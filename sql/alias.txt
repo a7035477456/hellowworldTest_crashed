@@ -1,0 +1,4 @@
+#### pg_dump #####
+alias backupEntireVsinglesSchema='pg_dump   -U postgres   -h 127.0.0.1   -p 50010   -n public   -f vsingles_entireSchema_backup_feb20.sql   vsingles'
+alias restorebigbackup='psql   -U postgres   -h 127.0.0.1   -p 50010   -d vsingles   -f big_singles_backup.sql'
+###############
