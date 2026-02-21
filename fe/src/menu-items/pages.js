@@ -1,10 +1,10 @@
 // assets
-import { IconKey, IconTypography } from '@tabler/icons-react';
+import { IconKey } from '@tabler/icons-react';
+import checkMenuImg from 'assets/images/checkMenu.jpg';
 
 // constant
 const icons = {
-  IconKey,
-  IconTypography
+  IconKey
 };
 
 // ==============================|| AUTHENTICATION MENU ITEMS ||============================== //
@@ -41,10 +41,10 @@ const pages = {
       title: 'My Vetting Info',
       type: 'item',
       url: '/verifyself',
-      icon: icons.IconTypography,
+      iconSrc: checkMenuImg,
       breadcrumbs: false,
       customStyle: {
-        fontFamily: "'Snell Roundhand', 'Snell Roundhand Script', cursive",
+        fontFamily: 'Comic Sans MS',
         color: '#744DBC',
         fontWeight: 600
       }
@@ -54,10 +54,10 @@ const pages = {
       title: 'Others Request About Me',
       type: 'item',
       url: '/dashboard/request-about-me',
-      icon: icons.IconTypography,
+      iconSrc: checkMenuImg,
       breadcrumbs: false,
       customStyle: {
-        fontFamily: "'Snell Roundhand', 'Snell Roundhand Script', cursive",
+        fontFamily: 'Comic Sans MS',
         color: '#744DBC',
         fontWeight: 600
       }
@@ -67,10 +67,10 @@ const pages = {
       title: "Request I've Sent",
       type: 'item',
       url: '/dashboard/request-ive-sent',
-      icon: icons.IconTypography,
+      iconSrc: checkMenuImg,
       breadcrumbs: false,
       customStyle: {
-        fontFamily: "'Snell Roundhand', 'Snell Roundhand Script', cursive",
+        fontFamily: 'Comic Sans MS',
         color: '#744DBC',
         fontWeight: 600
       }

@@ -21,7 +21,7 @@ const utilities = {
       icon: icons.IconTypography,
       breadcrumbs: false,
       customStyle: {
-        fontFamily: "'Snell Roundhand', 'Snell Roundhand Script', cursive",
+        fontFamily: 'Comic Sans MS',
         color: '#744DBC',
         fontWeight: 600
       }
@@ -34,7 +34,7 @@ const utilities = {
       icon: icons.IconTypography,
       breadcrumbs: false,
       customStyle: {
-        fontFamily: "'Snell Roundhand', 'Snell Roundhand Script', cursive",
+        fontFamily: 'Comic Sans MS',
         color: '#744DBC',
         fontWeight: 600
       }
@@ -47,7 +47,7 @@ const utilities = {
       icon: icons.IconTypography,
       breadcrumbs: false,
       customStyle: {
-        fontFamily: "'Snell Roundhand', 'Snell Roundhand Script', cursive",
+        fontFamily: 'Comic Sans MS',
         color: '#744DBC',
         fontWeight: 600
       }

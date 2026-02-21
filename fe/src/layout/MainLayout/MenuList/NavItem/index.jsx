@@ -13,6 +13,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 // project imports
 import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
@@ -49,8 +50,16 @@ export default function NavItem({ item, level, isParents = false, setSelectedID 
     window.removeEventListener('resize', compareSize);
   }, []);
 
+  const iconSize = drawerOpen ? 20 : 24;
   const Icon = item?.icon;
-  const itemIcon = item?.icon ? (
+  const itemIcon = item?.iconSrc ? (
+    <Box
+      component="img"
+      src={item.iconSrc}
+      alt=""
+      sx={{ width: iconSize, height: iconSize, objectFit: 'contain' }}
+    />
+  ) : item?.icon ? (
     <Icon stroke={1.5} size={drawerOpen ? '20px' : '24px'} style={{ ...(isParents && { fontSize: 20, stroke: '1.5' }) }} />
   ) : (
     <FiberManualRecordIcon sx={{ width: isSelected ? 8 : 6, height: isSelected ? 8 : 6 }} fontSize={level > 0 ? 'inherit' : 'medium'} />
