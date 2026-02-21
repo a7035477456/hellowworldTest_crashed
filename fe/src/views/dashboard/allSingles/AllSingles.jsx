@@ -284,6 +284,7 @@ export default function AllSingles() {
                   height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
+                  backgroundColor: '#BB96F2',
                   '&:hover': {
                     boxShadow: 6
                   }
