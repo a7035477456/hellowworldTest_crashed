@@ -46,9 +46,10 @@ function Sidebar() {
           p: 0,
           borderRadius: 1.5,
           overflow: 'hidden',
+          transform: 'translate(-2px, -2px)',
           transition: 'transform 0.12s ease, box-shadow 0.12s ease',
           '&:hover': { opacity: 0.9 },
-          '&:active': { transform: 'translateY(1px)' }
+          '&:active': { transform: 'translate(-2px, -1px)' }
         }}
       >
         <Box
