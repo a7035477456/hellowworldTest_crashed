@@ -7,7 +7,7 @@ export async function getSinglesInterested(req, res) {
       FROM public.requests r
       JOIN public.singles s ON r.singles_id_to = s.singles_id
       WHERE r.interested = true
-      ORDER BY s.lastLoginTime DESC
+      ORDER BY s.created_at DESC
     `);
 
     const processedRows = result.rows.map((row) => {

@@ -6,7 +6,7 @@ export async function getVettedSingles(req, res) {
       `SELECT s.singles_id, s.profile_image_url, s.vetted_status
        FROM public.singles s
        WHERE s.vetted_status = true
-       ORDER BY s.lastLoginTime DESC`
+       ORDER BY s.created_at DESC`
     );
     res.json(result.rows);
   } catch (error) {

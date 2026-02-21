@@ -183,7 +183,7 @@ export const getAllSingles_BBBBBBBB = async (req, res) => {
         singles_id, 
         profile_image_url
       FROM public.singles s 
-      ORDER BY s.lastLoginTime desc`
+      ORDER BY s.created_at DESC`
     );
 
     res.json(result.rows);
@@ -202,7 +202,7 @@ export const getVettedSingles_CCCCCCCC = async (req, res) => {
         s.vetted_status
       FROM public.singles s
       WHERE (s.vetted_status=true)
-      ORDER BY s.lastLoginTime DESC`
+      ORDER BY s.created_at DESC`
     );
 
     res.json(result.rows);
@@ -226,7 +226,7 @@ export const getSinglesInterested_DDDDDDD = async (req, res) => {
         FROM public.requests r
                JOIN public.singles s ON r.singles_id_to = s.singles_id
         WHERE r.interested = true 
-        ORDER BY s.lastLoginTime DESC;
+        ORDER BY s.created_at DESC;
       `);
     } catch (fieldError) {
       console.error('Error fetching singles:', error);
