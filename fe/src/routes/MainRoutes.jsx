@@ -6,10 +6,10 @@ import Loadable from 'ui-component/Loadable';
 import AllSingles from '../views/dashboard/allSingles/AllSingles';
 import VettedSingles from '../views/dashboard/vettedSingles/VettedSingles';
 import InterestedSingles from '../views/dashboard/interested/InterestedSingles';
+import UnderConstruction from '../views/dashboard/underConstruction/UnderConstruction';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/default/defaultIndex')));
-// const AllSingles = Loadable(lazy(() => import('views/dashboard/allSingles/allSinglesIndex')));
 // utilities routing
 const VerifySelf = Loadable(lazy(() => import('views/utilities/VerifySelf')));
 const RequestsAboutMe = Loadable(lazy(() => import('views/utilities/requestsAboutMeIndex')));
@@ -43,15 +43,15 @@ const MainRoutes = {
         {
           path: 'interestedSingles',
           element: <InterestedSingles />
+        },
+        {
+          path: 'request-about-me',
+          element: <UnderConstruction />
+        },
+        {
+          path: 'request-ive-sent',
+          element: <UnderConstruction />
         }
-        // {
-        //   path: 'request-about-me',
-        //   element: <RequestAboutMe />
-        // },
-        // {
-        //   path: 'request-ive-sent',
-        //   element: <RequestIveSent />
-        // }
       ]
     },
     {
