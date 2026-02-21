@@ -63,7 +63,7 @@ export default function AllSingles() {
         <Typography
           sx={{
             fontSize: downSM ? '1.125rem' : '1.5rem',
-            color: '#56367C'
+            color: '#754DBC'
           }}
         >
           All Singles

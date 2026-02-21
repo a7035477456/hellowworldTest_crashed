@@ -293,7 +293,7 @@ export default function VerifySelf() {
 
   return (
     <>
-      <MainCard title={<Typography sx={{ fontSize: '1.5rem', color: '#56367C' }}>Verify Your Information</Typography>}>
+      <MainCard title={<Typography sx={{ fontSize: '1.5rem', color: '#754DBC' }}>Verify Your Information</Typography>}>
         <Grid container spacing={gridSpacing}>
           <Grid size={12}>
             <Alert severity="info" sx={{ mb: 2 }}>

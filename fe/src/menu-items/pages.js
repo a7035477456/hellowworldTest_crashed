@@ -11,12 +11,12 @@ const icons = {
 
 const pages = {
   id: 'authentication',
-  title: 'Authentication',
+  title: 'Vetting',
   type: 'group',
   children: [
     // {
     //   id: 'authentication',
-    //   title: 'Authentication',
+    //   title: 'Vetting',
     //   type: 'collapse',
     //   icon: icons.IconKey,
     //   children: [

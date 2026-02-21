@@ -86,11 +86,18 @@ export default function NavItem({ item, level, isParents = false, setSelectedID 
           ...(downSM && drawerOpen && { py: 0.25, minHeight: 'auto' }),
           ...((!drawerOpen || level !== 1) && {
             py: level === 1 ? 0 : 1,
-            '&:hover': { bgcolor: 'transparent' },
+            '&:hover': { bgcolor: isSelected ? '#e8f0fe' : 'transparent' },
             '&.Mui-selected': {
-              '&:hover': { bgcolor: 'transparent' },
+              '&:hover': { bgcolor: '#e8f0fe' },
               bgcolor: 'transparent'
             }
+          }),
+          // Gemini-style selected: dark blue text on light blue background
+          ...(isSelected && {
+            bgcolor: '#e8f0fe',
+            color: '#1967d2',
+            '&:hover': { bgcolor: '#e8f0fe' },
+            '& .MuiListItemIcon-root': { color: '#1967d2' }
           })
         }}
         selected={isSelected}
@@ -100,7 +107,7 @@ export default function NavItem({ item, level, isParents = false, setSelectedID 
           <ListItemIcon
             sx={{
               minWidth: downSM && drawerOpen ? (level === 1 ? 28 : 14) : level === 1 ? 36 : 18,
-              color: isSelected ? 'secondary.main' : 'text.primary',
+              color: isSelected ? '#1967d2' : 'text.primary',
               ...(!drawerOpen &&
                 level === 1 && {
                   borderRadius: `${borderRadius}px`,
@@ -108,10 +115,10 @@ export default function NavItem({ item, level, isParents = false, setSelectedID 
                   height: 46,
                   alignItems: 'center',
                   justifyContent: 'center',
-                  '&:hover': { bgcolor: 'secondary.light' },
+                  '&:hover': { bgcolor: isSelected ? '#e8f0fe' : 'secondary.light' },
                   ...(isSelected && {
-                    bgcolor: 'secondary.light',
-                    '&:hover': { bgcolor: 'secondary.light' }
+                    bgcolor: '#e8f0fe',
+                    '&:hover': { bgcolor: '#e8f0fe' }
                   })
                 })
             }}
@@ -133,7 +140,8 @@ export default function NavItem({ item, level, isParents = false, setSelectedID 
                     textOverflow: 'ellipsis',
                     maxWidth: '100%',
                     color: 'inherit',
-                    ...(item.customStyle && item.customStyle)
+                    ...(item.customStyle && item.customStyle),
+                    ...(isSelected && { color: '#1967d2', fontWeight: 500 })
                   }}
                 >
                   {item.title}

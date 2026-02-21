@@ -4,7 +4,6 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 
 // project imports
@@ -17,7 +16,9 @@ import { drawerWidth, drawerWidthMobile } from 'store/constant';
 import SimpleBar from 'ui-component/third-party/SimpleBar';
 
 import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
-import { IconMenu2 } from '@tabler/icons-react';
+
+import closemenuImg from 'assets/images/closemenu.jpg';
+import openmenuImg from 'assets/images/openmenu.jpg';
 
 // ==============================|| SIDEBAR DRAWER ||============================== //
 
@@ -39,39 +40,31 @@ function Sidebar() {
         aria-label={drawerOpen ? 'Close menu' : 'Open menu'}
         onClick={() => handlerDrawerOpen(!drawerOpen)}
         sx={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 1,
+          display: 'block',
           width: '100%',
-          justifyContent: drawerOpen ? 'flex-start' : 'center',
-          px: drawerOpen ? 2 : 1,
-          py: 1.25,
           m: '2px 6px',
+          p: 0,
           borderRadius: 1.5,
-          color: '#fff',
-          bgcolor: '#279FF3',
-          border: '1px solid',
-          borderColor: 'rgba(0,0,0,0.1)',
-          boxShadow: '0 2px 0 0 rgba(0,0,0,0.08), 0 3px 4px 0 rgba(0,0,0,0.06)',
+          overflow: 'hidden',
           transition: 'transform 0.12s ease, box-shadow 0.12s ease',
-          '&:hover': {
-            bgcolor: '#1e8ad9'
-          },
-          '&:active': {
-            transform: 'translateY(2px)',
-            boxShadow: '0 0 0 0 rgba(0,0,0,0.08), 0 1px 2px 0 rgba(0,0,0,0.06)'
-          }
+          '&:hover': { opacity: 0.9 },
+          '&:active': { transform: 'translateY(1px)' }
         }}
       >
-        <IconMenu2 stroke={1.5} size={20} />
-        {drawerOpen && (
-          <Typography variant="body2" component="span">
-            Close menu
-          </Typography>
-        )}
+        <Box
+          component="img"
+          src={drawerOpen ? closemenuImg : openmenuImg}
+          alt={drawerOpen ? 'Close menu' : 'Open menu'}
+          sx={{
+            display: 'block',
+            width: '100%',
+            height: 'auto',
+            verticalAlign: 'middle'
+          }}
+        />
       </ButtonBase>
     ),
-    [drawerOpen, theme]
+    [drawerOpen]
   );
 
   const logo = useMemo(
