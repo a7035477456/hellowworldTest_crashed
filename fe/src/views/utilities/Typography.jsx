@@ -86,13 +86,13 @@ export default function Typography() {
               <MuiTypography
                 variant="body2"
                 component={Link}
-                href="https://berrydashboard.com"
+                href="https://vsingles.club"
                 target="_blank"
                 underline="hover"
                 gutterBottom
                 sx={{ display: 'block', color: 'primary.main' }}
               >
-                https://berrydashboard.com
+                https://vsingles.club
               </MuiTypography>
             </Stack>
           </SubCard>

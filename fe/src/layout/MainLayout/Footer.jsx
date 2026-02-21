@@ -9,11 +9,8 @@ export default function Footer() {
       <Typography variant="caption">
         &copy; All rights reserved{' '}
         <Typography component={Link} href="https://vsingles.club" underline="hover" target="_blank" sx={{ color: 'secondary.main' }}>
-          CodedThemes
+          vsingles.club
         </Typography>
-      </Typography>
-      <Typography variant="caption" color="text.secondary">
-        GitHub Figma UI Kit
       </Typography>
     </Stack>
   );
