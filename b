@@ -590,9 +590,16 @@ alias cleancompileresetrunbeprod='beclean;cdsavedir && cd ./be && npm i && pm2 k
 
 #----- USE THIS----
 alias testpg='netstat -an | grep LISTEN | grep 50010'
+# Mac: netstat output can differ; lsof is reliable for port-in-use check
+alias testpgmac='lsof -i :50010 >/dev/null 2>&1'
 
 check_pg() {
-    if testpg > /dev/null 2>&1; then
+    if [ "$(uname)" = "Darwin" ]; then
+        testpgmac
+    else
+        testpg > /dev/null 2>&1
+    fi
+    if [ $? -eq 0 ]; then
         echo "✅ Postgres is active. Proceeding..."
         return 0
     else
@@ -607,7 +614,8 @@ alias bedev='check_pg && (savedir; realenv; pm2 flush; cleancompileresetrunbedev
 alias febeprod='check_pg && (savedir; realenv; pm2 flush; cleancompilebuildfeprod;cleancompileresetrunbeprod)'
 alias runprod='check_pg && (savedir; realenv; pm2 flush; pm2 kill && rm -rf ~/.pm2 && pm2 list && npm run pm2:start && pm2 save)'
 
-alias febemac='check_pg && (savedir;realenv; pm2 flush; feclean && npm i && npm run build && ls ./dist && beclean && cp ~/.ssh/.env . && npm i && kill40000; cdsavedir && cd ./be && pm2 kill && rm -rf ~/.pm2 && pm2 list && npm run pm2:start && pm2 save && openurl)'
+# Mac: build fe from fe dir (feclean uses sudo and can hang; we build explicitly), use build:mac for local API URL, copy env from ~/.ssh/be/.env
+alias febemac='check_pg && (savedir; realenv; pm2 flush; cdsavedir && cd ./fe && npm i && npm run build:mac && ls ./dist && cdsavedir && cd ./be && (test -f ~/.ssh/be/.env && cp ~/.ssh/be/.env . || true) && rm -rf node_modules package-lock.json && npm i && kill40000 && pm2 kill && rm -rf ~/.pm2 && pm2 list && npm run pm2:start && pm2 save && openurl)'
 
 #========= PROD ============
 alias cleancompilebuildfeprod='feclean;cdsavedir && cd ./fe && npm i && npm run buildprod'
