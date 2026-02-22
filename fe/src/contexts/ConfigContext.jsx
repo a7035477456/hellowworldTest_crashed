@@ -14,7 +14,7 @@ export const ConfigContext = createContext(undefined);
 export function ConfigProvider({ children }) {
   const { state, setState, setField, resetState } = useLocalStorage('vsingles-config-vite-js', config);
 
-  // Force site-wide font to Comic Sans MS (font size and color remain per-component)
+  // Force site-wide font to Comic Neue from Google Fonts (works on Android/iOS)
   const stateWithFont = useMemo(() => ({ ...state, fontFamily: config.fontFamily }), [state]);
 
   const memoizedValue = useMemo(() => ({ state: stateWithFont, setState, setField, resetState }), [stateWithFont, setField, setState, resetState]);

@@ -42,7 +42,8 @@ export default defineConfig(({ mode }) => {
         '@tabler/icons-react': '@tabler/icons-react/dist/esm/icons/index.mjs'
       }
     },
-    base: '/',
+    // Use relative base for Capacitor Android build (file:// loading)
+    base: process.env.CAPACITOR_BUILD === 'true' ? './' : '/',
     plugins: [react(), jsconfigPaths()]
   };
 });

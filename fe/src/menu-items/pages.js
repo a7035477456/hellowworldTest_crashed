@@ -1,6 +1,6 @@
 // assets
 import { IconKey } from '@tabler/icons-react';
-import checkMenuImg from 'assets/images/checkMenu.jpg';
+import checkMenuImg from 'assets/images/checkMenu.png';
 
 // constant
 const icons = {
@@ -44,7 +44,7 @@ const pages = {
       iconSrc: checkMenuImg,
       breadcrumbs: false,
       customStyle: {
-        fontFamily: 'Comic Sans MS',
+        fontFamily: "'Comic Neue', cursive",
         color: '#744DBC',
         fontWeight: 600
       }
@@ -57,7 +57,7 @@ const pages = {
       iconSrc: checkMenuImg,
       breadcrumbs: false,
       customStyle: {
-        fontFamily: 'Comic Sans MS',
+        fontFamily: "'Comic Neue', cursive",
         color: '#744DBC',
         fontWeight: 600
       }
@@ -70,7 +70,7 @@ const pages = {
       iconSrc: checkMenuImg,
       breadcrumbs: false,
       customStyle: {
-        fontFamily: 'Comic Sans MS',
+        fontFamily: "'Comic Neue', cursive",
         color: '#744DBC',
         fontWeight: 600
       }

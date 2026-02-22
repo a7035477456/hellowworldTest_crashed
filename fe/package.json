@@ -12,6 +12,10 @@
     "obfuscate": "javascript-obfuscator dist/assets --output dist/assets --compact true --self-defending true",
     "build:ubuntu": "VITE_API_BASE_URL=https://vsingles.club vite build",
     "preview": "vite preview",
+    "build:android": "CAPACITOR_BUILD=true vite build",
+    "cap:sync": "cap sync android",
+    "cap:open": "cap open android",
+    "android": "yarn build:android && cap sync android && cap open android",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
     "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
@@ -64,6 +68,9 @@
     ]
   },
   "devDependencies": {
+    "@capacitor/android": "6.0.1",
+    "@capacitor/cli": "6.0.1",
+    "@capacitor/core": "6.0.1",
     "javascript-obfuscator": "4.1.1",
     "@eslint/compat": "2.0.0",
     "@eslint/eslintrc": "3.3.3",

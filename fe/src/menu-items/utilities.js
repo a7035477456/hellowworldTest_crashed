@@ -21,7 +21,7 @@ const utilities = {
       icon: icons.IconTypography,
       breadcrumbs: false,
       customStyle: {
-        fontFamily: 'Comic Sans MS',
+        fontFamily: "'Comic Neue', cursive",
         color: '#744DBC',
         fontWeight: 600
       }
@@ -34,7 +34,7 @@ const utilities = {
       icon: icons.IconTypography,
       breadcrumbs: false,
       customStyle: {
-        fontFamily: 'Comic Sans MS',
+        fontFamily: "'Comic Neue', cursive",
         color: '#744DBC',
         fontWeight: 600
       }
@@ -47,7 +47,7 @@ const utilities = {
       icon: icons.IconTypography,
       breadcrumbs: false,
       customStyle: {
-        fontFamily: 'Comic Sans MS',
+        fontFamily: "'Comic Neue', cursive",
         color: '#744DBC',
         fontWeight: 600
       }

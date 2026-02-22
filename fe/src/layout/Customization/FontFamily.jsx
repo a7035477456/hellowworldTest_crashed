@@ -24,6 +24,11 @@ export default function FontFamilyPage() {
 
   const fonts = [
     {
+      id: 'comicNeue',
+      value: `'Comic Neue', cursive`,
+      label: 'Comic Neue'
+    },
+    {
       id: 'comicSans',
       value: `'Comic Sans MS', cursive`,
       label: 'Comic Sans MS'
