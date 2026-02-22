@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 import os from 'os';
 import pool from './db/connection.js';
 import {
@@ -88,15 +89,22 @@ app.get('/api/requestedSingles', getSinglesRequest_EEEEEEEE);
 app.get('/api/photo/:id', getPhoto);
 
 // Serve built frontend (fe/dist) – run fe build first (febedev/febeprod).
+const feDistPath = path.join(__dirname, '../fe/dist');
+const feIndexPath = path.join(feDistPath, 'index.html');
+if (!fs.existsSync(feIndexPath)) {
+  console.error('FATAL: Frontend not built. Missing: ' + feIndexPath);
+  console.error('On Mac run: febemac (or in fe/: npm run build). On Ubuntu run: febeprod (or in fe/: npm run buildprod).');
+  process.exit(1);
+}
 // On Ubuntu: ensure both vsingles.club and www.vsingles.club route to this app so /assets/* (e.g. Login-*.js) are served.
-app.use(express.static(path.join(__dirname, '../fe/dist'), { index: false }));
+app.use(express.static(feDistPath, { index: false }));
 
 // SPA: all other GET routes serve index.html (no-cache so registration/auth get fresh code)
 app.get('*', (req, res) => {
   res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   res.set('Pragma', 'no-cache');
   res.set('Expires', '0');
-  res.sendFile(path.join(__dirname, '../fe/dist/index.html'));
+  res.sendFile(feIndexPath);
 });
 
 // Error handling middleware
