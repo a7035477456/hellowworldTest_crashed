@@ -10,14 +10,15 @@ const MainContentStyled = styled('main', {
   shouldForwardProp: (prop) => prop !== 'open' && prop !== 'borderRadius'
 })(({ theme, open, borderRadius }) => ({
   backgroundColor: '#EDE7F6',
-  minWidth: '1%',
-  width: '95%',
+  minWidth: 0,
+  width: '100%',
   maxWidth: '100%',
   minHeight: 'calc(100vh - 88px)',
   flexGrow: 1,
+  flexShrink: 1,
   padding: 20,
   marginTop: 88,
-  marginRight: '5%',
+  marginRight: 0,
   boxSizing: 'border-box',
   borderRadius: `${borderRadius}px`,
   borderBottomLeftRadius: 0,
@@ -29,7 +30,7 @@ const MainContentStyled = styled('main', {
     }),
     [theme.breakpoints.up('md')]: {
       marginLeft: -(drawerWidth - 72),
-      width: '95%',
+      width: '100%',
       marginTop: 88
     }
   }),
@@ -40,7 +41,7 @@ const MainContentStyled = styled('main', {
     }),
     marginLeft: 0,
     marginTop: 88,
-    width: '95%',
+    width: '100%',
     [theme.breakpoints.up('md')]: {
       marginTop: 88
     }
@@ -49,16 +50,16 @@ const MainContentStyled = styled('main', {
     marginLeft: 20,
     padding: 16,
     marginTop: 88,
-    marginRight: '5%',
-    width: '95%',
+    marginRight: 0,
+    width: '100%',
     ...(!open && {
-      width: '95%'
+      width: '100%'
     })
   },
   [theme.breakpoints.down('sm')]: {
     marginLeft: 10,
-    marginRight: '5%',
-    width: '95%'
+    marginRight: 0,
+    width: '100%'
   }
 }));
 
