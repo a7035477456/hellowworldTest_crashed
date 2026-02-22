@@ -65,5 +65,5 @@ The app loads the same JavaScript as the web build. To point the app at your API
 
 ## App ID
 
-- **App ID (package):** `club.vsingles.app` (set in `capacitor.config.mjs` as `appId`).
-- To change it, edit `appId` in `capacitor.config.mjs`, then run `yarn cap:sync` and update the package name in Android Studio if needed.
+- **App ID (package):** `club.vsingles.app` (set in `capacitor.config.json` as `appId`).
+- To change it, edit `appId` in `capacitor.config.json`, then run `yarn cap:sync` and update the package name in Android Studio if needed.

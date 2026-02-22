@@ -1,0 +1,8 @@
+{
+  "appId": "club.vsingles.app",
+  "appName": "VSingles",
+  "webDir": "dist",
+  "android": {
+    "allowMixedContent": true
+  }
+}
