@@ -978,10 +978,10 @@ check_pg() {
 # Refactored febedev
 alias febedev='check_pg && (savedir; realenv;pm2 flush; cleancompilebuildfedev; cleancompileresetrunbedev)'
 alias bedev='check_pg && (savedir; realenv; pm2 flush; cleancompileresetrunbedev)'
-alias febeprod='check_pg && (savedir; realenv; pm2 flush; cleancompilebuildfeprod;cleancompileresetrunbeprod)'
+alias febeprod='check_pg && (savedir; realenv; pm2 flush; cleancompilebuildfeprod && cleancompileresetrunbeprod)'
 alias runprod='check_pg && (savedir; realenv; pm2 flush; pm2 kill && rm -rf ~/.pm2 && pm2 list && cd ./be && npm run pm2:start && pm2 save)'
 
-alias febemac='check_pg && (savedir; realenv; pm2 flush;cleancompilebuildfemac;cleancompileresetrunbemac)'
+alias febemac='check_pg && (savedir; realenv; pm2 flush; cleancompilebuildfemac && cleancompileresetrunbemac)'
 
 ######## BUILD THE END ###########################################################################################
 ######## BUILD THE END ###########################################################################################
