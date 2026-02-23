@@ -6,8 +6,8 @@ import Stack from '@mui/material/Stack';
 // project imports
 import useConfig from 'hooks/useConfig';
 
-// Top margin from viewport (red-arrow spacing); stays this size at any zoom (scale compensates)
-const TOP_MARGIN_SCREEN_PX = 24;
+// Top margin from viewport (blue-arrow spacing); stays this size at any zoom (scale compensates)
+const TOP_MARGIN_SCREEN_PX = 12;
 
 // ==============================|| AUTH INNER STACK - FIXED TOP MARGIN ||============================== //
 
