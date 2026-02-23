@@ -166,9 +166,17 @@ export default function AuthCreatePassword() {
       error.includes('10-digit') ||
       /already associated|different number|sign in/i.test(error));
 
+  const isCodeError =
+    !!error &&
+    (error.includes('code is invalid') ||
+      error.includes('invalid, expired, or already used') ||
+      error.includes('6-character') ||
+      error.includes('request a new registration email') ||
+      error.includes('Email does not match'));
+
   return (
     <form onSubmit={handleSubmit}>
-      {error && !isPhoneError && (
+      {error && !isPhoneError && !isCodeError && (
         <Typography variant="subtitle1" sx={{ color: 'error.main', fontWeight: 700, textAlign: 'center', mb: 2 }}>
           Error: {error}
         </Typography>
@@ -182,7 +190,12 @@ export default function AuthCreatePassword() {
           Enter the 6-character code we just email to you
         </Typography>
       </Box>
-      <CustomFormControl fullWidth sx={{ mb: 2 }}>
+      {isCodeError && (
+        <Typography variant="subtitle1" sx={{ color: 'error.main', fontWeight: 700, textAlign: 'center', mb: 1.5 }}>
+          Error: {error}
+        </Typography>
+      )}
+      <CustomFormControl fullWidth sx={{ mb: 2 }} error={isCodeError}>
         <InputLabel htmlFor="outlined-adornment-code">Registration Code</InputLabel>
         <OutlinedInput
           id="outlined-adornment-code"
