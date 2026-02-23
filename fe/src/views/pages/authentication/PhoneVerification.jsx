@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 // project imports
 import AuthWrapper1 from './AuthWrapper1';
 import AuthCardWrapper from './AuthCardWrapper';
+import AuthInnerStack from './AuthInnerStack';
 
 import Logo from 'ui-component/Logo';
 import AuthFooter from 'ui-component/cards/AuthFooter';
@@ -21,7 +22,7 @@ export default function PhoneVerification() {
   return (
     <AuthWrapper1>
       <Stack sx={{ justifyContent: 'flex-end', minHeight: '100vh' }}>
-        <Stack sx={{ justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 68px)' }}>
+        <AuthInnerStack>
           <Box sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>
             <AuthCardWrapper>
               <Stack sx={{ alignItems: 'center', justifyContent: 'center', gap: 2 }}>
@@ -41,7 +42,7 @@ export default function PhoneVerification() {
               </Stack>
             </AuthCardWrapper>
           </Box>
-        </Stack>
+        </AuthInnerStack>
         <Box sx={{ px: 3, my: 3 }}>
           <AuthFooter />
         </Box>

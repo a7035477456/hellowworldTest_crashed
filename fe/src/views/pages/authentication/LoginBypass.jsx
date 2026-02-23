@@ -7,6 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
 import AuthWrapper1 from './AuthWrapper1';
+import AuthInnerStack from './AuthInnerStack';
 import Logo from 'ui-component/Logo';
 import AuthFooter from 'ui-component/cards/AuthFooter';
 
@@ -80,7 +81,7 @@ export default function LoginBypass() {
   return (
     <AuthWrapper1>
       <Stack sx={{ justifyContent: 'flex-end', minHeight: '100vh' }}>
-        <Stack sx={{ justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 68px)' }}>
+        <AuthInnerStack>
           <Box sx={{ m: { xs: 1, sm: 3 }, mb: 0, textAlign: 'center' }}>
             <Logo />
             <Box sx={{ mt: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
@@ -90,7 +91,7 @@ export default function LoginBypass() {
               </Typography>
             </Box>
           </Box>
-        </Stack>
+        </AuthInnerStack>
         <Box sx={{ px: 3, my: 3 }}>
           <AuthFooter />
         </Box>

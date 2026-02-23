@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 // project imports
 import AuthWrapper1 from './AuthWrapper1';
 import AuthCardWrapper from './AuthCardWrapper';
+import AuthInnerStack from './AuthInnerStack';
 import Logo from 'ui-component/Logo';
 import AuthFooter from 'ui-component/cards/AuthFooter';
 
@@ -16,7 +17,7 @@ export default function AboutUs() {
   return (
     <AuthWrapper1>
       <Stack sx={{ justifyContent: 'flex-end', minHeight: '100vh' }}>
-        <Stack sx={{ justifyContent: 'center', alignItems: 'stretch', minHeight: 'calc(100vh - 68px)', py: { xs: 1, sm: 1.5 }, px: { xs: 2, sm: 3 } }}>
+        <AuthInnerStack sx={{ alignItems: 'stretch', py: { xs: 1, sm: 1.5 }, px: { xs: 2, sm: 3 } }}>
           <Box sx={{ width: '100%', maxWidth: 1200, mb: 0, mx: 'auto' }}>
             <AuthCardWrapper tight sx={{ width: '100%', maxWidth: '100%' }}>
               <Stack spacing={3} sx={{ alignItems: 'center', textAlign: 'left' }}>
@@ -56,7 +57,7 @@ export default function AboutUs() {
               </Stack>
             </AuthCardWrapper>
           </Box>
-        </Stack>
+        </AuthInnerStack>
         <Box sx={{ px: 2, my: 1.5 }}>
           <AuthFooter hideVettedSinglesText />
         </Box>
