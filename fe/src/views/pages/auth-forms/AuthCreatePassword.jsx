@@ -183,7 +183,7 @@ export default function AuthCreatePassword() {
       )}
 
       <Box sx={sectionHeaderSx}>
-        <Typography variant="h6" sx={{ color: 'white', fontWeight: 700, fontSize: '2.5rem' }}>
+        <Typography variant="h6" sx={{ color: 'white', fontWeight: 700, fontSize: '1.875rem' }}>
           Verify email code
         </Typography>
         <Typography variant="body2" sx={{ color: '#f3e5f5', mt: 0.5 }}>
@@ -196,7 +196,9 @@ export default function AuthCreatePassword() {
         </Typography>
       )}
       <CustomFormControl fullWidth sx={{ mb: 2 }} error={isCodeError}>
-        <InputLabel htmlFor="outlined-adornment-code">Registration Code</InputLabel>
+        <InputLabel htmlFor="outlined-adornment-code" sx={{ color: '#683AB7', '&.Mui-focused': { color: '#683AB7' }, '&.MuiInputLabel-shrink': { color: '#683AB7' } }}>
+          Registration Code
+        </InputLabel>
         <OutlinedInput
           id="outlined-adornment-code"
           type="text"
@@ -206,11 +208,16 @@ export default function AuthCreatePassword() {
           placeholder="e.g. AB12CD"
           inputProps={{ maxLength: 6, style: { textTransform: 'uppercase', letterSpacing: 2 } }}
           required
+          sx={{
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7' },
+            '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7' },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7', borderWidth: 2 }
+          }}
         />
       </CustomFormControl>
 
       <Box sx={{ ...sectionHeaderSx, mt: 3 }}>
-        <Typography variant="h6" sx={{ color: 'white', fontWeight: 700, fontSize: '2.5rem' }}>
+        <Typography variant="h6" sx={{ color: 'white', fontWeight: 700, fontSize: '1.875rem' }}>
           Create password
         </Typography>
         <Typography variant="body2" sx={{ color: '#f3e5f5', mt: 0.5 }}>
@@ -219,7 +226,9 @@ export default function AuthCreatePassword() {
       </Box>
 
       <CustomFormControl fullWidth>
-        <InputLabel htmlFor="outlined-adornment-email-create">Email Address</InputLabel>
+        <InputLabel htmlFor="outlined-adornment-email-create" sx={{ color: '#683AB7', '&.Mui-focused': { color: '#683AB7' }, '&.MuiInputLabel-shrink': { color: '#683AB7' } }}>
+          Email Address
+        </InputLabel>
         <OutlinedInput
           id="outlined-adornment-email-create"
           type="email"
@@ -229,13 +238,20 @@ export default function AuthCreatePassword() {
           disabled
           inputProps={{ readOnly: true }}
           required
+          sx={{
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7' },
+            '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7' },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7', borderWidth: 2 }
+          }}
         />
       </CustomFormControl>
 
       <CustomFormControl fullWidth>
-        <InputLabel htmlFor="outlined-adornment-password-create">Password</InputLabel>
-        <OutlinedInput 
-          id="outlined-adornment-password-create" 
+        <InputLabel htmlFor="outlined-adornment-password-create" sx={{ color: '#683AB7', '&.Mui-focused': { color: '#683AB7' }, '&.MuiInputLabel-shrink': { color: '#683AB7' } }}>
+          Password
+        </InputLabel>
+        <OutlinedInput
+          id="outlined-adornment-password-create"
           type={showPassword ? 'text' : 'password'}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -255,6 +271,11 @@ export default function AuthCreatePassword() {
             </InputAdornment>
           }
           label="Password"
+          sx={{
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7' },
+            '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7' },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7', borderWidth: 2 }
+          }}
         />
         <Typography variant="caption" sx={{ mt: 0.5, color: 'text.secondary' }}>
           Password strength: {Math.round(([pwRequirement_8Chars, pwRequirement_smallLetter, pwRequirement_capitalLetter, pwRequirement_numberOrSymbol].filter(Boolean).length / 4) * 100)}%
@@ -282,9 +303,11 @@ export default function AuthCreatePassword() {
       </CustomFormControl>
 
       <CustomFormControl fullWidth>
-        <InputLabel htmlFor="outlined-adornment-password-confirm">Confirm Password</InputLabel>
-        <OutlinedInput 
-          id="outlined-adornment-password-confirm" 
+        <InputLabel htmlFor="outlined-adornment-password-confirm" sx={{ color: '#683AB7', '&.Mui-focused': { color: '#683AB7' }, '&.MuiInputLabel-shrink': { color: '#683AB7' } }}>
+          Confirm Password
+        </InputLabel>
+        <OutlinedInput
+          id="outlined-adornment-password-confirm"
           type={showConfirmPassword ? 'text' : 'password'}
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
@@ -304,6 +327,11 @@ export default function AuthCreatePassword() {
             </InputAdornment>
           }
           label="Confirm Password"
+          sx={{
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7' },
+            '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7' },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7', borderWidth: 2 }
+          }}
         />
         {confirmPassword && (
           <Stack direction="row" alignItems="center" gap={1} sx={{ mt: 0.5 }}>
@@ -323,18 +351,25 @@ export default function AuthCreatePassword() {
         </Typography>
       )}
       <CustomFormControl fullWidth error={isPhoneError}>
-        <InputLabel htmlFor="outlined-adornment-phone">Phone Number</InputLabel>
-        <OutlinedInput 
-          id="outlined-adornment-phone" 
+        <InputLabel htmlFor="outlined-adornment-phone" sx={{ color: '#683AB7', '&.Mui-focused': { color: '#683AB7' }, '&.MuiInputLabel-shrink': { color: '#683AB7' } }}>
+          Phone Number
+        </InputLabel>
+        <OutlinedInput
+          id="outlined-adornment-phone"
           type="tel"
           value={phone}
           onChange={handlePhoneChange}
           name="phone"
           placeholder="(100) 000-0000"
           required
+          sx={{
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7' },
+            '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7' },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7', borderWidth: 2 }
+          }}
         />
       </CustomFormControl>
-      <Typography variant="body2" sx={{ mt: 1, mb: 0, color: '#1976d2' }}>
+      <Typography variant="body2" sx={{ mt: 1, mb: 0, color: '#683AB7' }}>
         For your security, we limit one account per person per phone number and email. You can update your email address anytime in your account settings.
       </Typography>
 
@@ -348,11 +383,11 @@ export default function AuthCreatePassword() {
         />
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
         I agree to receive automated text messages from Vetted Singles for account security, identity verification, and service updates at the phone number provided. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Reply HELP for help or STOP to cancel.{' '}
-          <Typography component="a" href="/pages/privacyPolicy" target="_blank" rel="noopener noreferrer" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+          <Typography component="a" href="/pages/privacyPolicy" target="_blank" rel="noopener noreferrer" variant="body2" sx={{ color: '#683AB7', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
             Privacy Policy
           </Typography>
           {' and '}
-          <Typography component="a" href="/pages/termsAndConditions" target="_blank" rel="noopener noreferrer" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+          <Typography component="a" href="/pages/termsAndConditions" target="_blank" rel="noopener noreferrer" variant="body2" sx={{ color: '#683AB7', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
             Terms &amp; Conditions
           </Typography>
         </Typography>

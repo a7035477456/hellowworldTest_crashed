@@ -70,15 +70,22 @@ export default function AuthRegister() {
       </Stack> */}
 
       <CustomFormControl fullWidth>
-        <InputLabel htmlFor="outlined-adornment-email-register">Email Address</InputLabel>
-        <OutlinedInput 
-          id="outlined-adornment-email-register" 
-          type="email" 
+        <InputLabel htmlFor="outlined-adornment-email-register" sx={{ color: '#683AB7', '&.Mui-focused': { color: '#683AB7' }, '&.MuiInputLabel-shrink': { color: '#683AB7' } }}>
+          Email Address
+        </InputLabel>
+        <OutlinedInput
+          id="outlined-adornment-email-register"
+          type="email"
           value={email}
           onChange={handleEmailChange}
           name="email"
           required
           error={!!emailError}
+          sx={{
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7' },
+            '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7' },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#683AB7', borderWidth: 2 }
+          }}
         />
       </CustomFormControl>
       {emailError && (
@@ -86,7 +93,7 @@ export default function AuthRegister() {
           {emailError.startsWith('Error:') ? emailError : `Error: ${emailError}`}
         </Typography>
       )}
-      <Typography variant="body2" sx={{ mt: 1, mb: 0, color: '#1976d2' }}>
+      <Typography variant="body2" sx={{ mt: 1, mb: 0, color: '#683AB7' }}>
         For your security, we limit one account per person per phone number and email. You can update your email address anytime in your account settings.
       </Typography>
 
@@ -100,11 +107,11 @@ export default function AuthRegister() {
         />
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
         I agree to receive automated text messages from Vetted Singles for account security, identity verification, and service updates at the phone number provided. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. Reply HELP for help or STOP to cancel.{' '}
-          <Typography component="a" href="/pages/privacyPolicy" target="_blank" rel="noopener noreferrer" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+          <Typography component="a" href="/pages/privacyPolicy" target="_blank" rel="noopener noreferrer" variant="body2" sx={{ color: '#683AB7', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
             Privacy Policy
           </Typography>
           {' and '}
-          <Typography component="a" href="/pages/termsAndConditions" target="_blank" rel="noopener noreferrer" variant="body2" sx={{ color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+          <Typography component="a" href="/pages/termsAndConditions" target="_blank" rel="noopener noreferrer" variant="body2" sx={{ color: '#683AB7', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
             Terms &amp; Conditions
           </Typography>
         </Typography>
