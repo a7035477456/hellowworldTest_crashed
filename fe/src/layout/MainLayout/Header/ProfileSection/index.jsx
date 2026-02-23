@@ -92,6 +92,9 @@ export default function ProfileSection() {
           height: downSM ? '96px' : '48px',
           alignItems: 'center',
           borderRadius: downSM ? '54px' : '27px',
+          color: '#fff',
+          bgcolor: '#744DBC',
+          '&:hover': { bgcolor: '#744DBC', filter: 'brightness(1.1)' },
           '& .MuiChip-icon': downSM ? { width: 68, height: 68, margin: '14px 0 14px 14px !important' } : undefined
         }}
         icon={
@@ -114,7 +117,6 @@ export default function ProfileSection() {
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
-        color="primary"
         aria-label="user-account"
       />
       <Popper
