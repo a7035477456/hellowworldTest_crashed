@@ -46,10 +46,20 @@ function Sidebar() {
           p: 0,
           borderRadius: 1.5,
           overflow: 'hidden',
-          transform: 'translate(-2px, -2px)',
-          transition: 'transform 0.12s ease, box-shadow 0.12s ease',
-          '&:hover': { opacity: 0.9 },
-          '&:active': { transform: 'translate(-2px, -1px)' }
+          ...(drawerOpen
+            ? {
+                transform: 'translate(-2px, -2px)',
+                transition: 'transform 0.12s ease, box-shadow 0.12s ease',
+                '&:active': { transform: 'translate(-2px, -1px)' }
+              }
+            : {
+                transform: 'none',
+                mt: '6px',
+                mb: '2px',
+                transition: 'transform 0.12s ease',
+                '&:active': { transform: 'none' }
+              }),
+          '&:hover': { opacity: 0.9 }
         }}
       >
         <Box
@@ -60,7 +70,8 @@ function Sidebar() {
             display: 'block',
             width: '100%',
             height: 'auto',
-            verticalAlign: 'middle'
+            verticalAlign: 'middle',
+            ...(!drawerOpen && { objectFit: 'contain' })
           }}
         />
       </ButtonBase>
@@ -70,11 +81,11 @@ function Sidebar() {
 
   const logo = useMemo(
     () => (
-      <Box sx={{ display: 'flex', p: downSM ? 1 : 2 }}>
-        <LogoSection />
+      <Box sx={{ display: 'flex', alignItems: 'center', p: downSM ? 1 : 2, minWidth: 0 }}>
+        <LogoSection variant={drawerOpen ? 'full' : 'icon'} />
       </Box>
     ),
-    [downSM]
+    [downSM, drawerOpen]
   );
 
   const drawer = useMemo(() => {

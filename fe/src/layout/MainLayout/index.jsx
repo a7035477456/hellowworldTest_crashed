@@ -17,6 +17,9 @@ import Customization from '../Customization';
 import Loader from 'ui-component/Loader';
 import Breadcrumbs from 'ui-component/extended/Breadcrumbs';
 
+// assets
+import backgroundTop from 'assets/images/backgroundtop.png';
+
 import useConfig from 'hooks/useConfig';
 import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
 
@@ -57,8 +60,19 @@ export default function MainLayout() {
         })
       }}
     >
-      {/* header */}
-      <AppBar enableColorOnDark position="fixed" color="inherit" elevation={0} sx={{ bgcolor: 'background.default' }}>
+      {/* header - background only on this top portion */}
+      <AppBar
+        enableColorOnDark
+        position="fixed"
+        color="inherit"
+        elevation={0}
+        sx={{
+          backgroundImage: `url(${backgroundTop})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
         <Toolbar sx={{ p: 2 }}>
           <Header />
         </Toolbar>

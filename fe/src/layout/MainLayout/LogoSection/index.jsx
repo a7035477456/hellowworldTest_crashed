@@ -9,10 +9,13 @@ import Logo from 'ui-component/Logo';
 
 // ==============================|| MAIN LOGO ||============================== //
 
-export default function LogoSection() {
+/**
+ * @param {'full' | 'icon'} [variant='full'] - 'full' = logo with text (sidebar expanded), 'icon' = icon only (sidebar collapsed)
+ */
+export default function LogoSection({ variant = 'full' }) {
   return (
-    <Link component={RouterLink} to={DASHBOARD_PATH} aria-label="theme-logo">
-      <Logo />
+    <Link component={RouterLink} to={DASHBOARD_PATH} aria-label="theme-logo" sx={{ display: 'block', minWidth: 0 }}>
+      <Logo variant={variant} />
     </Link>
   );
 }
