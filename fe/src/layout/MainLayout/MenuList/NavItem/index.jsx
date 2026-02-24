@@ -101,13 +101,33 @@ export default function NavItem({ item, level, isParents = false, setSelectedID 
               bgcolor: 'transparent'
             }
           }),
-          ...(isSelected && {
-            border: '2px solid #744DBC',
-            bgcolor: 'transparent',
-            color: '#744DBC',
-            '&:hover': { bgcolor: 'transparent', border: '2px solid #744DBC' },
-            '& .MuiListItemIcon-root': { color: '#744DBC' }
-          })
+          ...(drawerOpen &&
+            level === 1 && {
+              bgcolor: '#EDE7F6',
+              border: '1px solid #D1C4E9',
+              boxShadow: '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)',
+              transition: 'background-color 0.2s ease, box-shadow 0.2s ease',
+              '&:hover': {
+                bgcolor: '#D4C4F0',
+                boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)'
+              },
+              ...(isSelected && {
+                border: '2px solid #744DBC',
+                bgcolor: '#C6D7F6',
+                color: '#744DBC',
+                boxShadow: '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)',
+                '&:hover': {
+                  bgcolor: '#B5C8F0',
+                  border: '2px solid #744DBC',
+                  boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)'
+                },
+                '&.Mui-selected': {
+                  bgcolor: '#C6D7F6',
+                  '&:hover': { bgcolor: '#B5C8F0' }
+                },
+                '& .MuiListItemIcon-root': { color: '#744DBC' }
+              })
+            })
         }}
         selected={isSelected}
         onClick={() => itemHandler()}

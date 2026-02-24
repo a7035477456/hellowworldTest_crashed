@@ -1,0 +1,142 @@
+================================================================================
+                    GAIN / LOSS REPORT FROM 1099-B TRANSACTIONS
+================================================================================
+NOTE: This report was extracted from a compressed image. Some values marked with
+(~) are approximate due to image resolution. Please verify against your original
+1099-B document.
+
+Gain/Loss = Total Proceeds - Cost Basis
+
+================================================================================
+SYMBOL / DESCRIPTION              CUSIP         QTY      DATE ACQ    DATE SOLD    TOTAL PROCEEDS    COST BASIS      GAIN/LOSS
+------------------------------------------------------------------------------------------------------------------------------
+
+--- SECTION 1a: SHORT-TERM, BASIS REPORTED TO IRS ---
+
+ 1. FIDELITY CONTRAFUND            315793852    331.12   VARIOUS     10/18/18       23,496.01       24,877.69       -1,381.68
+    COMMINGLED POOL
+
+ 2. FIDELITY CONTRAFUND            315793852    ~95.14   VARIOUS     10/18/18       ~6,916.95       ~6,891.18          ~25.77
+    COMMINGLED POOL
+
+ 3. FIDELITY ZERO LG CAP           31620M757   ~262.17   VARIOUS     10/18/18       ~2,610.87       ~2,614.55          ~-3.68
+    INDEX COMMINGLED POOL
+
+ 4. JPMORGAN EQUITY PREMIUM         46625H100    ~1.35   10/16/18    10/18/18          ~69.07          ~69.07            0.00
+    INCOME
+
+ 5. JPMORGAN EQUITY PREMIUM         46625H100    ~3.25   10/16/18    10/18/18         ~152.84         ~152.44           ~0.40
+    INCOME
+
+ 6. FIDELITY INTL INDEX             31635M756   ~40.13   VARIOUS     10/18/18       ~1,580.68       ~1,582.44          ~-1.76
+    COMMINGLED POOL
+
+ 7. PIMCO INCOME FUND               72200C106    ~5.50   VARIOUS     10/18/18         ~596.49         ~586.49          ~10.00
+    INSTITUTIONAL
+
+ 8. FIDELITY US BOND INDEX           31635M772  ~123.45   VARIOUS     10/18/18       ~1,215.30       ~1,215.16           ~0.14
+    COMMINGLED POOL
+
+------------------------------------------------------------------------------------------------------------------------------
+                                                       SUBTOTAL (Sect 1a):      ~36,638.21      ~37,989.02       ~-1,350.81
+------------------------------------------------------------------------------------------------------------------------------
+
+--- SECTION: INDIVIDUAL STOCK TRANSACTIONS ---
+
+ 9. MERCK & CO INC NEW              58933Y105   ~100.00   11/05/18    11/16/18       ~7,394.41       ~7,395.00          ~-0.59
+    (MERCK)
+
+10. ADVANCE MICRO DEVI CE           007903107   ~150.00   07/02/18    11/16/18       ~4,867.12       ~4,777.86          ~89.26
+    (AMD)
+
+------------------------------------------------------------------------------------------------------------------------------
+                                                   SUBTOTAL (Indiv Stocks):     ~12,261.53      ~12,172.86          ~88.67
+------------------------------------------------------------------------------------------------------------------------------
+
+--- SECTION: BANK INDUSTRIAL (Multiple Lots) ---
+    CUSIP: 46625H100 (approx)
+
+11. BANK INDUSTRIAL_CLQ                          ~91.00   VARIOUS     10/18/18       ~4,367.71       ~4,177.98         ~189.73
+12. BANK INDUSTRIAL_CLQ                         ~175.00   VARIOUS     10/18/18       ~8,394.50       ~8,518.13        ~-123.63
+13. BANK INDUSTRIAL_CLQ                         ~112.00   VARIOUS     10/18/18       ~5,373.84       ~5,453.10         ~-79.26
+14. BANK INDUSTRIAL_CLQ                         ~135.00   VARIOUS     10/18/18       ~6,078.15       ~6,538.15        ~-460.00
+15. BANK INDUSTRIAL_CLQ                          ~10.00   VARIOUS     10/18/18         ~479.30         ~490.50         ~-11.20
+16. BANK INDUSTRIAL_CLQ                          ~50.00   VARIOUS     10/18/18       ~2,397.00       ~2,430.00         ~-33.00
+17. BANK INDUSTRIAL_CLQ                         ~131.00   VARIOUS     10/18/18       ~5,233.21       ~5,321.47         ~-88.26
+18. BANK INDUSTRIAL_CLQ                         ~132.00   VARIOUS     10/18/18       ~6,336.48       ~6,325.36          ~11.12
+19. BANK INDUSTRIAL_CLQ                          ~67.12   VARIOUS     10/18/18       ~3,024.78       ~3,024.78           ~0.00
+20. BANK INDUSTRIAL_CLQ                         ~176.22   VARIOUS     10/18/18       ~8,453.86       ~8,566.42        ~-112.56
+21. BANK INDUSTRIAL_CLQ                          ~55.00   VARIOUS     10/19/18       ~2,627.35       ~2,681.15         ~-53.80
+22. BANK INDUSTRIAL_CLQ                         ~135.00   VARIOUS     10/19/18       ~6,451.35       ~6,538.35         ~-87.00
+23. BANK INDUSTRIAL_CLQ                          ~10.00   VARIOUS     10/19/18         ~477.90         ~485.10          ~-7.20
+24. BANK INDUSTRIAL_CLQ                         ~130.00   VARIOUS     10/19/18       ~6,213.90       ~6,317.90        ~-104.00
+25. BANK INDUSTRIAL_CLQ                         ~115.00   VARIOUS     10/19/18       ~5,492.45       ~5,581.85         ~-89.40
+26. BANK INDUSTRIAL_CLQ                          ~12.00   VARIOUS     11/14/18         ~585.12         ~581.16           ~3.96
+27. BANK INDUSTRIAL_CLQ                         ~200.00   VARIOUS     11/14/18       ~9,752.00       ~9,694.00          ~58.00
+28. BANK INDUSTRIAL_CLQ                         ~150.00   VARIOUS     11/14/18       ~7,314.00       ~7,278.00          ~36.00
+29. BANK INDUSTRIAL_CLQ                         ~175.00   VARIOUS     11/14/18       ~8,533.00       ~8,490.50          ~42.50
+30. BANK INDUSTRIAL_CLQ                         ~132.00   VARIOUS     11/14/18       ~6,437.52       ~6,399.48          ~38.04
+31. BANK INDUSTRIAL_CLQ                           ~9.00   VARIOUS     11/14/18         ~438.93         ~436.41           ~2.52
+32. BANK INDUSTRIAL_CLQ                         ~200.00   VARIOUS     11/16/18       ~9,480.00       ~9,694.00        ~-214.00
+33. BANK INDUSTRIAL_CLQ                         ~150.00   VARIOUS     11/16/18       ~7,110.00       ~7,278.00        ~-168.00
+34. BANK INDUSTRIAL_CLQ                         ~175.00   VARIOUS     11/16/18       ~8,295.00       ~8,490.50        ~-195.50
+
+------------------------------------------------------------------------------------------------------------------------------
+                                                  SUBTOTAL (Bank Industrial):  ~129,546.35     ~130,591.29       ~-1,044.94
+------------------------------------------------------------------------------------------------------------------------------
+
+--- SECTION: BANK MONTREAL (Multiple Lots) ---
+    CUSIP: 06368B100 (approx)
+
+35. BANK MONTREAL_CLQ                           ~100.00   VARIOUS     10/18/18       ~6,135.00       ~6,233.00         ~-98.00
+36. BANK MONTREAL_CLQ                           ~150.00   VARIOUS     10/18/18      ~10,143.15      ~10,070.50          ~72.65
+37. BANK MONTREAL_CLQ                           ~135.00   VARIOUS     10/18/18       ~8,268.30       ~8,413.80        ~-145.50
+38. BANK MONTREAL_CLQ                           ~200.00   VARIOUS     10/18/18      ~12,270.00      ~12,524.00        ~-254.00
+39. BANK MONTREAL_CLQ                            ~50.00   VARIOUS     10/18/18       ~3,067.50       ~3,082.00         ~-14.50
+40. BANK MONTREAL_CLQ                            ~75.00   VARIOUS     10/18/18       ~4,601.25       ~4,675.50         ~-74.25
+41. BANK MONTREAL_CLQ                           ~132.00   VARIOUS     10/18/18       ~8,098.32       ~8,222.16        ~-123.84
+42. BANK MONTREAL_CLQ                           ~110.00   VARIOUS     10/19/18       ~6,743.00       ~6,853.00        ~-110.00
+43. BANK MONTREAL_CLQ                            ~91.00   VARIOUS     10/19/18       ~5,579.43       ~5,670.43         ~-91.00
+44. BANK MONTREAL_CLQ                            ~75.00   VARIOUS     10/19/18       ~4,598.25       ~4,675.50         ~-77.25
+45. BANK MONTREAL_CLQ                            ~50.00   VARIOUS     10/19/18       ~3,065.50       ~3,082.00         ~-16.50
+46. BANK MONTREAL_CLQ                           ~132.00   VARIOUS     11/14/18       ~8,184.24       ~8,222.16         ~-37.92
+47. BANK MONTREAL_CLQ                           ~175.00   VARIOUS     11/14/18      ~10,857.00      ~10,907.75         ~-50.75
+48. BANK MONTREAL_CLQ                           ~200.00   VARIOUS     11/16/18      ~12,134.00      ~12,524.00        ~-390.00
+49. BANK MONTREAL_CLQ                           ~100.00   VARIOUS     11/16/18       ~6,067.00       ~6,233.00        ~-166.00
+50. BANK MONTREAL_CLQ                            ~50.00   VARIOUS     11/16/18       ~3,033.50       ~3,082.00         ~-48.50
+
+------------------------------------------------------------------------------------------------------------------------------
+                                                    SUBTOTAL (Bank Montreal):  ~112,844.44     ~114,470.80       ~-1,625.36
+------------------------------------------------------------------------------------------------------------------------------
+
+--- SECTION: OTHER ENTRIES ---
+
+51. FIDELITY NATIONAL INFO          516057106   ~100.00   08/15/18    11/16/18       ~9,843.00       ~9,876.00         ~-33.00
+    SERVICES (FIS)
+
+52. BANK INDUSTRIAL_CLQ                          ~62.00   VARIOUS     11/30/18       ~3,043.76       ~3,053.16          ~-9.40
+
+53. BANK MONTREAL_CLQ                            ~45.00   VARIOUS     11/30/18       ~2,807.10       ~2,813.85          ~-6.75
+
+------------------------------------------------------------------------------------------------------------------------------
+                                                       SUBTOTAL (Other):        ~15,693.86      ~15,743.01         ~-49.15
+------------------------------------------------------------------------------------------------------------------------------
+
+
+================================================================================
+                              GRAND TOTAL SUMMARY
+================================================================================
+
+  Total Proceeds (all rows):     ~$306,984.39
+  Total Cost Basis (all rows):   ~$310,966.98
+                                 ----------------
+  TOTAL GAIN / (LOSS):           ~($3,982.59)
+                                 ================
+
+================================================================================
+IMPORTANT DISCLAIMER:
+  Values preceded by (~) are APPROXIMATE readings from the compressed image.
+  The gain/loss total above is estimated. Please verify all figures against
+  your original 1099-B tax document from your brokerage before using for
+  tax filing purposes.
+================================================================================

@@ -45,15 +45,15 @@ function Sidebar() {
             onClick={() => handlerDrawerOpen(false)}
             startIcon={<IconChevronsLeft size={20} />}
             sx={{
-              bgcolor: '#7B1FA2',
+              bgcolor: '#744DBC',
               color: '#fff',
               borderRadius: '12px',
               textTransform: 'none',
               fontWeight: 600,
               fontSize: '0.9rem',
               py: 1.2,
-              boxShadow: 'none',
-              '&:hover': { bgcolor: '#6A1B9A', boxShadow: 'none' }
+              boxShadow: '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)',
+              '&:hover': { bgcolor: '#6A3FB5', boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)' }
             }}
           >
             Close Menu
