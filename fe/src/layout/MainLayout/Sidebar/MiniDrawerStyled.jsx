@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
 
 // project imports
-import { drawerWidth } from 'store/constant';
+import { drawerWidth, drawerWidthClosed } from 'store/constant';
 
 const sidebarBg = '#EDE7F6';
 
@@ -28,7 +28,7 @@ function closedMixin(theme) {
     zIndex: 1099,
     background: sidebarBg,
     overflowX: 'hidden',
-    width: 72,
+    width: drawerWidthClosed,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen + 200

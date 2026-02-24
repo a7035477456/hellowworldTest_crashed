@@ -97,41 +97,6 @@ export default function NavGroup({ item, lastItem, remItems, lastItemId, setSele
     <>
       <List
         disablePadding={!drawerOpen}
-        subheader={
-          currentItem.title &&
-          drawerOpen && (
-            <Typography
-              variant="caption"
-              gutterBottom
-              sx={{
-                display: 'block',
-                fontSize: downSM ? '0.75rem' : '0.875rem',
-                fontWeight: 500,
-                color: 'text.heading',
-                padding: downSM ? 0.5 : 0.75,
-                textTransform: 'capitalize',
-                marginTop: downSM ? 0.5 : 1.25
-              }}
-            >
-              {currentItem.title}
-              {currentItem.caption && (
-                <Typography
-                  gutterBottom
-                  sx={{
-                    display: 'block',
-                    fontSize: '0.6875rem',
-                    fontWeight: 500,
-                    color: 'text.secondary',
-                    textTransform: 'capitalize',
-                    lineHeight: 1.66
-                  }}
-                >
-                  {currentItem.caption}
-                </Typography>
-              )}
-            </Typography>
-          )
-        }
       >
         {items}
       </List>

@@ -32,7 +32,7 @@ export default function Header() {
   return (
     <>
       {/* logo (menu toggle moved to top of sidebar, below branding; show header toggle only on mobile to open drawer) */}
-      <Box sx={{ width: downMD ? 'auto' : 228, display: 'flex' }}>
+      <Box sx={{ width: downMD ? 'auto' : 180, display: 'flex' }}>
         <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
           <LogoSection />
         </Box>

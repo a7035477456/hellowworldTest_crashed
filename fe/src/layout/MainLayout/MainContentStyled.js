@@ -1,9 +1,6 @@
 // material-ui
 import { styled } from '@mui/material/styles';
 
-// project imports
-import { drawerWidth } from 'store/constant';
-
 // ==============================|| MAIN LAYOUT - STYLED ||============================== //
 
 const MainContentStyled = styled('main', {
@@ -18,48 +15,24 @@ const MainContentStyled = styled('main', {
   flexShrink: 1,
   padding: 20,
   marginTop: 88,
+  marginLeft: 0,
   marginRight: 0,
   boxSizing: 'border-box',
   borderRadius: `${borderRadius}px`,
   borderBottomLeftRadius: 0,
   borderBottomRightRadius: 0,
-  ...(!open && {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.shorter + 200
-    }),
-    [theme.breakpoints.up('md')]: {
-      marginLeft: -(drawerWidth - 72),
-      width: '100%',
-      marginTop: 88
-    }
-  }),
-  ...(open && {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.shorter + 200
-    }),
-    marginLeft: 0,
-    marginTop: 88,
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      marginTop: 88
-    }
+  transition: theme.transitions.create(['margin', 'width'], {
+    easing: open ? theme.transitions.easing.easeOut : theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.shorter + 200
   }),
   [theme.breakpoints.down('md')]: {
     marginLeft: 20,
     padding: 16,
-    marginTop: 88,
-    marginRight: 0,
-    width: '100%',
-    ...(!open && {
-      width: '100%'
-    })
+    marginRight: 0
   },
   [theme.breakpoints.down('sm')]: {
     marginLeft: 10,
-    marginRight: 0,
-    width: '100%'
+    marginRight: 0
   }
 }));
 

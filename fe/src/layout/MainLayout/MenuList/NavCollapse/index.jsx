@@ -180,7 +180,6 @@ export default function NavCollapse({ menu, level, parentId }) {
                   alignItems: 'center',
                   justifyContent: 'center',
                   '&:hover': { bgcolor: 'secondary.light' },
-
                   ...((isSelected || anchorEl) && {
                     bgcolor: 'secondary.light',
                     '&:hover': { bgcolor: 'secondary.light' }

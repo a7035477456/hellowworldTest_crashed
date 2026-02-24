@@ -101,7 +101,6 @@ export default function NavItem({ item, level, isParents = false, setSelectedID 
               bgcolor: 'transparent'
             }
           }),
-          // Selected: purple highlight border
           ...(isSelected && {
             border: '2px solid #744DBC',
             bgcolor: 'transparent',

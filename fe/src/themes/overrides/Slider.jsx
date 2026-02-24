@@ -5,16 +5,26 @@ export default function Slider(theme) {
     MuiSlider: {
       styleOverrides: {
         root: {
+          color: '#7B1FA1',
           '&.Mui-disabled': {
             color: theme.vars.palette.grey[300]
           }
+        },
+        thumb: {
+          backgroundColor: '#7B1FA1'
+        },
+        track: {
+          backgroundColor: '#7B1FA1'
+        },
+        rail: {
+          backgroundColor: '#CE93D8'
         },
         mark: {
           backgroundColor: theme.vars.palette.background.paper,
           width: '4px'
         },
         valueLabel: {
-          color: theme.vars.palette.primary.light
+          backgroundColor: '#7B1FA1'
         }
       }
     }
