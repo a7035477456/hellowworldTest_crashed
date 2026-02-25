@@ -52,12 +52,13 @@ export default function NavItem({ item, level, isParents = false, setSelectedID 
 
   const iconSize = drawerOpen ? 20 : 24;
   const Icon = item?.icon;
+  const imgIconSize = drawerOpen ? 28 : 30;
   const itemIcon = item?.iconSrc ? (
     <Box
       component="img"
       src={item.iconSrc}
       alt=""
-      sx={{ width: iconSize, height: iconSize, objectFit: 'contain' }}
+      sx={{ width: imgIconSize, height: imgIconSize, objectFit: 'contain' }}
     />
   ) : item?.icon ? (
     <Icon stroke={1.5} size={drawerOpen ? '20px' : '24px'} style={{ ...(isParents && { fontSize: 20, stroke: '1.5' }) }} />
