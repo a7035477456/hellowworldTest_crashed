@@ -177,17 +177,17 @@ export default function NavCollapse({ menu, level, parentId }) {
             }),
             ...((isSelected || anchorEl) && {
               border: '2px solid #744DBC',
-              bgcolor: '#C6D7F6',
+              bgcolor: '#FFFFFF',
               color: '#744DBC',
               boxShadow: '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)',
               '&:hover': {
-                bgcolor: '#B5C8F0',
+                bgcolor: '#F5F5F5',
                 border: '2px solid #744DBC',
                 boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)'
               },
               '&.Mui-selected': {
-                bgcolor: '#C6D7F6',
-                '&:hover': { bgcolor: '#B5C8F0' }
+                bgcolor: '#FFFFFF',
+                '&:hover': { bgcolor: '#F5F5F5' }
               }
             })
           })

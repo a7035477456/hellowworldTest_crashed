@@ -65,12 +65,13 @@ function Sidebar() {
             aria-label="Open menu"
             onClick={() => handlerDrawerOpen(true)}
             sx={{
-              bgcolor: '#7B1FA2',
+              bgcolor: '#6739B8',
               color: '#fff',
               borderRadius: '12px',
               width: 42,
               height: 42,
-              '&:hover': { bgcolor: '#6A1B9A' }
+              boxShadow: '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)',
+              '&:hover': { bgcolor: '#5A2FA8', boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)' }
             }}
           >
             <IconMenu2 size={22} />
