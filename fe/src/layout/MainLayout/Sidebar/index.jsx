@@ -40,6 +40,8 @@ function Sidebar() {
         <Box sx={{ px: '1px', pt: '6px' }}>
           <Button
             variant="contained"
+            disableElevation
+            disableRipple
             fullWidth
             aria-label="Close menu"
             onClick={() => handlerDrawerOpen(false)}
@@ -52,8 +54,11 @@ function Sidebar() {
               fontWeight: 600,
               fontSize: '0.9rem',
               py: 1.2,
-              boxShadow: '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)',
-              '&:hover': { bgcolor: '#6A3FB5', boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)' }
+              boxShadow: '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12) !important',
+              transition: 'all 0.15s ease',
+              transform: 'translate(0, 0)',
+              '&:hover': { bgcolor: '#6A3FB5', boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12) !important', transform: 'translate(2px, 2px) !important' },
+              '&:active': { transform: 'translate(4px, 4px) !important', boxShadow: '0px 1px 1px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 2px 0px rgba(0,0,0,0.12) !important' }
             }}
           >
             Close Menu
@@ -63,6 +68,7 @@ function Sidebar() {
         <Box sx={{ display: 'flex', justifyContent: 'center', pt: 1.5, pb: 0.5 }}>
           <IconButton
             aria-label="Open menu"
+            disableRipple
             onClick={() => handlerDrawerOpen(true)}
             sx={{
               bgcolor: '#6739B8',
@@ -71,7 +77,10 @@ function Sidebar() {
               width: 42,
               height: 42,
               boxShadow: '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)',
-              '&:hover': { bgcolor: '#5A2FA8', boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)' }
+              transition: 'all 0.15s ease',
+              transform: 'translate(0, 0)',
+              '&:hover': { bgcolor: '#5A2FA8', boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)', transform: 'translate(2px, 2px) !important' },
+              '&:active': { transform: 'translate(4px, 4px) !important', boxShadow: '0px 1px 1px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 2px 0px rgba(0,0,0,0.12)' }
             }}
           >
             <IconMenu2 size={22} />

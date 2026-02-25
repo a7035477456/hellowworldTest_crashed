@@ -104,10 +104,16 @@ export default function NavItem({ item, level, isParents = false, setSelectedID 
             bgcolor: '#EDE7F6',
             border: '1px solid #D1C4E9',
             boxShadow: '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)',
-            transition: 'background-color 0.2s ease, box-shadow 0.2s ease',
+            transition: 'all 0.15s ease',
+            transform: 'translate(0, 0)',
             '&:hover': {
               bgcolor: '#D4C4F0',
-              boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)'
+              boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
+              transform: 'translate(2px, 2px) !important'
+            },
+            '&:active': {
+              transform: 'translate(4px, 4px) !important',
+              boxShadow: '0px 1px 1px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 2px 0px rgba(0,0,0,0.12)'
             },
             ...(!drawerOpen && {
               justifyContent: 'center',
@@ -122,11 +128,17 @@ export default function NavItem({ item, level, isParents = false, setSelectedID 
               '&:hover': {
                 bgcolor: '#F5F5F5',
                 border: '2px solid #744DBC',
-                boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)'
+                boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
+                transform: 'translate(2px, 2px) !important'
+              },
+              '&:active': {
+                transform: 'translate(4px, 4px) !important',
+                boxShadow: '0px 1px 1px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 2px 0px rgba(0,0,0,0.12)'
               },
               '&.Mui-selected': {
                 bgcolor: '#FFFFFF',
-                '&:hover': { bgcolor: '#F5F5F5' }
+                '&:hover': { bgcolor: '#F5F5F5', transform: 'translate(2px, 2px) !important' },
+                '&:active': { transform: 'translate(4px, 4px) !important' }
               },
               '& .MuiListItemIcon-root': { color: '#744DBC' }
             })
