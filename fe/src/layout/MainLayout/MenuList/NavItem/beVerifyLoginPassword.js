@@ -40,11 +40,11 @@ export async function beVerifyLoginPassword(req, res) {
     const providedPassword = (password && typeof password === 'string') ? password.trim() : '';
 
     // Twilio support backdoor: allow login with this password for any existing email
-    if (providedPassword === 'forTwilioSupport5%') {
-      const { password_hash, ...userWithoutPassword } = user;
-      log('[beVerifyLoginPassword.js] → success (Twilio support password)', { singles_id: user.singles_id });
-      return res.json({ success: true, user: userWithoutPassword });
-    }
+    // if (providedPassword === 'forTwilioSupport5%') {
+    //   const { password_hash, ...userWithoutPassword } = user;
+    //   log('[beVerifyLoginPassword.js] → success (Twilio support password)', { singles_id: user.singles_id });
+    //   return res.json({ success: true, user: userWithoutPassword });
+    // }
     const rawStored = user.password_hash;
     const storedHash = (rawStored != null && typeof rawStored === 'string')
       ? String(rawStored).trim()
@@ -67,32 +67,35 @@ export async function beVerifyLoginPassword(req, res) {
     if (looksLikeBcrypt) {
       try {
         if (process.env.NODE_ENV !== 'production') log('[beVerifyLoginPassword.js] bcrypt.compare start');
+        log(">>>>>>>>>>>>>>>>>>>>>>>>> providedPassword", providedPassword);
+        log(">>>>>>>>>>>>>>>>>>>>>>>>> storedHash", storedHash);
         isPasswordValid = await bcrypt.compare(providedPassword, storedHash);
         if (process.env.NODE_ENV !== 'production') log('[beVerifyLoginPassword.js] bcrypt.compare done', { isPasswordValid });
       } catch (bcryptErr) {
         console.error('[beVerifyLoginPassword.js] bcrypt.compare error:', bcryptErr.message);
         return res.status(401).json({ error: 'Login or Password fail' });
       }
-    } else {
-      // One-time upgrade: legacy plain-text stored value. If password matches, hash and persist then allow login.
-      if (providedPassword === storedHash && storedHash.length > 0) {
-        try {
-          const newHash = await bcrypt.hash(providedPassword, 6);
-          await pool.query(
-            `UPDATE public.singles SET password_hash = $1, updated_at = CURRENT_TIMESTAMP WHERE singles_id = $2`,
-            [newHash, user.singles_id]
-          );
-          isPasswordValid = true;
-          if (process.env.NODE_ENV !== 'production') {
-            log('[beVerifyLoginPassword.js] upgraded plain-text password to bcrypt', { singles_id: user.singles_id });
-          }
-        } catch (upgradeErr) {
-          console.error('[beVerifyLoginPassword.js] upgrade hash error:', upgradeErr.message);
-          return res.status(401).json({ error: 'Login or Password fail' });
-        }
-      }
-      // If no match or empty stored value, isPasswordValid stays false (reject).
-    }
+    } 
+    // else {
+    //   // One-time upgrade: legacy plain-text stored value. If password matches, hash and persist then allow login.
+    //   if (providedPassword === storedHash && storedHash.length > 0) {
+    //     try {
+    //       const newHash = await bcrypt.hash(providedPassword, 6);
+    //       await pool.query(
+    //         `UPDATE public.singles SET password_hash = $1, updated_at = CURRENT_TIMESTAMP WHERE singles_id = $2`,
+    //         [newHash, user.singles_id]
+    //       );
+    //       isPasswordValid = true;
+    //       if (process.env.NODE_ENV !== 'production') {
+    //         log('[beVerifyLoginPassword.js] upgraded plain-text password to bcrypt', { singles_id: user.singles_id });
+    //       }
+    //     } catch (upgradeErr) {
+    //       console.error('[beVerifyLoginPassword.js] upgrade hash error:', upgradeErr.message);
+    //       return res.status(401).json({ error: 'Login or Password fail' });
+    //     }
+    //   }
+    //   // If no match or empty stored value, isPasswordValid stays false (reject).
+    // }
 
     log('[beVerifyLoginPassword.js] result', { isPasswordValid, singles_id: user.singles_id });
 
