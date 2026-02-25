@@ -44,11 +44,14 @@ export default function Header() {
               ...avatarSx,
               overflow: 'hidden',
               transition: 'all .2s ease-in-out',
-              color: theme.vars.palette.secondary.dark,
-              background: theme.vars.palette.secondary.light,
+              color: '#fff',
+              background: '#6739B8',
+              borderRadius: '12px',
+              boxShadow: '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)',
               '&:hover': {
-                color: theme.vars.palette.secondary.light,
-                background: theme.vars.palette.secondary.dark
+                color: '#fff',
+                background: '#5A2FA8',
+                boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)'
               }
             }}
             onClick={() => handlerDrawerOpen(!drawerOpen)}

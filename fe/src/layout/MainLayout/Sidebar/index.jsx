@@ -37,7 +37,7 @@ function Sidebar() {
   const menuToggle = useMemo(
     () =>
       drawerOpen ? (
-        <Box sx={{ px: '6px', pt: '6px' }}>
+        <Box sx={{ px: downSM ? 6 : '10px', pt: '6px' }}>
           <Button
             variant="contained"
             fullWidth
@@ -78,7 +78,7 @@ function Sidebar() {
           </IconButton>
         </Box>
       ),
-    [drawerOpen]
+    [drawerOpen, downSM]
   );
 
   const logo = useMemo(
