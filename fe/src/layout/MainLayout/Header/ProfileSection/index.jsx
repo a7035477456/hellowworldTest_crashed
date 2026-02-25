@@ -94,7 +94,8 @@ export default function ProfileSection() {
           borderRadius: downSM ? '54px' : '27px',
           color: '#fff',
           bgcolor: '#744DBC',
-          '&:hover': { bgcolor: '#744DBC', filter: 'brightness(1.1)' },
+          transition: 'background-color 0.2s ease, color 0.2s ease',
+          '&:hover': { bgcolor: '#FFFFFF', color: '#744DBC', '& .MuiChip-icon': { filter: 'none' }, '& .MuiSvgIcon-root, & svg': { color: '#744DBC', stroke: '#744DBC' } },
           '& .MuiChip-icon': downSM ? { width: 68, height: 68, margin: '14px 0 14px 14px !important' } : undefined
         }}
         icon={
