@@ -15,7 +15,7 @@ const utilities = {
   children: [
     {
       id: 'util-vetself',
-      title: 'My Vetting Info',
+      title: 'Vetting Profile',
       type: 'item',
       url: '/verifyself',
       icon: icons.IconTypography,
@@ -28,7 +28,7 @@ const utilities = {
     },
     {
       id: 'util-requests-about-me',
-      title: 'Others Request About Me',
+      title: 'Vetting Req In',     
       type: 'item',
       url: '/dashboard/request-about-me',
       icon: icons.IconTypography,
@@ -41,7 +41,7 @@ const utilities = {
     },
     {
       id: 'util-requests-sent',
-      title: "Request I've Sent",
+      title: 'Vetting Req Out',         
       type: 'item',
       url: '/dashboard/request-ive-sent',
       icon: icons.IconTypography,
