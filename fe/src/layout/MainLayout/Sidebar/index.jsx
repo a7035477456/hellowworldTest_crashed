@@ -37,7 +37,7 @@ function Sidebar() {
   const menuToggle = useMemo(
     () =>
       drawerOpen ? (
-        <Box sx={{ px: downSM ? 6 : '10px', pt: '6px' }}>
+        <Box sx={{ px: downSM ? '4px' : '10px', pt: '6px' }}>
           <Button
             variant="contained"
             fullWidth
@@ -94,7 +94,7 @@ function Sidebar() {
     let drawerSX = { paddingLeft: '4px', paddingRight: '4px', marginTop: '8px' };
     if (drawerOpen) {
       drawerSX = downSM
-        ? { paddingLeft: 6, paddingRight: 6, marginTop: 0 }
+        ? { paddingLeft: '4px', paddingRight: '4px', marginTop: 0 }
         : { paddingLeft: '10px', paddingRight: '10px', marginTop: '0px' };
     }
 
