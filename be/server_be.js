@@ -20,6 +20,9 @@ import {
 } from './routes/singles/index.js';
 import { getPhoto } from './routes/photos/getPhoto.js';
 
+import cookieParser from 'cookie-parser';
+import jwt from 'jsonwebtoken';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 40000;
@@ -44,6 +47,7 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
+app.use(cookieParser());
 
 // Health check for HAProxy (httpchk GET /health)
 app.get('/health', (req, res) => {
@@ -73,6 +77,38 @@ function getInternalIp() {
 }
 app.get('/api/serverInfo', (req, res) => {
   res.status(200).json({ internalIp: getInternalIp() || req.socket?.localAddress || '' });
+});
+
+// Validation endpoint: React calls this on refresh
+app.get('/api/me', async (req, res) => {
+  const token = req.cookies.token; // Requires 'cookie-parser' middleware
+  if (!token) return res.status(401).json({ authenticated: false });
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'vsingles-secret-key-12345');
+    
+    // Fetch fresh user data from DB
+    const result = await pool.query(
+      'SELECT singles_id, email, profile_image_fk FROM public.singles WHERE singles_id = $1',
+      [decoded.singles_id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(401).json({ authenticated: false });
+    }
+
+    const user = result.rows[0];
+    res.json({ authenticated: true, user });
+  } catch (err) {
+    console.error('Auth check error:', err.message);
+    res.status(401).json({ authenticated: false });
+  }
+});
+
+// Logout endpoint
+app.post('/api/logout', (req, res) => {
+  res.clearCookie('token'); // Deletes the cookie
+  res.status(200).json({ message: "Logged out" });
 });
 
 // API routes

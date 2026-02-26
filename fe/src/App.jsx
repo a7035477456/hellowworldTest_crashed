@@ -9,6 +9,7 @@ import DatabaseConnectionGuard from 'ui-component/DatabaseConnectionGuard';
 import ThemeCustomization from 'themes';
 
 // auth provider
+import { AuthProvider } from 'contexts/AuthContext';
 
 // ==============================|| APP ||============================== //
 
@@ -16,11 +17,13 @@ export default function App() {
   return (
     <ThemeCustomization>
       <DatabaseConnectionGuard>
-        <NavigationScroll>
-          <>
-            <RouterProvider router={router} />
-          </>
-        </NavigationScroll>
+        <AuthProvider>
+          <NavigationScroll>
+            <>
+              <RouterProvider router={router} />
+            </>
+          </NavigationScroll>
+        </AuthProvider>
       </DatabaseConnectionGuard>
     </ThemeCustomization>
   );

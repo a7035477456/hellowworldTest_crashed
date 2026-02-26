@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from 'contexts/AuthContext';
 
 // material-ui
 import Button from '@mui/material/Button';
@@ -30,6 +31,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (typeof window !== 'un
 export default function AuthLogin() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { login } = useAuth();
   const [checked, setChecked] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -55,72 +57,13 @@ export default function AuthLogin() {
     event.preventDefault();
     setIsLoading(true);
 
-    // Debug logging
-    console.log("=== INPUT DATA =================================================");
-    console.log('Frontend - Submitting login:');
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Password length:', password.length);
-    console.log('Password charCodes:', password.split('').map(c => c.charCodeAt(0)));
-
-    const url = `${API_BASE_URL}/api/verifyPassword`;
-    console.log('[AuthLogin] fetch URL:', url);
-
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      console.log("=== RESPONSE METADATA =================================================");
-      console.log('response.ok:', response.ok);
-      console.log('response.status:', response.status);
-      console.log('response.statusText:', response.statusText);
-      console.log('response.type:', response.type);
-      console.log('response.url:', response.url);
-      console.log('response.headers:', Object.fromEntries(response.headers.entries()));
-
-      let data;
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
-        data = await response.json();
-      } else {
-        const text = await response.text();
-        console.log('[AuthLogin] response body (non-JSON):', text?.slice(0, 500));
-        data = {};
-      }
-
-      console.log("=== RESPONSE BODY (data) =================================================");
-      console.log('data:', data);
-      console.log('data.success:', data.success);
-      console.log('data.error:', data.error);
-      console.log('data.user:', data.user);
-      console.log('data.passwordHash:', data.passwordHash);
-
-      console.log("=== WHY response.ok IS FALSE =================================================");
-      console.log('response.ok is false when response.status is not 2xx (e.g. 500 = Internal Server Error)');
-      console.log('Current response.status:', response.status, response.status === 500 ? '→ Backend threw an exception; check server logs.' : '');
-
-      if (response.ok && data.success) {
-        console.log('[AuthLogin] success branch → redirecting to dashboard');
+      const response = await login(email, password);
+      if (response.success) {
         navigate('/dashboard/allSingles');
-      } else {
-        console.log("=== ELSE ERROR (login failed or non-2xx) =================================================");
-        console.log('Email:', email);
-        console.log('Plain-text Password:', password);
-        console.log('Bcrypt of Password:', data.passwordHash || 'N/A');
-        console.log('Backend error message (data.error):', data.error || '(none)');
-        navigate('/pages/loginFailure');
       }
     } catch (error) {
-      console.error("=== FETCH EXCEPTION =================================================");
       console.error('Login error:', error);
-      console.error('error.name:', error?.name);
-      console.error('error.message:', error?.message);
-      console.error('error.cause:', error?.cause);
       navigate('/pages/loginFailure');
     } finally {
       setIsLoading(false);

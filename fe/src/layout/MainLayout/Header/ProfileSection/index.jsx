@@ -27,6 +27,7 @@ import UpgradePlanCard from './UpgradePlanCard';
 import MainCard from 'ui-component/cards/MainCard';
 import Transitions from 'ui-component/extended/Transitions';
 import useConfig from 'hooks/useConfig';
+import { useAuth } from 'contexts/AuthContext';
 
 // assets
 import User1 from 'assets/images/users/profile.jpeg';
@@ -40,6 +41,7 @@ export default function ProfileSection() {
   const {
     state: { borderRadius }
   } = useConfig();
+  const { logout } = useAuth();
 
   const [sdm, setSdm] = useState(true);
   const [value, setValue] = useState('');
@@ -63,15 +65,12 @@ export default function ProfileSection() {
     setOpen(false);
   };
 
-  const handleLogout = () => {
-    // Clear session so next load is truly logged out
-    sessionStorage.clear();
-    // Clear any auth-related localStorage keys (add more here if you store tokens)
+  const handleLogout = async () => {
     try {
-      const authKeys = ['vsingles-auth', 'token', 'authToken', 'user'];
-      authKeys.forEach((key) => localStorage.removeItem(key));
-    } catch (_) {}
-    window.location.href = 'https://vsingles.club';
+      await logout();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const prevOpen = useRef(open);
